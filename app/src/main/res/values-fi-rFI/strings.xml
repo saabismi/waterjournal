@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Vesikirja</string>
+    <string name="store_user_data">Tallenna</string>
+    <string name="add_drink">Lisää juoma</string>
+    <string name="preferences">Asetukset</string>
+    <string name="drinking_history">Historia</string>
+    <string name="home_button">Koti</string>
+    <string name="save_preferences">Tallenna</string>
+    <string name="tip_button">Vinkkejä</string>
+    <string name="radio_man">Mies</string>
+    <string name="radio_woman">Nainen</string>
+    <string name="add_weight">Anna paino</string>
+</resources>
