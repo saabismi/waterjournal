@@ -11,4 +11,5 @@
     <string name="radio_man">Mies</string>
     <string name="radio_woman">Nainen</string>
     <string name="add_weight">Anna paino</string>
+    <string name="drink_ml">Määrä (ml)</string>
 </resources>

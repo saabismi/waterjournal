@@ -10,4 +10,5 @@
     <string name="radio_man">Man</string>
     <string name="radio_woman">Woman</string>
     <string name="add_weight">Give weight</string>
+    <string name="drink_ml">Amount  (ml)</string>
 </resources>
