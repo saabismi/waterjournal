@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Water Journal</string>
+    <string name="store_user_data">Save</string>
+    <string name="add_drink">Add Drink</string>
+    <string name="preferences">Preferences</string>
+    <string name="drinking_history">History</string>
+    <string name="home_button">Home</string>
+    <string name="save_preferences">Save</string>
+    <string name="tip_button">Tips</string>
+    <string name="radio_man">Man</string>
+    <string name="radio_woman">Woman</string>
+    <string name="add_weight">Give weigth</string>
 </resources>
