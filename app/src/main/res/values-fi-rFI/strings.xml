@@ -13,4 +13,6 @@
     <string name="add_weight">Anna paino</string>
     <string name="drink_ml">Määrä (ml)</string>
     <string name="remove_resent">Poista uusin</string>
+    <string name="sex">Sukupuoli</string>
+    <string name="weight">Paino</string>
 </resources>
