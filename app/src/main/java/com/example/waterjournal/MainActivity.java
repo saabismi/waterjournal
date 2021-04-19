@@ -13,4 +13,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // Moi, testaan vaa et näkyyhän tää :D
+
+    // tässä toinen tämmöinen testirivi
 }
