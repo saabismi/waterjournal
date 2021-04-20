@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Vesikirja</string>
-    <string name="store_user_data">Tallenna</string>
-    <string name="add_drink">Lisää juoma</string>
+    <string name="button_store_user_data">Tallenna</string>
+    <string name="button_add_drink">Lisää juoma</string>
     <string name="preferences">Asetukset</string>
-    <string name="drinking_history">Historia</string>
-    <string name="home_button">Koti</string>
-    <string name="save_preferences">Tallenna</string>
-    <string name="tip_button">Vinkkejä</string>
-    <string name="radio_man">Mies</string>
-    <string name="radio_woman">Nainen</string>
+    <string name="button_drinking_history">Historia</string>
+    <string name="button_home">Koti</string>
+    <string name="button_save_preferences">Tallenna</string>
+    <string name="button_tips">Vinkkejä</string>
+    <string name="radio_button_man">Mies</string>
+    <string name="radio_button_woman">Nainen</string>
     <string name="add_weight">Anna paino</string>
     <string name="drink_ml">Määrä (ml)</string>
-    <string name="remove_resent">Poista uusin</string>
+    <string name="button_remove_resent">Poista uusin</string>
     <string name="sex">Sukupuoli</string>
     <string name="weight">Paino</string>
+    <string name="button_preferences">Asetukset</string>
 </resources>

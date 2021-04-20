@@ -1,17 +1,18 @@
 <resources>
     <string name="app_name">Water Journal</string>
-    <string name="store_user_data">Save</string>
-    <string name="add_drink">Add Drink</string>
+    <string name="button_store_user_data">Save</string>
+    <string name="button_add_drink">Add Drink</string>
     <string name="preferences">Preferences</string>
-    <string name="drinking_history">History</string>
-    <string name="home_button">Home</string>
-    <string name="save_preferences">Save</string>
-    <string name="tip_button">Tips</string>
-    <string name="radio_man">Man</string>
-    <string name="radio_woman">Woman</string>
+    <string name="button_drinking_history">History</string>
+    <string name="button_home">Home</string>
+    <string name="button_save_preferences">Save</string>
+    <string name="button_tips">Tips</string>
+    <string name="radio_button_man">Man</string>
+    <string name="radio_button_woman">Woman</string>
     <string name="add_weight">Give weight</string>
     <string name="drink_ml">Amount  (ml)</string>
-    <string name="remove_resent">Remove resent</string>
+    <string name="button_remove_resent">Remove resent</string>
     <string name="sex">Sex</string>
     <string name="weight">Weight</string>
+    <string name="button_preferences">Preferences</string>
 </resources>
