@@ -9,7 +9,7 @@
     <string name="button_tips">Tips</string>
     <string name="text_radio_button_man">Man</string>
     <string name="text_radio_button_woman">Woman</string>
-    <string name="text_add_weight">Give weight</string>
+    <string name="text_add_weight">Give weight (kg)</string>
     <string name="text_drink_ml">Amount (ml)</string>
     <string name="button_remove_resent">Remove resent</string>
     <string name="text_sex">Sex</string>

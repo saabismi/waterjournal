@@ -10,7 +10,7 @@
     <string name="button_tips">Vinkkejä</string>
     <string name="text_radio_button_man">Mies</string>
     <string name="text_radio_button_woman">Nainen</string>
-    <string name="text_add_weight">Anna paino</string>
+    <string name="text_add_weight">Anna paino (kg)</string>
     <string name="text_drink_ml">Määrä (ml)</string>
     <string name="button_remove_resent">Poista uusin</string>
     <string name="text_sex">Sukupuoli</string>
