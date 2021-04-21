@@ -2,6 +2,7 @@ package com.example.waterjournal;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -18,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         Button addDrink = findViewById(R.id.buttonAddDrink);
         Button history = findViewById(R.id.buttonHistory);
         Button home = findViewById(R.id.buttonHome);
-        Button removeResent = findViewById(R.id.buttonremoveResent);
+        Button removeResent = findViewById(R.id.buttonRemoveResent);
         Button preferences = findViewById(R.id.buttonPreferences);
 
         addDrink.setOnClickListener(new View.OnClickListener() {
@@ -27,12 +28,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this,"Drink added!", Toast.LENGTH_SHORT).show();
             }
         });
-        history.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(MainActivity.this,"Back to the future!", Toast.LENGTH_SHORT).show();
-            }
-        });
+
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -45,11 +41,19 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this,"Remove move move!", Toast.LENGTH_SHORT).show();
             }
         });
-        preferences.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(MainActivity.this,"No can do!", Toast.LENGTH_SHORT).show();
-            }
-        });
+
     }
+    public void openHistory(View v){
+        Intent intent = new Intent(this, HistoryActivity.class);
+        startActivity(intent);
+    }
+    public void openPreferences(View v){
+        Intent intent = new Intent(this, PreferencesActivity.class);
+        startActivity(intent);
+    }
+    public void openHome(View v){
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
 }

@@ -10,6 +10,7 @@
         android:id="@+id/buttonHistory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="openHistory"
         android:text="@string/button_drinking_history"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/buttonHome"
@@ -21,6 +22,7 @@
         android:id="@+id/buttonHome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="openHome"
         android:text="@string/button_home"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,6 +34,7 @@
         android:id="@+id/buttonPreferences"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="openPreferences"
         android:text="@string/button_preferences"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -99,7 +102,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textDailyGoal" />
 
     <Button
-        android:id="@+id/buttonremoveResent"
+        android:id="@+id/buttonRemoveResent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
