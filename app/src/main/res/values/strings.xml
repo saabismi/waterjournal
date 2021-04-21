@@ -17,4 +17,5 @@
     <string name="button_preferences">Preferences</string>
     <string name="text_add_drink">Add drink</string>
     <string name="text_daily_goal">Daily goal</string>
+    <string name="text_amount_goal">Amount / Goal</string>
 </resources>
