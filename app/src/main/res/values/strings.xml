@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Water Journal</string>
+    <string name="announce_weight">Your weight:</string>
+    <string name="announce_sex">Your sex:</string>
+    <string name="announce_target">Your daily water target:</string>
+    <string name="placeholder_x">x</string>
 </resources>
