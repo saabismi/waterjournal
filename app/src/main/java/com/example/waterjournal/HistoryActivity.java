@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+/**
+ *
+ */
 public class HistoryActivity extends AppCompatActivity {
 
     @Override
@@ -13,14 +16,29 @@ public class HistoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
     }
+
+    /**
+     *
+     * @param v
+     */
     public void openHistory(View v){
         Intent intent = new Intent(this, HistoryActivity.class);
         startActivity(intent);
     }
+
+    /**
+     *
+     * @param v
+     */
     public void openPreferences(View v){
         Intent intent = new Intent(this, PreferencesActivity.class);
         startActivity(intent);
     }
+
+    /**
+     *
+     * @param v
+     */
     public void openHome(View v){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);

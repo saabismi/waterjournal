@@ -8,33 +8,29 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+/**
+ *
+ */
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        //Buttons from main_layout
+        /**
+         *
+         */
         Button addDrink = findViewById(R.id.buttonAddDrink);
-        Button history = findViewById(R.id.buttonHistory);
-        Button home = findViewById(R.id.buttonHome);
-        Button removeResent = findViewById(R.id.buttonRemoveResent);
-        Button preferences = findViewById(R.id.buttonPreferences);
-
         addDrink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(MainActivity.this,"Drink added!", Toast.LENGTH_SHORT).show();
             }
         });
-
-        home.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(MainActivity.this,"You are!", Toast.LENGTH_SHORT).show();
-            }
-        });
+        /**
+         *
+         */
+        Button removeResent = findViewById(R.id.buttonRemoveResent);
         removeResent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -43,14 +39,29 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
+    /**
+     *
+     * @param v
+     */
     public void openHistory(View v){
         Intent intent = new Intent(this, HistoryActivity.class);
         startActivity(intent);
     }
+
+    /**
+     *
+     * @param v
+     */
     public void openPreferences(View v){
         Intent intent = new Intent(this, PreferencesActivity.class);
         startActivity(intent);
     }
+
+    /**
+     *
+     * @param v
+     */
     public void openHome(View v){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
