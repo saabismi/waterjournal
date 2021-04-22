@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 
 /**
- *
+ * Drink history activity
+ * User can check daily drink amount
+ * User can move in to the main activity or preference activity
  */
 public class HistoryActivity extends AppCompatActivity {
 

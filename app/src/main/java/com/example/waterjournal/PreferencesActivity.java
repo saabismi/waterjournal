@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 
 /**
- *
+ * User preferences
+ * User can change sex, weight and daily goal and save changes
+ * User can move in to the history activity or main activity
  */
 public class PreferencesActivity extends AppCompatActivity {
 

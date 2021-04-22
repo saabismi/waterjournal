@@ -12,7 +12,7 @@ import android.widget.Toast;
  * Main activity that opens by default after profile creation.
  * Here user adds amount of drink to the store
  * User can remove resent amount if it was a mistake or amount was wrong
- *
+ * User can move in to the history activity or preference activity
  */
 public class MainActivity extends AppCompatActivity {
 
