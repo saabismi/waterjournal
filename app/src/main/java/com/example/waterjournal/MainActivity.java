@@ -9,6 +9,9 @@ import android.widget.Button;
 import android.widget.Toast;
 
 /**
+ * Main activity that opens by default after profile creation.
+ * Here user adds amount of drink to the store
+ * User can remove resent amount if it was a mistake or amount was wrong
  *
  */
 public class MainActivity extends AppCompatActivity {
@@ -18,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         /**
-         *
+         * Button and onClickListener to add amount of drink to store
          */
         Button addDrink = findViewById(R.id.buttonAddDrink);
         addDrink.setOnClickListener(new View.OnClickListener() {
@@ -28,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         /**
-         *
+         * Button and onClickListener to remove resent drink from store
          */
         Button removeResent = findViewById(R.id.buttonRemoveResent);
         removeResent.setOnClickListener(new View.OnClickListener() {
@@ -41,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     *
+     * A metod to move in to the history activity
      * @param v
      */
     public void openHistory(View v){
@@ -50,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     *
+     * A metod to move in to the preference activity
      * @param v
      */
     public void openPreferences(View v){
@@ -59,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     *
+     * A metod to move in to the main activity
      * @param v
      */
     public void openHome(View v){

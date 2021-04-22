@@ -18,7 +18,7 @@ public class HistoryActivity extends AppCompatActivity {
     }
 
     /**
-     *
+     * A metod to move in to the history activity
      * @param v
      */
     public void openHistory(View v){
@@ -27,7 +27,7 @@ public class HistoryActivity extends AppCompatActivity {
     }
 
     /**
-     *
+     * A metod to move in to the preference activity
      * @param v
      */
     public void openPreferences(View v){
@@ -36,7 +36,7 @@ public class HistoryActivity extends AppCompatActivity {
     }
 
     /**
-     *
+     * A metod to move in to the main activity
      * @param v
      */
     public void openHome(View v){
