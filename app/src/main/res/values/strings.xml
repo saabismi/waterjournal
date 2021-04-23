@@ -10,5 +10,6 @@
     <string name="male">Male</string>
     <string name="female">Female</string>
     <string name="announce_water_target">Your calculated daily water target:</string>
+    <string name="whenReady">When ready:</string>
     <string name="toMainButton">Go to the main application</string>
 </resources>

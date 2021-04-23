@@ -14,12 +14,11 @@ public class MainActivity extends AppCompatActivity {
     private final String USER_STORE = "UserStore"; // create preferences for storing information about the user, etc.
     private final String userRegistered = "userRegistered"; // storage for sharing the information about whether the user is registered already or not
     private final String userWeight  = "userWeight"; // storage for storing the user weight
-    private final String userSex = "userSex"; // storage for storing the user's sex
     private final String userTarget = "userTarget"; // target water amount per day
     private boolean getRegistered; // variable for getting the value of registration status key
-    private double getWeight; //variable for getting the value of the weight key
+    private int getWeight; //variable for getting the value of the weight key
     private String getSex; // varbiale for getting the value of the sex key
-    private double getTarget; // variable for getting the value of the water target key
+    private String getTarget; // variable for getting the value of the water target key
 
     private String TAG = "WaterLog:"; // easy to use tag for logging
 
@@ -30,9 +29,8 @@ public class MainActivity extends AppCompatActivity {
 
         preferences = getSharedPreferences(USER_STORE, Context.MODE_PRIVATE);
         getRegistered = preferences.getBoolean(userRegistered, false);
-        getWeight = preferences.getFloat(userWeight, 0);
-        getSex = preferences.getString(userSex, null);
-        getTarget = preferences.getFloat(userTarget, 0);
+        getWeight = preferences.getInt(userWeight, 0);
+        getTarget = preferences.getString(userTarget, null);
 
         if (getRegistered != true) { // checking if the user has registered already
             Log.i(TAG, "User hasn't registered yet, let's go to Registration activity");
