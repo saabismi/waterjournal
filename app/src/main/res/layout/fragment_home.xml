@@ -8,13 +8,15 @@
 
     <Button
         android:id="@+id/buttonAddDrink"
-        android:drawableTop="@drawable/ic_baseline_add_circle_outline_24"
+        style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
+        android:drawableTop="@drawable/ic_baseline_add_circle_outline_24"
         android:text="@string/button_add_drink"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/editTextDrink"
@@ -69,11 +71,13 @@
 
     <Button
         android:id="@+id/buttonRemoveResent"
-        android:drawableTop="@drawable/ic_baseline_remove_circle_outline_24"
+        style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:drawableTop="@drawable/ic_baseline_remove_circle_outline_24"
         android:text="@string/button_remove_resent"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonAddDrink" />
