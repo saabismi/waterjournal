@@ -19,8 +19,8 @@ public class PreferencesFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        View root = inflater.inflate(R.layout.fragment_preferences, container, false);
+        View pref = inflater.inflate(R.layout.fragment_preferences, container, false);
 
-        return root;
+        return pref;
     }
 }
