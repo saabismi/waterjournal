@@ -20,4 +20,7 @@
     <string name="text_daily_goal">Päivätavoite</string>
     <string name="text_amount_goal">Juotu / Tavoite</string>
     <string name="text_history">Juomahistoriasi</string>
+    <string name="title_home">Vesikirja</string>
+    <string name="title_history">Historia</string>
+    <string name="title_prefenrences">Asetukset</string>
 </resources>

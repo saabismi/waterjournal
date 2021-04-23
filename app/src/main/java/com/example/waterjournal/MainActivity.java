@@ -2,11 +2,17 @@ package com.example.waterjournal;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 
 /**
  * Main activity that opens by default after profile creation.
@@ -20,54 +26,30 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        BottomNavigationView navView = findViewById(R.id.nav_view);
+        // Passing each menu ID as a set of Ids because each
+        // menu should be considered as top level destinations.
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.navigation_home, R.id.navigation_history, R.id.navigation_settings)
+                .build();
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        NavigationUI.setupWithNavController(navView, navController);
+
         /**
-         * Button and onClickListener to add amount of drink to store
+         * Button to add amount of drink to store
          */
         Button addDrink = findViewById(R.id.buttonAddDrink);
-        addDrink.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(MainActivity.this,"Drink added!", Toast.LENGTH_SHORT).show();
-            }
-        });
+
         /**
-         * Button and onClickListener to remove resent drink from store
+         * Button to remove resent drink from store
          */
         Button removeResent = findViewById(R.id.buttonRemoveResent);
-        removeResent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(MainActivity.this,"Remove move move!", Toast.LENGTH_SHORT).show();
-            }
-        });
+
+
 
     }
 
-    /**
-     * A metod to move in to the history activity
-     * @param v
-     */
-    public void openHistory(View v){
-        Intent intent = new Intent(this, HistoryActivity.class);
-        startActivity(intent);
-    }
-
-    /**
-     * A metod to move in to the preference activity
-     * @param v
-     */
-    public void openPreferences(View v){
-        Intent intent = new Intent(this, PreferencesActivity.class);
-        startActivity(intent);
-    }
-
-    /**
-     * A metod to move in to the main activity
-     * @param v
-     */
-    public void openHome(View v){
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-    }
 
 }

@@ -19,4 +19,7 @@
     <string name="text_daily_goal">Daily goal</string>
     <string name="text_amount_goal">Amount / Goal</string>
     <string name="text_history">Your drinking history</string>
+    <string name="title_home">Water Journal</string>
+    <string name="title_history">History</string>
+    <string name="title_prefenrences">Preferences</string>
 </resources>
