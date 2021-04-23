@@ -28,14 +28,28 @@ public class PreferencesFragment extends Fragment {
         textWeight = pref.findViewById(R.id.textWeight);
         weightPicker = pref.findViewById(R.id.weightPicker);
 
-        weightPicker.setMinValue(0);
-        weightPicker.setMaxValue(10);
-        weightPicker.setValue(5);
+        weightPicker.setMinValue(45);
+        weightPicker.setMaxValue(250);
+        weightPicker.setValue(70);
 
         weightPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker numberPicker, int i, int i1) {
                 textWeight.setText(i1 + " (kg)");
+            }
+        });
+
+        textAmount = pref.findViewById(R.id.textDaily);
+        dailyPicker = pref.findViewById(R.id.drinkPicker);
+
+        dailyPicker.setMinValue(100);
+        dailyPicker.setMaxValue(1000);
+        dailyPicker.setValue(333);
+
+        dailyPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+            @Override
+            public void onValueChange(NumberPicker numberPicker, int i, int i1) {
+                textAmount.setText(i1 + " (ml)");
             }
         });
 

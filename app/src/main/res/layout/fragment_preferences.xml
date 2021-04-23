@@ -28,6 +28,14 @@
         app:layout_constraintStart_toEndOf="@+id/textWeight"
         app:layout_constraintTop_toTopOf="@+id/textPreferences" />
 
+    <NumberPicker
+        android:id="@+id/drinkPicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="@+id/weightPicker"
+        app:layout_constraintTop_toBottomOf="@+id/weightPicker" />
+
     <TextView
         android:id="@+id/textWeight"
         android:layout_width="wrap_content"
@@ -76,8 +84,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="65dp"
-        android:text="@string/text_daily_goal"
+        android:layout_marginTop="104dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.476"
         app:layout_constraintStart_toStartOf="parent"
