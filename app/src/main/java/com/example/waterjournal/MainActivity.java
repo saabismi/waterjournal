@@ -37,18 +37,6 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
-        /**
-         * Button to add amount of drink to store
-         */
-        Button addDrink = findViewById(R.id.buttonAddDrink);
-
-        /**
-         * Button to remove resent drink from store
-         */
-        Button removeResent = findViewById(R.id.buttonRemoveResent);
-
-
-
     }
 
 
