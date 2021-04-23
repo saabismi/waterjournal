@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,10 +17,27 @@ import com.example.waterjournal.R;
 
 public class PreferencesFragment extends Fragment {
 
+    private NumberPicker weightPicker, dailyPicker;
+    private TextView textWeight, textAmount;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         View pref = inflater.inflate(R.layout.fragment_preferences, container, false);
+
+        textWeight = pref.findViewById(R.id.textWeight);
+        weightPicker = pref.findViewById(R.id.weightPicker);
+
+        weightPicker.setMinValue(0);
+        weightPicker.setMaxValue(10);
+        weightPicker.setValue(5);
+
+        weightPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+            @Override
+            public void onValueChange(NumberPicker numberPicker, int i, int i1) {
+                textWeight.setText(i1 + " (kg)");
+            }
+        });
 
         return pref;
     }
