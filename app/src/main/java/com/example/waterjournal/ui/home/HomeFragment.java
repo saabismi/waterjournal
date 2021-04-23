@@ -17,6 +17,8 @@ import com.example.waterjournal.R;
 
 public class HomeFragment extends Fragment {
 
+    private  Button addDrink, removeResent;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View main = inflater.inflate(R.layout.fragment_home, container, false);
@@ -24,12 +26,25 @@ public class HomeFragment extends Fragment {
         /**
          * Button to add amount of drink to store
          */
-        Button addDrink = main.findViewById(R.id.buttonAddDrink);
+        addDrink = main.findViewById(R.id.buttonAddDrink);
+        addDrink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
 
         /**
          * Button to remove resent drink from store
          */
-        Button removeResent = main.findViewById(R.id.buttonRemoveResent);
+        removeResent = main.findViewById(R.id.buttonRemoveResent);
+        removeResent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
         return main;
     }
 }

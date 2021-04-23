@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 
@@ -19,6 +20,7 @@ public class PreferencesFragment extends Fragment {
 
     private NumberPicker weightPicker, dailyPicker;
     private TextView textWeight, textAmount;
+    private Button save;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -50,6 +52,14 @@ public class PreferencesFragment extends Fragment {
             @Override
             public void onValueChange(NumberPicker numberPicker, int i, int i1) {
                 textAmount.setText(i1 + " (ml)");
+            }
+        });
+
+        save = pref.findViewById(R.id.buttonSave);
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
             }
         });
 
