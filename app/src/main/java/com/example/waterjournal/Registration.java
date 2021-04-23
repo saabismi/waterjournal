@@ -96,7 +96,7 @@ public class Registration extends AppCompatActivity {
         preferences = getSharedPreferences(USER_STORE, Context.MODE_PRIVATE);
 
         /* set the values for the variables which gets the values from the preferences */
-        getWeight = preferences.getInt(userWeight, 20);
+        getWeight = preferences.getInt(userWeight, 75);
         getTarget = preferences.getString(userTarget, null);
 
         /* Set the weight and calculated target to what they were previously set to */
