@@ -22,4 +22,5 @@
     <string name="title_home">Water Journal</string>
     <string name="title_history">History</string>
     <string name="title_prefenrences">Preferences</string>
+    <string name="waterdrop">waterdrop</string>
 </resources>
