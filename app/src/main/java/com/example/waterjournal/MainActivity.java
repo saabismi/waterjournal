@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean getRegistered; // variable for getting the value of registration status key
 
     private int getWeight; //variable for getting the value of the weight key
-    private String getTarget; // variable for getting the value of the water target key
+    private static String getTarget; // variable for getting the value of the water target key
 
     //private TextView showWeight; // textview for weight
     //private TextView showTarget; // textview for target
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         getRegistered = preferences.getBoolean(userRegistered, false);
         getWeight = preferences.getInt(userWeight, 0);
         getTarget = preferences.getString(userTarget, "undefined");
-
+        getTarget();
         //showWeight = findViewById(R.id.showWeight);
         //showTarget = findViewById(R.id.showTarget);
 
@@ -88,8 +88,12 @@ public class MainActivity extends AppCompatActivity {
         startActivity(regIntent); // start the activity Registration.java
     }
 
-
-
-
+    /**
+     *
+     * @return user's weight
+     */
+    public static String getTarget() {
+        return getTarget;
+    }
 
 }

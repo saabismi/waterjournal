@@ -1,5 +1,8 @@
 package com.example.waterjournal.ui.home;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.waterjournal.MainActivity;
 import com.example.waterjournal.R;
 
 import java.util.ArrayList;
@@ -28,7 +32,7 @@ public class HomeFragment extends Fragment {
      */
     private Button addDrink, removeResent;
     private NumberPicker amounPicker;
-    private TextView textAmount;
+    private TextView textAmount,textAmountGoal;
     public String drinks[] = {"100","200","250","300","333","400","450","500","600","700","800","900","1000"};
     /**
      * Metods and values
@@ -37,6 +41,9 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View main = inflater.inflate(R.layout.fragment_home, container, false);
+
+        textAmountGoal = main.findViewById(R.id.textAmountGoal);
+        textAmountGoal.setText("Amount/" + MainActivity.getTarget() + " ml");
 
         /**
          * Button to add amount of drink to store
@@ -69,8 +76,10 @@ public class HomeFragment extends Fragment {
             amounPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker numberPicker, int oldVal, int newVal) {
-                // Show amount and text on textAmount
+                //Amount of drink to store
                 String value = numberPicker.getDisplayedValues()[newVal];
+                // Show amount and text on textAmount
+                //this will be removed when store is in use
                 textAmount.setText(value + " (ml)");
             }
         });
