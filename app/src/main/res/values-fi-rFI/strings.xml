@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="text_app_name">Vesikirja</string>
+    <string name="button_store_user_data">Tallenna</string>
+    <string name="button_add_drink">Lisää</string>
+    <string name="text_preferences">Asetukset</string>
+    <string name="button_drinking_history">Historia</string>
+    <string name="button_home">Koti</string>
+    <string name="button_save_preferences">Tallenna</string>
+    <string name="button_tips">Vinkkejä</string>
+    <string name="text_radio_button_man">Mies</string>
+    <string name="text_radio_button_woman">Nainen</string>
+    <string name="text_add_weight">Anna paino (kg)</string>
+    <string name="text_drink_ml">Määrä (ml)</string>
+    <string name="button_remove_resent">Poista uusin</string>
+    <string name="text_sex">Sukupuoli</string>
+    <string name="text_weight">Paino</string>
+    <string name="button_preferences">Asetukset</string>
+    <string name="text_add_drink">Lisää juoma</string>
+    <string name="text_daily_goal">Päivätavoite</string>
+    <string name="text_amount_goal">Juotu / Tavoite</string>
+    <string name="text_history">Juomahistoriasi</string>
+    <string name="title_home">Vesikirja</string>
+    <string name="title_history">Historia</string>
+    <string name="title_prefenrences">Asetukset</string>
+    <string name="waterdrop">vesipisara</string>
+</resources>
