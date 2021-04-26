@@ -47,38 +47,6 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/askSex"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:text="@string/insert_sex"
-        android:textAlignment="center"
-        android:textSize="24sp" />
-
-    <RadioGroup
-        android:id="@+id/radiosSex"
-        android:layout_width="165dp"
-        android:layout_height="62dp"
-        android:layout_gravity="center"
-        android:orientation="horizontal">
-
-        <RadioButton
-            android:id="@+id/radioFemale"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:minWidth="48dp"
-            android:text="@string/female" />
-
-        <RadioButton
-            android:id="@+id/radioMale"
-            android:layout_width="86dp"
-            android:layout_height="match_parent"
-            android:text="@string/male" />
-
-    </RadioGroup>
-
-    <TextView
         android:id="@+id/tellTarget"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -113,6 +81,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="5dp"
+        android:onClick="goToMain"
         android:text="@string/toMainButton" />
 
     <!--</androidx.constraintlayout.widget.ConstraintLayout>-->

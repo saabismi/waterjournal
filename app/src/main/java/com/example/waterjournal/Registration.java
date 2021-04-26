@@ -3,8 +3,11 @@ package com.example.waterjournal;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.NumberPicker;
 import android.widget.RadioButton;
@@ -17,6 +20,10 @@ import java.text.DecimalFormat;
 
 public class Registration extends AppCompatActivity {
 
+    /* variables for intent extras */
+    public static final String WEIGHT = "666";
+    public static final String TARGET = "undefined";
+
     private SharedPreferences preferences; // create sharedpreferences variable
     private final String USER_STORE = "UserStore"; // create preferences for storing information about the user, etc.
     private final String userRegistered = "userRegistered"; // storage for sharing the information about whether the user is registered already or not
@@ -28,9 +35,6 @@ public class Registration extends AppCompatActivity {
 
     private String TAG = "WaterLog:"; // easy to use tag for logging
 
-    private RadioGroup radioSex; // radio group
-    private RadioButton radioFemale; // radio button with value female
-    private RadioButton radioMale; // radio button with value male
     private NumberPicker pickWeight; // number picker for choosing weight
     private TextView previewTarget; // textview for showing the preview for the water target
     private Button toMain; // button for going to the main activity
@@ -41,9 +45,6 @@ public class Registration extends AppCompatActivity {
         setContentView(R.layout.activity_registration);
 
         /* Set the values for the previously initialised variables */
-        radioSex = findViewById(R.id.radiosSex);
-        radioFemale = findViewById(R.id.radioFemale);
-        radioMale = findViewById(R.id.radioMale);
         pickWeight = findViewById(R.id.numPickWeight);
         previewTarget = findViewById(R.id.previewTarget);
         toMain = findViewById(R.id.toMainButton);
@@ -57,15 +58,23 @@ public class Registration extends AppCompatActivity {
         pickWeight.setMinValue(20);
         pickWeight.setValue(75);
 
+        DecimalFormat dec = new DecimalFormat("#.0"); // use this to format to one decimal number
+
+        double defaultTarget = 75 * 0.033; // calculate default target ( = 75kg)
+        String defaultStr = Double.toString(Double.valueOf(dec.format(defaultTarget)));
+        previewTarget.setText(defaultStr + " litres");
+        editor.putString(userTarget, defaultStr);
+        editor.commit();
+
         pickWeight.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker pickWeight, int oldVal, int newVal) {
-                DecimalFormat dec = new DecimalFormat("#.0");
-                Double target = newVal * 0.033;
-                String visibleTarget = Double.toString(Double.valueOf(dec.format(target))) + " litres";
-                previewTarget.setText(visibleTarget);
-                editor.putString(userTarget, visibleTarget);
-                editor.apply();
+                double target = newVal * 0.033;
+                //String targetStr = Double.toString(target);
+                String targetStr = Double.toString(Double.valueOf(dec.format(target)));
+                previewTarget.setText(targetStr + " litres");
+                editor.putString(userTarget, targetStr);
+                editor.commit();
             }
         });
     }
@@ -80,13 +89,13 @@ public class Registration extends AppCompatActivity {
 
         /* Save the weight when the app is paused */
         editor.putInt(userWeight, pickWeight.getValue());
-        editor.apply();
+        editor.commit();
     }
 
 
     @Override
-    protected void onStart() {
-        super.onStart();
+    protected void onRestart() {
+        super.onRestart();
 
         /* set values for the views where the weight and target are displayed */
         pickWeight = findViewById(R.id.numPickWeight);
@@ -97,11 +106,19 @@ public class Registration extends AppCompatActivity {
 
         /* set the values for the variables which gets the values from the preferences */
         getWeight = preferences.getInt(userWeight, 75);
-        getTarget = preferences.getString(userTarget, null);
+        getTarget = preferences.getString(userTarget, "undefined");
 
         /* Set the weight and calculated target to what they were previously set to */
         pickWeight.setValue(getWeight);
-        previewTarget.setText(getTarget);
+        previewTarget.setText(getTarget + " litres");
+    }
+
+    public void goToMain(View v) {
+        /* Create intent for returning to the main activity */
+        Intent regedIntent = new Intent(this, MainActivity.class);
+
+        Log.d(TAG, "Registration complete, returning to main activity"); // for debugging purposes
+        startActivity(regedIntent); // Go to the main activity
     }
 
 }
