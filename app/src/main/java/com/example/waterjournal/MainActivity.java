@@ -64,9 +64,4 @@ public class MainActivity extends AppCompatActivity {
         startActivity(regIntent); // start the activity Registration.java
     }
 
-    public void onStart() {
-        super.onStart();
-
-    }
-
 }

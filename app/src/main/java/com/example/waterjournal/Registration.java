@@ -117,6 +117,12 @@ public class Registration extends AppCompatActivity {
         /* Create intent for returning to the main activity */
         Intent regedIntent = new Intent(this, MainActivity.class);
 
+        /* Present the variables for the storage and the editor */
+        preferences = getSharedPreferences(USER_STORE, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean(userRegistered, true);
+        editor.commit();
+
         Log.d(TAG, "Registration complete, returning to main activity"); // for debugging purposes
         startActivity(regedIntent); // Go to the main activity
     }
