@@ -1,4 +1,17 @@
 <resources>
+    <string name="app_name">Water Journal</string>
+    <string name="announce_weight">Your weight:</string>
+    <string name="announce_sex">Your sex:</string>
+    <string name="announce_target">Your daily water target:</string>
+    <string name="placeholder_x">x</string>
+    <string name="insert_weight">Insert your weight:</string>
+    <string name="kg">kg</string>
+    <string name="insert_sex">Insert your sex:</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="announce_water_target">Your calculated daily water target:</string>
+    <string name="whenReady">When ready:</string>
+    <string name="toMainButton">Go to the main application</string>
     <string name="text_app_name">Water Journal</string>
     <string name="button_store_user_data">Save</string>
     <string name="button_add_drink">Add</string>
