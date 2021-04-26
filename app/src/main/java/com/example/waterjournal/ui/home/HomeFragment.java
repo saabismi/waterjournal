@@ -16,12 +16,24 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.waterjournal.R;
 
-public class HomeFragment extends Fragment {
+import java.util.ArrayList;
+import java.util.List;
 
-    private  Button addDrink, removeResent;
+/**
+ * Main activity, opens on default after user have set weight in registration activity
+ */
+public class HomeFragment extends Fragment {
+    /**
+     *
+     */
+    private Button addDrink, removeResent;
     private NumberPicker amounPicker;
     private TextView textAmount;
-
+    public String drinks[] = {"100","200","250","300","333","400","450","500","600","700","800","900","1000"};
+    /**
+     * Metods and values
+     * @return
+     */
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View main = inflater.inflate(R.layout.fragment_home, container, false);
@@ -33,21 +45,33 @@ public class HomeFragment extends Fragment {
         addDrink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+            // Adds drink amount to store
             }
         });
-
+        /**
+         * Numberpicker to take user value and storing that to store
+         */
         amounPicker = main.findViewById(R.id.amountPicker);
         textAmount = main.findViewById(R.id.textAmount);
 
-        amounPicker.setMinValue(100);
-        amounPicker.setMaxValue(1000);
-        amounPicker.setValue(333);
-
+        /**
+         * Numberpicker min, max and default values
+         * @param setMinValue
+         * @param setMaxValue
+         * @param setValue default value
+         */
+        amounPicker.setMinValue(0);
+        amounPicker.setMaxValue(12);
+        amounPicker.setDisplayedValues(drinks);
+            /**
+             * Numberpicker value picker
+             */
             amounPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
-            public void onValueChange(NumberPicker numberPicker, int i, int i1) {
-                textAmount.setText(i1 + " (ml)");
+            public void onValueChange(NumberPicker numberPicker, int oldVal, int newVal) {
+                // Show amount and text on textAmount
+                String value = numberPicker.getDisplayedValues()[newVal];
+                textAmount.setText(value + " (ml)");
             }
         });
 
@@ -58,7 +82,7 @@ public class HomeFragment extends Fragment {
         removeResent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+            // Removes resent value from store
             }
         });
 
