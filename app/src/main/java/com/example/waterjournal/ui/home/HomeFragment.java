@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,6 +19,8 @@ import com.example.waterjournal.R;
 public class HomeFragment extends Fragment {
 
     private  Button addDrink, removeResent;
+    private NumberPicker amounPicker;
+    private TextView textAmount;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -31,6 +34,20 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
+            }
+        });
+
+        amounPicker = main.findViewById(R.id.amountPicker);
+        textAmount = main.findViewById(R.id.textAmount);
+
+        amounPicker.setMinValue(100);
+        amounPicker.setMaxValue(1000);
+        amounPicker.setValue(333);
+
+            amounPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+            @Override
+            public void onValueChange(NumberPicker numberPicker, int i, int i1) {
+                textAmount.setText(i1 + " (ml)");
             }
         });
 
