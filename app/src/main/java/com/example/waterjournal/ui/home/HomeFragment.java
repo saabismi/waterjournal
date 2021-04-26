@@ -56,9 +56,9 @@ public class HomeFragment extends Fragment {
 
         /**
          * Numberpicker min, max and default values
-         * @param setMinValue
-         * @param setMaxValue
-         * @param setValue default value
+         * @param setMinValue lowest index on drink-array
+         * @param setMaxValue highest indes on drinks-array
+         * @param setDisplayedValues shows drinks-array values on picker
          */
         amounPicker.setMinValue(0);
         amounPicker.setMaxValue(12);
