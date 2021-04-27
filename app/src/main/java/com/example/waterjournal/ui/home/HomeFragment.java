@@ -80,7 +80,7 @@ public class HomeFragment extends Fragment {
                 String value = numberPicker.getDisplayedValues()[newVal];
                 // Show amount and text on textAmount
                 //this will be removed when store is in use
-                textAmount.setText(value + " (ml)");
+                textAmount.setText(" ml");
             }
         });
 

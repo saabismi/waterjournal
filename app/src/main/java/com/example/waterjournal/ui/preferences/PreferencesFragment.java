@@ -30,14 +30,16 @@ public class PreferencesFragment extends Fragment {
         textWeight = pref.findViewById(R.id.textWeight);
         weightPicker = pref.findViewById(R.id.weightPicker);
 
-        weightPicker.setMinValue(45);
-        weightPicker.setMaxValue(250);
-        weightPicker.setValue(70);
+        weightPicker.setMinValue(20);
+        weightPicker.setMaxValue(200);
+        weightPicker.setValue(75);
+        //textWeight.setText(" kg");
+        //textAmount.setText(" ml");
 
         weightPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker numberPicker, int i, int i1) {
-                textWeight.setText(i1 + " (kg)");
+                textWeight.setText(" kg");
             }
         });
 
@@ -46,12 +48,12 @@ public class PreferencesFragment extends Fragment {
 
         dailyPicker.setMinValue(100);
         dailyPicker.setMaxValue(1000);
-        dailyPicker.setValue(333);
+        dailyPicker.setValue(330);
 
         dailyPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker numberPicker, int i, int i1) {
-                textAmount.setText(i1 + " (ml)");
+                textAmount.setText(" ml");
             }
         });
 
