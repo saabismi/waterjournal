@@ -11,7 +11,7 @@
     <string name="female">Female</string>
     <string name="announce_water_target">Your calculated daily water target:</string>
     <string name="whenReady">When ready:</string>
-    <string name="toMainButton">Go to the main application</string>
+    <string name="toMainButton">Continue</string>
     <string name="text_app_name">Water Journal</string>
     <string name="button_store_user_data">Save</string>
     <string name="button_add_drink">Add</string>
@@ -24,12 +24,12 @@
     <string name="text_radio_button_woman">Woman</string>
     <string name="text_add_weight">Give weight (kg)</string>
     <string name="text_drink_ml">ml</string>
-    <string name="button_remove_resent">Remove resent</string>
+    <string name="button_remove_resent">Remove recent</string>
     <string name="text_sex">Sex</string>
     <string name="text_weight">Weight</string>
     <string name="button_preferences">Preferences</string>
     <string name="text_add_drink">Add drink</string>
-    <string name="text_daily_goal">Daily goal</string>
+    <string name="text_daily_goal">Daily goal:</string>
     <string name="text_amount_goal">Amount / Goal</string>
     <string name="text_history">Your drinking history</string>
     <string name="title_home">Water Journal</string>

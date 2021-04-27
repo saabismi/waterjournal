@@ -33,7 +33,7 @@ public class HomeFragment extends Fragment {
     private Button addDrink, removeResent;
     private NumberPicker amounPicker;
     private TextView textAmount,textAmountGoal;
-    public String drinks[] = {"100","200","250","300","333","400","450","500","600","700","800","900","1000"};
+    public String drinks[] = {"100","200","250","300","330","400","450","500","600","700","800","900","1000"};
     /**
      * Metods and values
      * @return
@@ -43,7 +43,7 @@ public class HomeFragment extends Fragment {
         View main = inflater.inflate(R.layout.fragment_home, container, false);
 
         textAmountGoal = main.findViewById(R.id.textAmountGoal);
-        textAmountGoal.setText("Amount/" + MainActivity.getTarget() + " l");
+        textAmountGoal.setText("Amount / " + MainActivity.getTarget() + " litres");
 
         /**
          * Button to add amount of drink to store
