@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Main activity, opens on default after user have set weight in registration activity
+ * Main fragment opens on default after user have set weight in registration activity
  */
 public class HomeFragment extends Fragment {
     /**
@@ -43,7 +43,7 @@ public class HomeFragment extends Fragment {
         View main = inflater.inflate(R.layout.fragment_home, container, false);
 
         textAmountGoal = main.findViewById(R.id.textAmountGoal);
-        textAmountGoal.setText("Amount/" + MainActivity.getTarget() + " ml");
+        textAmountGoal.setText("Amount/" + MainActivity.getTarget() + " l");
 
         /**
          * Button to add amount of drink to store
