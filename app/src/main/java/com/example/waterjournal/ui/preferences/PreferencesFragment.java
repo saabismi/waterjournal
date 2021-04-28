@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.NumberPicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -108,7 +109,8 @@ public class PreferencesFragment extends Fragment {
                 editor.putInt(userWeight, weightPicker.getValue());
                 editor.putString(userTarget, targetAmount);
                 editor.commit();
-
+                //Toast to screen
+                Toast.makeText(getContext(),"Preferences saved",Toast.LENGTH_SHORT).show();
             }
         });
 
