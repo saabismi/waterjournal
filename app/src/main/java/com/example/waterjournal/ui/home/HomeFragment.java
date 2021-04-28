@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.NumberPicker;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -36,9 +37,11 @@ public class HomeFragment extends Fragment {
      */
     private Button addDrink, removeResent;
     private NumberPicker amounPicker;
-    private TextView textAmount,textAmountGoal;
-    public String drinks[] = {"100","200","250","300","330","400","450","500","600","700","800","900","1000"};
-
+    private TextView textAmount,textAmountGoal, textProgressBar;
+    public String drinks[] = {"-","100","200","250","300","330","400","450","500","600","700","800","900","1000"};
+    private int progressBar = 0;
+    private ProgressBar circleBar;
+    private String value;
     /*
     private SharedPreferences preferences; // create sharedpreferences variable
     private final String USER_STORE = "UserStore"; // create preferences for storing information about the user, etc.
@@ -63,8 +66,10 @@ public class HomeFragment extends Fragment {
         View main = inflater.inflate(R.layout.fragment_home, container, false);
 
         textAmountGoal = main.findViewById(R.id.textAmountGoal); // get the textivew for the field to use
-        textAmountGoal.setText("Amount / " + getTargetAsMl() + " ml"); // set the text as the goal in millilitres using the function defined above
-
+        textAmountGoal.setText("0 / " + getTargetAsMl() + " ml"); // set the text as the goal in millilitres using the function defined above
+        textProgressBar= main.findViewById(R.id.textProgressBar);
+        circleBar = main.findViewById(R.id.progress_bar);
+        DecimalFormat decimal = new DecimalFormat("#.#");
         /**
          * Button to add amount of drink to store
          */
@@ -73,6 +78,13 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
             // Adds drink amount to store
+                textAmountGoal.setText(value + " / " + getTargetAsMl() + " ml");
+                int target = Integer.valueOf(getTargetAsMl());
+                int onToGoal = Integer.valueOf(value);
+                double prosent = (1.0*onToGoal/target)*100;
+                int circleProsent = (int) Math.round(prosent);
+                textProgressBar.setText(decimal.format(prosent) + " %");
+                circleBar.setProgress(circleProsent);
             }
         });
         /**
@@ -88,8 +100,7 @@ public class HomeFragment extends Fragment {
          * @param setDisplayedValues shows drinks-array values on picker
          */
         amounPicker.setMinValue(0);
-        amounPicker.setMaxValue(12);
-        amounPicker.setValue(2);
+        amounPicker.setMaxValue(13);
         amounPicker.setDisplayedValues(drinks);
             /**
              * Numberpicker value picker
@@ -98,10 +109,8 @@ public class HomeFragment extends Fragment {
             @Override
             public void onValueChange(NumberPicker numberPicker, int oldVal, int newVal) {
                 //Amount of drink to store
-                String value = numberPicker.getDisplayedValues()[newVal];
-                // Show amount and text on textAmount
-                //this will be removed when store is in use
-                textAmount.setText(" ml");
+                value = numberPicker.getDisplayedValues()[newVal];
+
             }
         });
 
@@ -118,4 +127,5 @@ public class HomeFragment extends Fragment {
 
         return main;
     }
+
 }
