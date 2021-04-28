@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private final String userTarget = "userTarget"; // target water amount per day
     private boolean getRegistered; // variable for getting the value of registration status key
 
-    private int getWeight; //variable for getting the value of the weight key
+    private static int getWeight; //variable for getting the value of the weight key
     private static String getTarget; // variable for getting the value of the water target key
 
     //private TextView showWeight; // textview for weight
@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
         preferences = getSharedPreferences(USER_STORE, Context.MODE_PRIVATE);
         getRegistered = preferences.getBoolean(userRegistered, false);
-        getWeight = preferences.getInt(userWeight, 0);
+        //getWeight = preferences.getInt(userWeight, 0);
         getTarget = preferences.getString(userTarget, "undefined");
         getTarget();
         //showWeight = findViewById(R.id.showWeight);

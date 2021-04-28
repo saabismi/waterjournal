@@ -22,18 +22,21 @@
     <string name="button_tips">Tips</string>
     <string name="text_radio_button_man">Man</string>
     <string name="text_radio_button_woman">Woman</string>
-    <string name="text_add_weight">Give weight (kg)</string>
+    <string name="text_add_weight">Insert weight (kg)</string>
     <string name="text_drink_ml">ml</string>
     <string name="button_remove_resent">Remove recent</string>
     <string name="text_sex">Sex</string>
     <string name="text_weight">Weight:</string>
     <string name="button_preferences">Preferences</string>
     <string name="text_add_drink">Add drink</string>
-    <string name="text_daily_goal">Daily goal:</string>
+    <string name="text_daily_goal">Daily water goal status:</string>
+    <string name="text_daily_goal_pref">Daily goal:</string>
     <string name="text_amount_goal">Amount / Goal</string>
     <string name="text_history">Your drinking history</string>
     <string name="title_home">Water Journal</string>
     <string name="title_history">History</string>
     <string name="title_prefenrences">Preferences</string>
     <string name="waterdrop">waterdrop</string>
+    <string name="text_kg_pref">kg</string>
+    <string name="text_l_pref">litres</string>
 </resources>

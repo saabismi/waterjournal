@@ -24,12 +24,11 @@
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="76dp"
+        android:layout_marginTop="60dp"
         android:drawableTop="@drawable/ic_baseline_remove_circle_outline_24"
         android:text="@string/button_remove_resent"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonAddDrink" />
 
@@ -52,7 +51,8 @@
         android:layout_marginBottom="4dp"
         app:layout_constraintBottom_toTopOf="@+id/buttonRemoveResent"
         app:layout_constraintStart_toStartOf="@+id/textAddDrink"
-        app:layout_constraintTop_toBottomOf="@+id/textAddDrink" />
+        app:layout_constraintTop_toBottomOf="@+id/textAddDrink"
+        android:descendantFocusability="blocksDescendants" />
 
     <TextView
         android:id="@+id/textAmountGoal"
