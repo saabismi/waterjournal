@@ -17,6 +17,13 @@ public class DailyDrinkingObject {
      */
     private DailyDrinkingObject() {
         this.dailyWater = new ArrayList<>();
+        this.dailyWater.add(new WaterObject(2.1));
+        this.dailyWater.add(new WaterObject(3));
+        this.dailyWater.add(new WaterObject(1.7));
+    }
+
+    public static DailyDrinkingObject getInstance() {
+        return ourInstance;
     }
 
     /**
@@ -41,7 +48,7 @@ public class DailyDrinkingObject {
      * @param specificDay Will use this given int number to search for a specific id in dailyWater list.
      * @return Will return the WaterObject which is in this specificDay id.
      */
-    public WaterObject getSpecificDay(int specificDay) {
-        return this.dailyWater.get(specificDay);
+    public ArrayList<Double> getSpecificDay(int specificDay) {
+        return this.dailyWater.get(specificDay).getDrinkAdded();
     }
 }

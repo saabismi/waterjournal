@@ -1,6 +1,7 @@
 package com.example.waterjournal;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -15,6 +16,7 @@ public class WaterObject {
     private Date currentDate;
     private long dateCheck;
     private ArrayList<Double> drinkAdded;
+    private ArrayList<Date> timeAdded;
 
     /**
      * This default constructor will define default values to private variables.
@@ -22,9 +24,9 @@ public class WaterObject {
     public WaterObject() {
         this.minimumWater = 2500;
         this.amountOfWater = 0;
-        this.currentDate = new Date();
-        this.dateCheck = this.currentDate.getTime();
         this.drinkAdded = new ArrayList<>();
+        this.timeAdded = new ArrayList<>();
+        this.currentDate = Calendar.getInstance().getTime();
     }
 
     /**
@@ -36,6 +38,8 @@ public class WaterObject {
         this.amountOfWater = 0.0;
         this.minimumWater = minimumWater;
         this.drinkAdded = new ArrayList<>();
+        this.timeAdded = new ArrayList<>();
+        this.currentDate = Calendar.getInstance().getTime();
     }
 
     /**
@@ -46,6 +50,7 @@ public class WaterObject {
     public void addingWater(double amount) {
         this.amountOfWater += amount;
         this.drinkAdded.add(amount);
+        this.timeAdded.add(Calendar.getInstance().getTime());
     }
 
     /**
@@ -57,11 +62,11 @@ public class WaterObject {
     public void removingWater(double amount) {
         if (this.amountOfWater - amount < 0) {
             this.amountOfWater = 0;
-            this.drinkAdded.remove(this.drinkAdded.size() - 1);
         } else {
             this.amountOfWater -= amount;
-            this.drinkAdded.remove(this.drinkAdded.size() - 1);
         }
+        this.drinkAdded.remove(this.drinkAdded.size() - 1);
+        this.timeAdded.remove(this.timeAdded.size() - 1);
     }
 
     /**
@@ -104,14 +109,28 @@ public class WaterObject {
         double dailyAmount = this.amountOfWater;
         this.amountOfWater = 0;
         this.drinkAdded.clear();
+        this.timeAdded.clear();
+        this.currentDate = Calendar.getInstance().getTime();
         return dailyAmount;
+    }
+
+    public ArrayList<Date> getTimeAdded() {
+        return this.timeAdded;
+    }
+
+    public ArrayList<Double> getDrinkAdded() {
+        return this.drinkAdded;
     }
 
     /**
      * This function will tell user how much the user has drank during the day and how much is the daily progress.
      * @return Will return a string variable to user.
      */
-    public String toString() {
+    public String getInformation() {
         return "You have drank " + this.amountOfWater + "ml amount of water.\nIt's " + drinkingProgress() + "% of your daily progress.";
+    }
+
+    public String toString() {
+        return this.currentDate.toString();
     }
 }
