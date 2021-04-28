@@ -27,6 +27,15 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/tellWelcome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="@string/welcome"
+        android:textAlignment="center"
+        android:textSize="18sp" />
+
+    <TextView
         android:id="@+id/askWeight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -78,12 +87,19 @@
         android:textAlignment="center"
         android:textSize="18sp" />
 
+    <TextView
+        android:id="@+id/tellInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/announce_info" />
+
     <Button
         android:id="@+id/toMainButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
         android:onClick="goToMain"
         android:text="@string/toMainButton" />
 

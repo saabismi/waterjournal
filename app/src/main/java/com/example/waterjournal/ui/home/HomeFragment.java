@@ -47,6 +47,13 @@ public class HomeFragment extends Fragment {
 */
     private String TAG = "WaterLog:"; // easy to use tag for logging
 
+    /** THIS CODE IS TO BE CHANGED WHEN THE PERSON-WATER-OBJECT BRANCH IS MERGED!!! For now it just shows the target which is set in the target field in shared preferences */
+    public int getTargetAsMl() {
+        float amountGoal = Float.parseFloat(MainActivity.getTarget()) * 1000; // litres to millilitres
+        int amountGoalInt = Math.round(amountGoal); // round it so that the decimal point leaves
+        return amountGoalInt; // set the text as the goal in millilitres
+    }
+
     /**
      * Metods and values
      * @return
@@ -55,26 +62,8 @@ public class HomeFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         View main = inflater.inflate(R.layout.fragment_home, container, false);
 
-        /*preferences = getActivity().getSharedPreferences(USER_STORE, Context.MODE_PRIVATE);
-        getRegistered = preferences.getBoolean(userRegistered, false);
-        if (getRegistered != true) { // checking if the user has registered already
-            Log.i(TAG, "User hasn't registered yet, let's go to Registration activity");
-            Intent regIntent = new Intent(this, Registration.class); // create intent for going to Registration.java
-            startActivity(regIntent); // start the activity Registration.java
-        } else {
-            Log.d(TAG, "User has already registered, continuing in MainActivity");
-            //showWeight.setText(Integer.toString(getWeight) + " kg");
-            //showTarget.setText(getTarget + " litres");
-        }*/
-
-
-
-        /** THIS CODE IS TO BE CHANGED WHEN THE PERSON-WATER-OBJECT BRANCH IS MERGED!!! */
-
-        float amountGoal = Float.parseFloat(MainActivity.getTarget()) * 1000; // litres to millilitres
-        int amountGoalInt = Math.round(amountGoal); // round it so that the decimal point leaves
         textAmountGoal = main.findViewById(R.id.textAmountGoal); // get the textivew for the field to use
-        textAmountGoal.setText("Amount / " + amountGoalInt + " ml"); // set the text as the goal in millilitres
+        textAmountGoal.setText("Amount / " + getTargetAsMl() + " ml"); // set the text as the goal in millilitres using the function defined above
 
         /**
          * Button to add amount of drink to store

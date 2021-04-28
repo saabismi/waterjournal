@@ -47,12 +47,23 @@
         android:id="@+id/amountPicker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
         android:layout_marginTop="15dp"
         android:layout_marginBottom="4dp"
+        android:descendantFocusability="blocksDescendants"
         app:layout_constraintBottom_toTopOf="@+id/buttonRemoveResent"
         app:layout_constraintStart_toStartOf="@+id/textAddDrink"
-        app:layout_constraintTop_toBottomOf="@+id/textAddDrink"
-        android:descendantFocusability="blocksDescendants" />
+        app:layout_constraintTop_toBottomOf="@+id/textAddDrink" />
+
+    <TextView
+        android:id="@+id/textAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/text_drink_ml"
+        app:layout_constraintStart_toEndOf="@+id/amountPicker"
+        app:layout_constraintTop_toTopOf="@+id/buttonAddDrink" />
 
     <TextView
         android:id="@+id/textAmountGoal"
@@ -92,14 +103,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.15" />
-
-    <TextView
-        android:id="@+id/textAmount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:text="@string/text_drink_ml"
-        app:layout_constraintStart_toEndOf="@+id/amountPicker"
-        app:layout_constraintTop_toTopOf="@+id/buttonAddDrink" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

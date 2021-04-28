@@ -1,15 +1,13 @@
 <resources>
     <string name="app_name">Water Journal</string>
+    <string name="welcome">Welcome to the Water journal app setup!</string>
     <string name="announce_weight">Your weight:</string>
-    <string name="announce_sex">Your sex:</string>
     <string name="announce_target">Your daily water target:</string>
     <string name="placeholder_x">x</string>
     <string name="insert_weight">Insert your weight:</string>
     <string name="kg">kg</string>
-    <string name="insert_sex">Insert your sex:</string>
-    <string name="male">Male</string>
-    <string name="female">Female</string>
     <string name="announce_water_target">Your calculated daily water target:</string>
+    <string name="announce_info">You can set a custom water target in the app preferences.</string>
     <string name="whenReady">When ready:</string>
     <string name="toMainButton">Continue</string>
     <string name="text_app_name">Water Journal</string>
@@ -20,15 +18,13 @@
     <string name="button_home">Home</string>
     <string name="button_save_preferences">Save</string>
     <string name="button_tips">Tips</string>
-    <string name="text_radio_button_man">Man</string>
-    <string name="text_radio_button_woman">Woman</string>
     <string name="text_add_weight">Insert weight (kg)</string>
     <string name="text_drink_ml">ml</string>
     <string name="button_remove_resent">Remove recent</string>
     <string name="text_sex">Sex</string>
     <string name="text_weight">Weight:</string>
     <string name="button_preferences">Preferences</string>
-    <string name="text_add_drink">Add drink</string>
+    <string name="text_add_drink">Add drink:</string>
     <string name="text_daily_goal">Daily water goal status:</string>
     <string name="text_daily_goal_pref">Daily goal:</string>
     <string name="text_amount_goal">Amount / Goal</string>
