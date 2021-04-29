@@ -1,5 +1,7 @@
 package com.example.waterjournal;
 
+import java.text.DecimalFormat;
+
 /**
  * This class is for app user. It will define user's gender and weight and it will use this information to calculate
  * approximately the water amount user has to drink using WaterObject class.
@@ -14,9 +16,20 @@ public class UserObject {
      * This constructor will define values for user either using default values
      * or user's values which are his gender and weight.
      */
+
+    /**
+     * This function will calculate the minimum water amount and convert it to a one decimal double
+     */
+    public double calcMinimumAmount(int weight) {
+        DecimalFormat dec = new DecimalFormat("#.0"); // use this to format to one decimal number
+
+        double minimumAmount = weight * 0.033; // calculate default target ( = 75kg)
+        return Double.valueOf(dec.format(minimumAmount));
+    }
+
     public UserObject() {
-        this.weight = 80;
-        this.minimumAmount = this.weight * 0.033;
+        this.weight = 75;
+        this.minimumAmount = calcMinimumAmount(this.weight);
     }
 
     /**
@@ -26,7 +39,7 @@ public class UserObject {
      */
     public UserObject(int weight) {
         this.weight = weight;
-        this.minimumAmount = weight * 0.033;
+        this.minimumAmount = calcMinimumAmount(weight);
     }
 
     /**
@@ -35,11 +48,12 @@ public class UserObject {
      */
     public void changeWeight(int newWeight) {
         this.weight = newWeight;
-        this.minimumAmount = newWeight * 0.033;
+        this.minimumAmount = calcMinimumAmount(weight);
     }
 
     public void changeMinimumAmount(double newMinimumAmount) {
-        this.minimumAmount = newMinimumAmount;
+        DecimalFormat dec = new DecimalFormat("#.0"); // use this to format to one decimal number
+        this.minimumAmount = Double.valueOf(dec.format(newMinimumAmount)); // convert the new minimum amount to one decimal
     }
 
     /**
@@ -54,7 +68,7 @@ public class UserObject {
      * This function will return user's amount of water user should drink.
      * @return Will return a double value about the amount of water user should at least drink per day.
      */
-    public double getminimumAmount() {
+    public double getMinimumAmount() {
         return this.minimumAmount;
     }
 

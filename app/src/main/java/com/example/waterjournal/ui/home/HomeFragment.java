@@ -51,9 +51,10 @@ public class HomeFragment extends Fragment {
 
     /** THIS CODE IS TO BE CHANGED WHEN THE PERSON-WATER-OBJECT BRANCH IS MERGED!!! For now it just shows the target which is set in the target field in shared preferences */
     public int getTargetAsMl() {
-        float amountGoal = Float.parseFloat(MainActivity.getTarget()) * 1000; // litres to millilitres
-        int amountGoalInt = Math.round(amountGoal); // round it so that the decimal point leaves
-        return amountGoalInt; // set the text as the goal in millilitres
+        //float amountGoal = Float.parseFloat(MainActivity.getTarget()) * 1000; // litres to millilitres
+        //int amountGoalInt = Math.round(amountGoal); // round it so that the decimal point leaves
+        //return amountGoalInt; // set the text as the goal in millilitres
+        return 123;
     }
 
     /**
