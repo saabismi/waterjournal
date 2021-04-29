@@ -1,0 +1,65 @@
+package com.example.waterjournal;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+/**
+ * Drink history activity
+ * User can check daily drink amount
+ * User can move in to the main activity or preference activity
+ */
+public class HistoryActivity extends AppCompatActivity {
+
+    private ListView listView;
+    public static final String EXTRA = "ListPosition";
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_history);
+        this.listView = findViewById(R.id.listViewForDays);
+        this.listView.setAdapter(new ArrayAdapter<WaterObject>(this, android.R.layout.simple_list_item_1, DailyDrinkingObject.getInstance().getDailyWaterList()));
+        this.listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent specificDayView = new Intent(HistoryActivity.this, SpecificDayView.class);
+                specificDayView.putExtra(EXTRA, position);
+                startActivity(specificDayView);
+            }
+        });
+    }
+
+    /**
+     * A metod to move in to the history activity
+     * @param v
+     */
+    public void openHistory(View v){
+        Intent intent = new Intent(this, HistoryActivity.class);
+        startActivity(intent);
+    }
+
+    /**
+     * A metod to move in to the preference activity
+     * @param v
+     */
+    /*
+    public void openPreferences(View v){
+        Intent intent = new Intent(this, PreferencesActivity.class);
+        startActivity(intent);
+    }*/
+
+    /**
+     * A metod to move in to the main activity
+     * @param v
+     */
+    public void openHome(View v){
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+}
