@@ -19,8 +19,14 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.waterjournal.R;
+import com.example.waterjournal.UserObject;
+import com.google.gson.Gson;
 
 public class PreferencesFragment extends Fragment {
+
+    public String userGson;
+    public String userJson;
+    public Gson gson = new Gson();
 
     private NumberPicker weightPicker, dailyPicker;
     private TextView textWeight, textAmount;
@@ -31,10 +37,15 @@ public class PreferencesFragment extends Fragment {
     private final String USER_STORE = "UserStore"; // create preferences for storing information about the user, etc.
     private final String userWeight  = "userWeight"; // storage for storing the user weight
     private final String userTarget = "userTarget"; // target water amount per day
+    private final String userObject = "userObject"; // location for the JSON formatted version of the user object
+
+    public UserObject user;
+
     public String targets[] = {"1.0","1.2","1.3","1.4","1.5","1.6","1.7","1.8","1.9","2.0","2.1","2.2","2.3", "2.4", "2.5", "2.6", "2.7", "2.8", "2.9", "3.0", "3.1", "3.2", "3.3", "3.4", "3.5", "3.6", "3.7", "3.8", "3.9", "4.0", "4.1", "4.2", "4.3", "4.4", "4.5", "4.6", "4.7", "4.8", "4.9", "5.0", "5.1", "5.2", "5.3", "5.4", "5.5"};
 
     private int getWeight; // get values from the preferences
     private String getTarget;
+    private String getUser;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -42,6 +53,18 @@ public class PreferencesFragment extends Fragment {
         View pref = inflater.inflate(R.layout.fragment_preferences, container, false);
 
         preferences = getActivity().getSharedPreferences(USER_STORE, Context.MODE_PRIVATE); // set the preferences variable
+
+        getUser = preferences.getString(userObject, "unexpected error"); // get the user object as a string from the storage
+        user = gson.fromJson(getUser, UserObject.class); // transfer the user object from json to object
+
+        Log.d(TAG, Double.toString(user.getWeight()));
+        user.changeWeight(44);
+        Log.d(TAG, Double.toString(user.getWeight()));
+
+        SharedPreferences.Editor editor = preferences.edit();
+        userJson = gson.toJson(user);
+        editor.putString(userObject, userJson);
+        editor.commit();
 
         getWeight = preferences.getInt(userWeight, 75); // get the value of the weight from the storage
         getTarget = preferences.getString(userTarget, "undefined"); // get the value of the target from the storage
@@ -51,7 +74,7 @@ public class PreferencesFragment extends Fragment {
 
         weightPicker.setMinValue(20);
         weightPicker.setMaxValue(200);
-        weightPicker.setValue(getWeight);
+        weightPicker.setValue(user.getWeight());
 
         //textWeight.setText(" kg");
         //textAmount.setText(" ml");
@@ -60,15 +83,13 @@ public class PreferencesFragment extends Fragment {
             @Override
             public void onValueChange(NumberPicker numberPicker, int i, int i1) {
                 //textWeight.setText(" kg");
-                Log.d(TAG, Integer.toString(weightPicker.getValue()));
+                user.changeWeight(weightPicker.getValue());
+                Log.d(TAG, "now :" + Integer.toString(user.getWeight()));
             }
         });
 
-
-
         textAmount = pref.findViewById(R.id.textDaily);
         dailyPicker = pref.findViewById(R.id.drinkPicker);
-
 
         dailyPicker.setMinValue(0);
         dailyPicker.setMaxValue(54);
@@ -104,10 +125,20 @@ public class PreferencesFragment extends Fragment {
                 preferences = getActivity().getSharedPreferences(USER_STORE, Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = preferences.edit();
 
+                getUser = preferences.getString(userObject, "unexpected error"); // get the user object as a string from the storage
+                user = gson.fromJson(getUser, UserObject.class); // transfer the user object from json to object
+                userJson = gson.toJson(user);
+
                 String targetAmount = dailyPicker.getDisplayedValues()[dailyPicker.getValue()];
                 String targetString = Integer.toString(dailyPicker.getValue());
+
+                double targetAmountDouble = Double.parseDouble(targetAmount);
+                Log.d(TAG, "target as double: " + Double.toString(targetAmountDouble));
+                user.changeMinimumAmount(targetAmountDouble);
+
                 editor.putInt(userWeight, weightPicker.getValue());
                 editor.putString(userTarget, targetAmount);
+                editor.putString(userObject, userJson);
                 editor.commit();
                 //Toast to screen
                 Toast.makeText(getContext(),"Preferences saved",Toast.LENGTH_SHORT).show();

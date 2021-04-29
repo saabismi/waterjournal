@@ -22,6 +22,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.waterjournal.MainActivity;
 import com.example.waterjournal.R;
 import com.example.waterjournal.Registration;
+import com.example.waterjournal.UserObject;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
@@ -32,9 +33,7 @@ import java.util.List;
  * Main fragment opens on default after user have set weight in registration activity
  */
 public class HomeFragment extends Fragment {
-    /**
-     *
-     */
+
     private Button addDrink, removeResent;
     private NumberPicker amounPicker;
     private TextView textAmount,textAmountGoal, textProgressBar;
