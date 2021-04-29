@@ -91,6 +91,12 @@ public class MainActivity extends AppCompatActivity {
                 userJson = gson.toJson(user); // user object to json form
                 editor.putString(userObject, userJson); // set the value of the newly created user object to the storage
                 editor.putBoolean(userCreated, true); // set the user object as created in the local storage
+
+                // reset these values so that they won't be used again because they are now unnecessary
+                editor.putInt(userWeight, 0);
+                editor.putString(userTarget, "0");
+
+                // commit the changes
                 editor.commit();
             } else {
                 Log.d(TAG, "user object already exists, no need to create it");

@@ -22,6 +22,8 @@ import com.example.waterjournal.R;
 import com.example.waterjournal.UserObject;
 import com.google.gson.Gson;
 
+import java.text.DecimalFormat;
+
 public class PreferencesFragment extends Fragment {
 
     public String userJson; // user object in json form
@@ -41,11 +43,32 @@ public class PreferencesFragment extends Fragment {
     public UserObject user; // user object
 
     /* List of displayed values in the daily water number picker */
-    public String targets[] = {"1.0","1.2","1.3","1.4","1.5","1.6","1.7","1.8","1.9","2.0","2.1","2.2","2.3", "2.4", "2.5", "2.6", "2.7", "2.8", "2.9", "3.0", "3.1", "3.2", "3.3", "3.4", "3.5", "3.6", "3.7", "3.8", "3.9", "4.0", "4.1", "4.2", "4.3", "4.4", "4.5", "4.6", "4.7", "4.8", "4.9", "5.0", "5.1", "5.2", "5.3", "5.4", "5.5"};
+    public String targets[] = {"1.0", "1.1", "1.2","1.3","1.4","1.5","1.6","1.7","1.8","1.9","2.0","2.1","2.2","2.3", "2.4", "2.5", "2.6", "2.7", "2.8", "2.9", "3.0", "3.1", "3.2", "3.3", "3.4", "3.5", "3.6", "3.7", "3.8", "3.9", "4.0", "4.1", "4.2", "4.3", "4.4", "4.5", "4.6", "4.7", "4.8", "4.9", "5.0", "5.1", "5.2", "5.3", "5.4", "5.5"};
 
     private int getWeight; // get values from the preferences
     private String getTarget;
     private String getUser;
+
+    /**
+     * Calculate needed water amount, used when the user changes their weight but doesn't touch the target water amount
+     * @param weight
+     * @return
+     */
+
+    public String calcMinValuePref(int weight) {
+        DecimalFormat dec = new DecimalFormat("#.0"); // use this to format to one decimal number
+
+        double minimumAmount = weight * 0.033; // calculate default target ( = 75kg)
+        return Double.toString(Double.valueOf(dec.format(minimumAmount)));
+    }
+
+    /**
+     * Main view of the preferences fragment
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -73,37 +96,50 @@ public class PreferencesFragment extends Fragment {
         weightPicker.setValue(user.getWeight());
         Log.d(TAG, "the user weight in the object is: " + user.getWeight());
 
-        //textWeight.setText(" kg");
-        //textAmount.setText(" ml");
+        dailyPicker = pref.findViewById(R.id.drinkPicker);
+        dailyPicker.setMinValue(0);
+        dailyPicker.setMaxValue(45);
+        dailyPicker.setDisplayedValues(targets);
+
+        /**
+         * Set values for the daily water amount picker
+         */
+        /* This should be a function but I didn't manage to do it, but at least it works... */
+        String minimumAsString = Double.toString(user.getMinimumAmount());
+        Log.d(TAG, "minimum as string: " + minimumAsString);
+
+        int targetIndex = 0;
+        while(true) {
+            if(minimumAsString.equals(targets[targetIndex]) && targetIndex <= 45) {
+                dailyPicker.setValue(targetIndex);
+                break;
+            } else {
+                targetIndex++;
+            }
+        }
+
+        textAmount = pref.findViewById(R.id.textDaily);
+
+        Log.d(TAG, Integer.toString(targets.length));
+
 
         weightPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker numberPicker, int i, int i1) {
                 user.changeWeight(i1);
                 Log.d(TAG, "weight now :" + Integer.toString(user.getWeight()));
+
+                int targetIndex2 = 0;
+                while(true) {
+                    if(calcMinValuePref(user.getWeight()).equals(targets[targetIndex2]) && targetIndex2 <= 45) {
+                        dailyPicker.setValue(targetIndex2);
+                        break;
+                    } else {
+                        targetIndex2++;
+                    }
+                }
             }
         });
-
-        textAmount = pref.findViewById(R.id.textDaily);
-        dailyPicker = pref.findViewById(R.id.drinkPicker);
-
-        dailyPicker.setMinValue(0);
-        dailyPicker.setMaxValue(54);
-
-        String minimumAsString = Double.toString(user.getMinimumAmount());
-        Log.d(TAG, "minimum as string: " + minimumAsString);
-        int targetIndex = 0;
-        while(true) {
-            if(getTarget.equals(targets[targetIndex]) && targetIndex <= 54) {
-                dailyPicker.setValue(targetIndex);
-                break;
-            } else {
-                targetIndex++;
-            }
-
-        }
-
-        dailyPicker.setDisplayedValues(targets);
 
         dailyPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
