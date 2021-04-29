@@ -35,31 +35,4 @@ public class HistoryActivity extends AppCompatActivity {
         });
     }
 
-    /**
-     * A metod to move in to the history activity
-     * @param v
-     */
-    public void openHistory(View v){
-        Intent intent = new Intent(this, HistoryActivity.class);
-        startActivity(intent);
-    }
-
-    /**
-     * A metod to move in to the preference activity
-     * @param v
-     */
-    /*
-    public void openPreferences(View v){
-        Intent intent = new Intent(this, PreferencesActivity.class);
-        startActivity(intent);
-    }*/
-
-    /**
-     * A metod to move in to the main activity
-     * @param v
-     */
-    public void openHome(View v){
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-    }
 }
