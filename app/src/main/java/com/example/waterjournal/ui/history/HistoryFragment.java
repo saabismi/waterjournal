@@ -22,6 +22,9 @@ import com.example.waterjournal.R;
 import com.example.waterjournal.SpecificDayView;
 import com.example.waterjournal.WaterObject;
 
+/**
+ * History fragment show user's drinking history on listView by daily
+ */
 public class HistoryFragment extends Fragment {
 
     private ListView listView;
@@ -31,11 +34,15 @@ public class HistoryFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
 
         View hist = inflater.inflate(R.layout.fragment_history, container, false);
+        /**
+         * ListeView to list days when user have use app and store a drink or drinks
+         */
         this.listView = hist.findViewById(R.id.listViewForDays);
         this.listView.setAdapter(new ArrayAdapter<WaterObject>(getActivity(), android.R.layout.simple_list_item_1, DailyDrinkingObject.getInstance().getDailyWaterList()));
         this.listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //Intent to open daily view to check stats from a specific day
                 Intent specificDayView = new Intent(getActivity(), SpecificDayView.class);
                 specificDayView.putExtra(EXTRA, position);
                 startActivity(specificDayView);

@@ -65,15 +65,20 @@ public class MainActivity extends AppCompatActivity {
             //showTarget.setText(getTarget + " litres");
         }
         BottomNavigationView navView = findViewById(R.id.nav_view);
+        BottomNavigationView navViewTop = findViewById(R.id.nav_view_top);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_home, R.id.navigation_history, R.id.navigation_settings)
                 .build();
+        AppBarConfiguration appBarConfigurationTop = new AppBarConfiguration.Builder(
+                R.id.navigation_tips)
+                .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
-
+        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfigurationTop);
+        NavigationUI.setupWithNavController(navViewTop, navController);
     }
 
     public void reset(View v) {

@@ -35,4 +35,7 @@
     <string name="waterdrop">waterdrop</string>
     <string name="text_kg_pref">kg</string>
     <string name="text_l_pref">litres</string>
+    <string name="title_tips">Tips</string>
+    <string name="text_water">Vesi \n\nYlläpitää nestetasapainoa  \nSäätelee kehon lämpötilaa  \nTukee ruoansulatusta  \nKuljettaa ja imeyttää ravintoaineita  \nPoistaa aineenvaihduntatuotteita  \n(thl)</string>
+    <string name="text_child">Lapsille \n\nNormaalisti lapsi tarvitsee nestettä 1–1,5 litraa päivässä. \nHelteellä nesteen tarve voi olla jopa suurempi. \nTarjoa lapselle juotavaa tasaisesti pitkin päivää.  \nLapsi on juonut liian vähän, jos hän käy pissalla normaalia harvemmin ja pissa on väriltään tavallista tummempaa. \nNestehukka voi aiheuttaa myös päänsärkyä ja ärtyneisyyttä. \n(thl)</string>
 </resources>
