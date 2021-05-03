@@ -33,7 +33,7 @@ public class Registration extends AppCompatActivity {
     private int getWeight; // get values from the preferences
     private String getTarget;
 
-    private String TAG = "WaterLog:"; // easy to use tag for logging
+    private String TAG = "WaterLog"; // easy to use tag for logging
 
     private NumberPicker pickWeight; // number picker for choosing weight
     private TextView previewTarget; // textview for showing the preview for the water target

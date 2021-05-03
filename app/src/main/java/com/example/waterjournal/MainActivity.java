@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
     //private TextView showWeight; // textview for weight
     //private TextView showTarget; // textview for target
 
-    private String TAG = "WaterLog:"; // easy to use tag for logging
+    private String TAG = "WaterLog"; // easy to use tag for logging
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,7 +101,8 @@ public class MainActivity extends AppCompatActivity {
                 editor.commit();
             } else {
                 Log.d(TAG, "user object already exists, no need to create it");
-                user = gson.fromJson(getUser, UserObject.class); // transfer the user object from json to object
+                user = gson.fromJson(getUser, UserObject.class); // transfer the user object from json to objec
+              
                 Log.d("paino", String.valueOf(user.getWeight()));
                 //userTarget = String.valueOf(user.getMinimumAmount());
             }

@@ -23,7 +23,6 @@ public class UserObject {
     public double calcMinimumAmount(int weight) {
         DecimalFormat dec = new DecimalFormat("#.0"); // use this to format to one decimal number
 
-        this.weight = weight;
         double minimumAmount = weight * 0.033; // calculate default target ( = 75kg)
         return Double.valueOf(dec.format(minimumAmount));
     }

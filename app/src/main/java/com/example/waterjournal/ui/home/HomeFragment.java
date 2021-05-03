@@ -3,6 +3,7 @@ package com.example.waterjournal.ui.home;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,8 +14,12 @@ import android.widget.NumberPicker;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.time.LocalDate;
+import java.time.Month;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -23,19 +28,20 @@ import com.example.waterjournal.DailyDrinkingObject;
 import com.example.waterjournal.MainActivity;
 import com.example.waterjournal.R;
 import com.example.waterjournal.Registration;
+import com.example.waterjournal.UserObject;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
  * Main fragment opens on default after user have set weight in registration activity
  */
+@RequiresApi(api = Build.VERSION_CODES.O)
 public class HomeFragment extends Fragment {
-    /**
-     *
-     */
+
     private Button addDrink, removeResent;
     private NumberPicker amounPicker;
     private TextView textAmount, textAmountGoal, textProgressBar;
@@ -43,28 +49,46 @@ public class HomeFragment extends Fragment {
     private int progressBar = 0;
     private ProgressBar circleBar;
     private String value;
-    /*
-    private SharedPreferences preferences; // create sharedpreferences variable
-    private final String USER_STORE = "UserStore"; // create preferences for storing information about the user, etc.
-    private final String userRegistered = "userRegistered"; // storage for sharing the information about whether the user is registered already or not
-    private boolean getRegistered; // variable for getting the value of registration status key
-*/
-    private String TAG = "WaterLog:"; // easy to use tag for logging
+
+    /**
+     * Date stuff testing
+     */
+    // Localdate object for retrieving the current date
+    LocalDate currentDate = LocalDate.now();
+
+    // this represents the day that the app gets from the latest water object
+    public Calendar testCal = new Calendar.Builder().setCalendarType("iso8601").setDate(2021,5,2).build();
+
+    // Integer which returns the latest water object's day as a number (1-31)
+    public int latestDay() {
+        return testCal.get(Calendar.DAY_OF_MONTH); // this is to be changed to a value retrieved from the water object
+    }
+
+    // this is the current date refreshed every time the app is laoded
+    public Calendar currentCal = new Calendar.Builder().setCalendarType("iso8601").setDate(currentDate.getYear(), currentDate.getMonthValue(), currentDate.getDayOfMonth()).build();
+
+    // Integer which returns the current day number (1-31)
+    public int currentDay() {
+        return currentCal.get(Calendar.DAY_OF_MONTH);
+    }
+
+    private String TAG = "WaterLog"; // easy to use tag for logging in Logcat
 
     /**
      * THIS CODE IS TO BE CHANGED WHEN THE PERSON-WATER-OBJECT BRANCH IS MERGED!!! For now it just shows the target which is set in the target field in shared preferences
      */
     public int getTargetAsMl() {
-        float amountGoal = Float.parseFloat(MainActivity.getTarget()) * 1000; // litres to millilitres
-        int amountGoalInt = Math.round(amountGoal); // round it so that the decimal point leaves
-        return amountGoalInt; // set the text as the goal in millilitres
+        //float amountGoal = Float.parseFloat(MainActivity.getTarget()) * 1000; // litres to millilitres
+        //int amountGoalInt = Math.round(amountGoal); // round it so that the decimal point leaves
+        //return amountGoalInt; // set the text as the goal in millilitres
+        return 1234;
     }
 
     /**
-     * Metods and values
-     *
+     * Methods and values
      * @return
      */
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View main = inflater.inflate(R.layout.fragment_home, container, false);
@@ -98,6 +122,23 @@ public class HomeFragment extends Fragment {
          */
         amounPicker = main.findViewById(R.id.amountPicker);
         textAmount = main.findViewById(R.id.textAmount);
+
+        /* Testing!! */
+
+        Log.d(TAG, "onko ennen nykyhetkeä: " + Boolean.toString(currentCal.after(testCal)));
+
+        Log.d(TAG, "viimeisin: " + Integer.toString(latestDay()));
+        Log.d(TAG, "nykyinen: " + Integer.toString(currentDay()));
+
+        if(latestDay() < currentDay()) {
+            //create new water object
+            Log.d(TAG, "create new water object");
+        } else {
+            //continue with the old water object
+            Log.d(TAG, "continue using the existing water object");
+        }
+
+
 
         /**
          * Numberpicker min, max and default values
