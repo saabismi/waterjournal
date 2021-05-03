@@ -44,6 +44,7 @@ public class PreferencesFragment extends Fragment {
         preferences = getActivity().getSharedPreferences(USER_STORE, Context.MODE_PRIVATE); // set the preferences variable
 
         getWeight = preferences.getInt(userWeight, 75); // get the value of the weight from the storage
+        Log.d("paino", String.valueOf(getWeight));
         getTarget = preferences.getString(userTarget, "undefined"); // get the value of the target from the storage
 
         textWeight = pref.findViewById(R.id.textWeight);

@@ -35,7 +35,7 @@ public class HistoryFragment extends Fragment {
 
         View hist = inflater.inflate(R.layout.fragment_history, container, false);
         /**
-         * ListeView to list days when user have use app and store a drink or drinks
+         * ListView to list days when user have use app and store a drink or drinks
          */
         this.listView = hist.findViewById(R.id.listViewForDays);
         this.listView.setAdapter(new ArrayAdapter<WaterObject>(getActivity(), android.R.layout.simple_list_item_1, DailyDrinkingObject.getInstance().getDailyWaterList()));
