@@ -58,13 +58,13 @@ public class HomeFragment extends Fragment {
     // this represents the day that the app gets from the latest water object
     public Calendar testCal = new Calendar.Builder().setCalendarType("iso8601").setDate(2021,5,2).build();
 
-    // this is the current date refreshed every time the app is laoded
-    public Calendar currentCal = new Calendar.Builder().setCalendarType("iso8601").setDate(currentDate.getYear(), currentDate.getMonthValue(), currentDate.getDayOfMonth()).build();
-
     // Integer which returns the latest water object's day as a number (1-31)
     public int latestDay() {
-        return testCal.get(Calendar.DAY_OF_MONTH);
+        return testCal.get(Calendar.DAY_OF_MONTH); // this is to be changed to a value retrieved from the water object
     }
+
+    // this is the current date refreshed every time the app is laoded
+    public Calendar currentCal = new Calendar.Builder().setCalendarType("iso8601").setDate(currentDate.getYear(), currentDate.getMonthValue(), currentDate.getDayOfMonth()).build();
 
     // Integer which returns the current day number (1-31)
     public int currentDay() {
@@ -120,10 +120,19 @@ public class HomeFragment extends Fragment {
 
         /* Testing!! */
 
-        Log.d(TAG, "onko ennen nykyhetkeä: " + Boolean.toString(currentCal.before(testCal)));
+        Log.d(TAG, "onko ennen nykyhetkeä: " + Boolean.toString(currentCal.after(testCal)));
 
         Log.d(TAG, "viimeisin: " + Integer.toString(latestDay()));
         Log.d(TAG, "nykyinen: " + Integer.toString(currentDay()));
+
+        if(latestDay() < currentDay()) {
+            //create new water object
+            Log.d(TAG, "create new water object");
+        } else {
+            //continue with the old water object
+            Log.d(TAG, "continue using the existing water object");
+        }
+
 
 
         /**
