@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.google.gson.Gson;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,7 +19,9 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.waterjournal.MainActivity;
 import com.example.waterjournal.R;
+import com.example.waterjournal.UserObject;
 
 public class PreferencesFragment extends Fragment {
 
@@ -26,8 +29,11 @@ public class PreferencesFragment extends Fragment {
     private TextView textWeight, textAmount;
     private Button save;
     private String TAG = "WaterLog:";
+    public Gson gson = new Gson();
 
     private SharedPreferences preferences; // create sharedpreferences variable
+    private final String userObject = "userObject";
+    public UserObject user;
     private final String USER_STORE = "UserStore"; // create preferences for storing information about the user, etc.
     private final String userWeight  = "userWeight"; // storage for storing the user weight
     private final String userTarget = "userTarget"; // target water amount per day
@@ -47,12 +53,15 @@ public class PreferencesFragment extends Fragment {
         Log.d("paino", String.valueOf(getWeight));
         getTarget = preferences.getString(userTarget, "undefined"); // get the value of the target from the storage
 
+        String userJson = preferences.getString(userObject, "");
+        user = gson.fromJson(userJson, UserObject.class);
+
         textWeight = pref.findViewById(R.id.textWeight);
         weightPicker = pref.findViewById(R.id.weightPicker);
 
         weightPicker.setMinValue(20);
         weightPicker.setMaxValue(200);
-        weightPicker.setValue(getWeight);
+        weightPicker.setValue(user.getWeight());
 
         //textWeight.setText(" kg");
         //textAmount.setText(" ml");
