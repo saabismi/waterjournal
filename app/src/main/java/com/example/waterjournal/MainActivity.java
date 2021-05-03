@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
     //private TextView showWeight; // textview for weight
     //private TextView showTarget; // textview for target
 
-    private String TAG = "WaterLog:"; // easy to use tag for logging
+    private String TAG = "WaterLog"; // easy to use tag for logging
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

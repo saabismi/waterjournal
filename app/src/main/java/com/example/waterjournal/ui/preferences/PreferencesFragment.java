@@ -32,7 +32,7 @@ public class PreferencesFragment extends Fragment {
     private NumberPicker weightPicker, dailyPicker;
     private TextView textWeight, textAmount;
     private Button save;
-    private String TAG = "WaterLog:";
+    private String TAG = "WaterLog";
 
     private final String USER_STORE = "UserStore"; // create preferences for storing information about the user, etc.
     private final String userWeight  = "userWeight"; // storage for storing the user weight
