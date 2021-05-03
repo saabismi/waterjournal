@@ -117,6 +117,12 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
+        BottomNavigationView navViewTop = findViewById(R.id.nav_view_top);
+        AppBarConfiguration appBarConfigurationTop = new AppBarConfiguration.Builder(
+                R.id.navigation_tips)
+                .build();
+        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfigurationTop);
+        NavigationUI.setupWithNavController(navViewTop, navController);
     }
 
     public void reset(View v) {
