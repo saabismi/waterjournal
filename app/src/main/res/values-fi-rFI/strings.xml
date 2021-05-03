@@ -8,8 +8,6 @@
     <string name="button_home">Koti</string>
     <string name="button_save_preferences">Tallenna</string>
     <string name="button_tips">Vinkkejä</string>
-    <string name="text_radio_button_man">Mies</string>
-    <string name="text_radio_button_woman">Nainen</string>
     <string name="text_add_weight">Anna paino (kg)</string>
     <string name="text_drink_ml">ml</string>
     <string name="button_remove_resent">Poista uusin</string>
@@ -24,4 +22,21 @@
     <string name="title_history">Historia</string>
     <string name="title_prefenrences">Asetukset</string>
     <string name="waterdrop">vesipisara</string>
+    <string name="text_tips_water">Vesi \\n\\nYlläpitää nestetasapainoa  \\nSäätelee kehon lämpötilaa  \\nTukee ruoansulatusta  \\nKuljettaa ja imeyttää ravintoaineita  \\nPoistaa aineenvaihduntatuotteita  \\n(thl)</string>
+    <string name="text_tips_child">Lapsille \\n\\nNormaalisti lapsi tarvitsee nestettä 1–1,5 litraa päivässä. \\nHelteellä nesteen tarve voi olla jopa suurempi. \\nTarjoa lapselle juotavaa tasaisesti pitkin päivää.  \\nLapsi on juonut liian vähän, jos hän käy pissalla normaalia harvemmin ja pissa on väriltään tavallista tummempaa. \\nNestehukka voi aiheuttaa myös päänsärkyä ja ärtyneisyyttä. \\n(thl)</string>
+    <string name="text_tips_adult">Aikuisille \\n\\nJuo 2–3 litraa nestettä päivässä. \\nTästä noin puolet pitäisi saada juotuna ja toinen puoli ruoan mukana. \\nHikoilu ja saunominen lisäävät nesteen tarvetta. \\nJos juot kahvia tai alkoholia, juo sen kanssa aina lasillinen vettä. \\n(thl)</string>
+    <string name="text_tips_pregnant">Raskaana oleville  \\n\\nMuista juoda riittävästi.  \\nKehosi tuottaa ylimääräistä verta, ja siihen tarvitaan nestettä.  \\nNeste myös tukee aineenvaihduntaa, vähentää turvotusta ja ehkäisee ummetusta.  \\nRasvattomia maitovalmisteita on hyvä juoda 5–6 dl päivässä.  \\nNäin saat tarpeeksi kalsiumia ja D-vitamiinia.  \\nÄlä juo alkoholia.  \\nAlkoholi voi vaurioittaa sikiötä raskauden jokaisessa vaiheessa.  \\n(thl)</string>
+    <string name="text_tips_breastfeeding">" Imettäville \\n\\nKun imetät, menetät nestettä. \\nNauti nestettä siis noin imetetyn maidon verran. \\nYlimääräinen juominen ei kuitenkaan lisää rintamaidon määrää. \\nÄlä juo liikaa nestettä. \\nYli viisi litraa päivässä on elimistölle jo selvästi liikaa. \\nSopivia juomia ovat vesi, rasvaton maito ja piimä, tee sekä vähäsokeriset, laimeat mehut.  \\nNauti kahvia kohtuullisesti. \\nRunsas kahvin juonti saattaa tehdä lapsesta levottoman, sillä osa kofeiinista kulkeutuu rintamaitoon.  \\nVältä alkoholia imetysaikana. \\nAlkoholi poistuu rintamaidosta yhtä nopeasti kuin verestä. \\nKorkeimmillaan alkoholipitoisuus on noin 30–60 minuuttia alkoholin juomisen jälkeen. \\n(thl)"</string>
+    <string name="text_l_pref">Litraa</string>
+    <string name="title_tips">Vinkkejä</string>
+    <string name="text_kg_pref">kg</string>
+    <string name="text_daily_goal_pref">Päivätavoite:</string>
+    <string name="insert_weight">Anna paino:</string>
+    <string name="kg">kg</string>
+    <string name="app_name">Vesikirja</string>
+    <string name="welcome">Tervetuloa vesikirjan asetuksiin!</string>
+    <string name="announce_weight">Painosi:</string>
+    <string name="announce_target">Veden juonnin päivätavoitteesi:</string>
+    <string name="placeholder_x">x</string>
+    <string name="text_tips_elderly">Ikääntyneille \\n\\nJuo 1–1,5 litraa päivässä. \\nJuo, vaikka sinulla ei olisikaan jano. \\nHyviä juomia ovat veden ja maitotuotteiden lisäksi muun muassa täysmehut, mehujuomat ja virvoitusjuomat. \\nSyö nestepitoista ruokaa, esimerkiksi salaatteja ja kylmiä keittoja. \\nVaraa joka päivä jääkaappiin juotavaa litran kannuun. \\nNäin voit myös tarkkailla, paljonko juot. \\nJuo nestettä runsaammin aamulla ja päivällä. \\nRunsas iltajuominen lisää virtsaneritystä yöllä. \\nNestevajaus on ikääntyneille erityisen vakavaa, sillä kehossa on vähemmän vettä kuin nuoremmilla.  \\nNestevajaus voi syntyä hyvin nopeasti. \\nSe voi johtaa muun muassa verenpaineen laskuun ja kaatumisiin. \\nMyös jotkut lääkkeet lisäävät nesteen tarvetta.  \\n(thl)</string>
 </resources>
