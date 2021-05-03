@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
          * First checking if the user is registered
          */
 
-        if (getRegistered != true) { // checking if the user has registered already
+        if (!getRegistered) { // checking if the user has registered already
             Log.d(TAG, "User hasn't registered yet, let's go to Registration activity");
             Intent regIntent = new Intent(this, Registration.class); // create intent for going to Registration.java
             startActivity(regIntent); // start the activity Registration.java
@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
             /**
              * Checking if the user object has been created
              */
-            if (getCreated != true) {
+            if (!getCreated) {
                 Log.d(TAG, "user object hasn't been created, gonna create it");
                 user = new UserObject(getWeight); // create the user object
                 userJson = gson.toJson(user); // user object to json form
@@ -93,14 +93,18 @@ public class MainActivity extends AppCompatActivity {
                 editor.putBoolean(userCreated, true); // set the user object as created in the local storage
 
                 // reset these values so that they won't be used again because they are now unnecessary
-                editor.putInt(userWeight, 0);
-                editor.putString(userTarget, "0");
+                DailyDrinkingObject.getInstance().createWaterObject(user.getMinimumAmount());
+                editor.putInt(userWeight, user.getWeight());
+                editor.putString(userTarget, String.valueOf(DailyDrinkingObject.getInstance().getSpecificWaterObject(0).getMinimumWater()));
 
                 // commit the changes
                 editor.commit();
             } else {
                 Log.d(TAG, "user object already exists, no need to create it");
-                user = gson.fromJson(getUser, UserObject.class); // transfer the user object from json to object
+                user = gson.fromJson(getUser, UserObject.class); // transfer the user object from json to objec
+              
+                Log.d("paino", String.valueOf(user.getWeight()));
+                //userTarget = String.valueOf(user.getMinimumAmount());
             }
         }
 
@@ -114,6 +118,12 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
+        BottomNavigationView navViewTop = findViewById(R.id.nav_view_top);
+        AppBarConfiguration appBarConfigurationTop = new AppBarConfiguration.Builder(
+                R.id.navigation_tips)
+                .build();
+        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfigurationTop);
+        NavigationUI.setupWithNavController(navViewTop, navController);
     }
 
     public void reset(View v) {
@@ -133,7 +143,11 @@ public class MainActivity extends AppCompatActivity {
      * @return user's weight
      */
     public static String getTarget() {
-        return getTarget;
+        if (DailyDrinkingObject.getInstance().getDailyWaterList().size() == 0) {
+            return "0";
+        } else {
+            return String.valueOf(DailyDrinkingObject.getInstance().getSpecificWaterObject(DailyDrinkingObject.getInstance().getDailyWaterList().size() - 1).getMinimumWater());
+        }
     }
 
 }
