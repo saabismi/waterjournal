@@ -39,7 +39,7 @@ public class HomeFragment extends Fragment {
     private Button addDrink, removeResent;
     private NumberPicker amounPicker;
     private TextView textAmount, textAmountGoal, textProgressBar;
-    public String drinks[] = {"-", "100", "200", "250", "300", "330", "400", "450", "500", "600", "700", "800", "900", "1000"};
+    public String drinks[] = {"-", "100", "200", "250", "300", "333", "400", "450", "500", "600", "700", "800", "900", "1000"};
     private int progressBar = 0;
     private ProgressBar circleBar;
     private String value;
