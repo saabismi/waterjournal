@@ -28,6 +28,8 @@ import androidx.navigation.ui.NavigationUI;
  */
 public class MainActivity extends AppCompatActivity {
 
+    public static Context contextOfApplication;
+
     public String userGson;
     public String userJson;
     public Gson gson = new Gson();
@@ -57,6 +59,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        /**
+         * Variable for context of application
+         */
+        contextOfApplication = getApplicationContext();
+
 
         preferences = getSharedPreferences(USER_STORE, Context.MODE_PRIVATE);
         getRegistered = preferences.getBoolean(userRegistered, false);
@@ -124,6 +132,10 @@ public class MainActivity extends AppCompatActivity {
                 .build();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfigurationTop);
         NavigationUI.setupWithNavController(navViewTop, navController);
+    }
+
+    public static Context getContextOfApplication(){
+        return contextOfApplication;
     }
 
     public void reset(View v) {

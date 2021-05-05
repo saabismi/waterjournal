@@ -1,5 +1,11 @@
 package com.example.waterjournal;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 
 /**
@@ -7,6 +13,29 @@ import java.util.ArrayList;
  * This will give user a chance to check his daily or monthly water usage and compare them.
  */
 public class DailyDrinkingObject {
+
+    /**
+     * Gson variable
+     */
+    public Gson gson = new Gson();
+
+    /**
+     * Get application context from the main activity
+     */
+    Context applicationContext = MainActivity.getContextOfApplication();
+
+
+    /**
+     * Set variables for the sharedpreferences
+     */
+    private final String USER_STORE = "UserStore"; // create preferences for storing information about the user, etc.
+    private final String userObject = "userObject"; // location for the JSON formatted version of the user object
+    private SharedPreferences preferences = applicationContext.getSharedPreferences(USER_STORE, Context.MODE_PRIVATE);
+
+    private String getUser = preferences.getString(userObject, "unexpected error"); // get the user object as a string from the storage
+    public UserObject user = gson.fromJson(getUser, UserObject.class); // transfer the user object from json to objec
+    private double minWater = user.getMinimumAmount();
+
 
     //Creating variables for class.
     private ArrayList<WaterObject> dailyWater;
@@ -17,7 +46,7 @@ public class DailyDrinkingObject {
      */
     private DailyDrinkingObject() {
         this.dailyWater = new ArrayList<>();
-        this.dailyWater.add(new WaterObject(2.5));
+        this.dailyWater.add(new WaterObject(this.minWater));
     }
 
     public static DailyDrinkingObject getInstance() {
