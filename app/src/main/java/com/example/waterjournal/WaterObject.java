@@ -59,7 +59,12 @@ public class WaterObject {
     public void addingWater(double amount) {
         this.amountOfWater += amount;
         int amountInt = (int) amount;
-        String help = "You drank " + amountInt + " ml at " + Calendar.getInstance().get(Calendar.HOUR_OF_DAY) + ":" + Calendar.getInstance().get(Calendar.MINUTE);
+        String help;
+        if(Calendar.getInstance().get(Calendar.MINUTE) > 9) {
+            help = "You drank " + amountInt + " ml at " + Calendar.getInstance().get(Calendar.HOUR_OF_DAY) + ":" + Calendar.getInstance().get(Calendar.MINUTE);
+        } else {
+            help = "You drank " + amountInt + " ml at " + Calendar.getInstance().get(Calendar.HOUR_OF_DAY) + ":0" + Calendar.getInstance().get(Calendar.MINUTE);
+        }
         this.drinkAddedText.add(help);
         this.timeAdded.add(Calendar.getInstance().getTime());
         this.drinksTaken.add(amount);
