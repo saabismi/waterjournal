@@ -162,6 +162,14 @@ public class WaterObject {
         return this.currentDate;
     }
 
+    public Calendar getDate() {
+        return Calendar.getInstance();
+    }
+
+    public ArrayList<Double> getDrinksTaken() {
+        return this.drinksTaken;
+    }
+
     public double getMinimumWater() {
         return this.minimumWater;
     }

@@ -75,24 +75,18 @@ public class HomeFragment extends Fragment {
     // this represents the day that the app gets from the latest water object
     public Calendar testCal = new Calendar.Builder().setCalendarType("iso8601").setDate(2021, 5, 2).build();
 
-    // Integer which returns the latest water object's day as a number (1-31)
-    public int latestDay() {
-        return testCal.get(Calendar.DAY_OF_MONTH); // this is to be changed to a value retrieved from the water object
-    }
 
-    // this is the current date refreshed every time the app is loaded
-    public Calendar currentCal = new Calendar.Builder().setCalendarType("iso8601").setDate(currentDate.getYear(), currentDate.getMonthValue(), currentDate.getDayOfMonth()).build();
-
-    // Integer which returns the current day number (1-31)
-    public int currentDay() {
-        return currentCal.get(Calendar.DAY_OF_MONTH);
-    }
+    /**
+     * Variables  for checking whether to create a new water object or use the old one = if the day has changed
+     */
+    private String SingletonDay; // get the value of the date of the latest water object
+    private int SingletonDayInt; // int for the day extracted from the date
+    private Calendar currentCal; // initialise variable for getting the current date as a calendar object
+    private int currentDay;
 
     private String TAG = "WaterLog"; // easy to use tag for logging in Logcat
 
-    /**
-     * THIS CODE IS TO BE CHANGED WHEN THE PERSON-WATER-OBJECT BRANCH IS MERGED!!! For now it just shows the target which is set in the target field in shared preferences
-     */
+
     public int getTargetAsMl() {
         float amountGoal = Float.parseFloat(MainActivity.getTarget()); // litres to millilitres
         int amountGoalInt = Math.round(amountGoal); // round it so that the decimal point leaves
@@ -118,6 +112,21 @@ public class HomeFragment extends Fragment {
         circleBar = main.findViewById(R.id.progress_bar);
         DecimalFormat decimal = new DecimalFormat("#.#");
 
+
+        /**
+         * Get the date from the singleton
+         */
+        SingletonDay = DailyDrinkingObject.getInstance().getSpecificWaterObject(DailyDrinkingObject.getInstance().getDailyWaterList().size() - 1).toString();
+        SingletonDayInt = SingletonDay.charAt(0);
+
+        /**
+         * Get the current date
+         */
+        // this is the current date refreshed every time the app is loaded
+        currentCal = new Calendar.Builder().setCalendarType("iso8601").setDate(currentDate.getYear(), currentDate.getMonthValue(), currentDate.getDayOfMonth()).build();
+        // Integer which returns the current day number (1-31)
+        currentDay = currentCal.get(Calendar.DAY_OF_MONTH);
+
         /**
          * Set the percent text in the middle of the progress bar
          */
@@ -125,6 +134,7 @@ public class HomeFragment extends Fragment {
         double percent = (DailyDrinkingObject.getInstance().getSpecificWaterObject(DailyDrinkingObject.getInstance().getDailyWaterList().size() - 1).getAmountOfWater()) / target * 100;
         int circlePercent = (int) Math.round(percent);
         textProgressBar.setText(decimal.format(percent) + " %");
+        circleBar.setProgress(circlePercent);
 
         preferences = getActivity().getSharedPreferences(USER_STORE, Context.MODE_PRIVATE);
 
@@ -177,11 +187,20 @@ public class HomeFragment extends Fragment {
 
         Log.d(TAG, "onko ennen nykyhetkeä: " + Boolean.toString(currentCal.after(testCal)));
 
-        Log.d(TAG, "viimeisin: " + Integer.toString(latestDay()));
-        Log.d(TAG, "nykyinen: " + Integer.toString(currentDay()));
+       // Log.d(TAG, "viimeisin: " + Integer.toString(latestDay()));
+        //Log.d(TAG, "nykyinen: " + Integer.toString(currentDay()));
 
-        if (latestDay() < currentDay()) {
+
+        if (SingletonDayInt < currentDay) {
             //create new water object
+            waters = gson.fromJson(getWaters, WaterList.class);
+            waters.reset();
+            DailyDrinkingObject.getInstance().getSpecificWaterObject(DailyDrinkingObject.getInstance().getDailyWaterList().size() - 1).dailyReset();
+
+            watersGson = gson.toJson(waters);
+            SharedPreferences.Editor editor = preferences.edit(); // editor
+            editor.putString(waterList, watersGson);
+            editor.commit();
             Log.d(TAG, "create new water object");
         } else {
             //continue with the old water object

@@ -24,7 +24,6 @@ public class DailyDrinkingObject {
      */
     Context applicationContext = MainActivity.getContextOfApplication();
 
-
     /**
      * Set variables for the sharedpreferences
      */
