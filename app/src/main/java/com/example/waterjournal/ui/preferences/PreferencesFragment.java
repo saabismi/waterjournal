@@ -29,6 +29,7 @@ import java.text.DecimalFormat;
 
 public class PreferencesFragment extends Fragment {
 
+    public String userGson; // user converted to json
     public String userJson; // user object in json form
     public Gson gson = new Gson(); // Gson object
 
@@ -83,13 +84,13 @@ public class PreferencesFragment extends Fragment {
 
         preferences = getActivity().getSharedPreferences(USER_STORE, Context.MODE_PRIVATE);
 
-        /*person_stuff
+        /*person_stuff*/
         getUser = preferences.getString(userObject, "unexpected error"); // get the user object as a string from the storage
         user = gson.fromJson(getUser, UserObject.class); // transfer the user object from json to object
 
         SharedPreferences.Editor editor = preferences.edit();
         userJson = gson.toJson(user);
-        */
+
 
         /* new_object_branch
         getWeight = preferences.getInt(userWeight, 75); // get the value of the weight from the storage
@@ -185,6 +186,10 @@ public class PreferencesFragment extends Fragment {
                 String userJson = getUser; // transfer the user object from json to object
                 user = gson.fromJson(userJson, UserObject.class);
 
+                //double dailyValueDouble = Double.parseDouble(dailyPicker.getDisplayedValues()[dailyPicker.getValue()]);
+                //user.changeMinimumAmount(dailyValueDouble);
+                user.changeWeight(weightPicker.getValue());
+
                 String targetAmount = dailyPicker.getDisplayedValues()[dailyPicker.getValue()];
                 String targetString = Integer.toString(dailyPicker.getValue());
 
@@ -192,9 +197,11 @@ public class PreferencesFragment extends Fragment {
                 Log.d(TAG, "target saved as double: " + Double.toString(targetAmountDouble));
                 user.changeMinimumAmount(targetAmountDouble);
 
+                userGson = gson.toJson(user);
+
                 editor.putInt(userWeight, weightPicker.getValue());
                 editor.putString(userTarget, targetAmount);
-                editor.putString(userObject, userJson);
+                editor.putString(userObject, userGson);
                 editor.commit();
                 //Toast to screen
                 Toast.makeText(getContext(),"Preferences saved",Toast.LENGTH_SHORT).show();
