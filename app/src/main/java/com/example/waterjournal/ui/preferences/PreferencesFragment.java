@@ -18,6 +18,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
 import com.example.waterjournal.MainActivity;
 import com.example.waterjournal.R;
@@ -34,7 +35,7 @@ public class PreferencesFragment extends Fragment {
 
     private NumberPicker weightPicker, dailyPicker;
     private TextView textWeight, textAmount;
-    private Button save;
+    private Button save, tips;
 
     private String TAG = "WaterLog";
 
@@ -198,6 +199,14 @@ public class PreferencesFragment extends Fragment {
                 editor.commit();
                 //Toast to screen
                 Toast.makeText(getContext(),"Preferences saved",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        tips = pref.findViewById(R.id.imageButtonTips);
+        tips.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.navigation_tips);
             }
         });
 

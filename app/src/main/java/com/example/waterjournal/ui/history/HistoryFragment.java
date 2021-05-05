@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -15,6 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
 import com.example.waterjournal.DailyDrinkingObject;
 import com.example.waterjournal.HistoryActivity;
@@ -29,6 +31,7 @@ public class HistoryFragment extends Fragment {
 
     private ListView listViewForDays;
     private TextView historyText;
+    private Button tips;
     public static final String EXTRA = "ListPosition";
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -48,7 +51,13 @@ public class HistoryFragment extends Fragment {
                 startActivity(specificDayView);
             }
         });
-
+        tips = hist.findViewById(R.id.imageButtonTips);
+        tips.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.navigation_tips);
+            }
+        });
         return hist;
     }
 }

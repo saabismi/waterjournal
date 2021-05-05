@@ -23,6 +23,7 @@ import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
 import com.example.waterjournal.DailyDrinkingObject;
 import com.example.waterjournal.MainActivity;
@@ -42,7 +43,7 @@ import java.util.List;
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class HomeFragment extends Fragment {
 
-    private Button addDrink, removeResent;
+    private Button addDrink, removeResent, tips;
     private NumberPicker amountPicker;
     private TextView textAmount, textAmountGoal, textProgressBar;
     public String drinks[] = {"-", "100", "200", "250", "300", "333", "400", "450", "500", "600", "700", "800", "900", "1000"};
@@ -184,6 +185,13 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        tips = main.findViewById(R.id.imageButtonTips);
+        tips.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.navigation_tips);
+            }
+        });
         return main;
     }
 
