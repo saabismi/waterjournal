@@ -32,6 +32,9 @@ public class DailyDrinkingObject {
     private final String userObject = "userObject"; // location for the JSON formatted version of the user object
     private SharedPreferences preferences = applicationContext.getSharedPreferences(USER_STORE, Context.MODE_PRIVATE);
 
+    /**
+     * Get the minimum amount from the user object
+     */
     private String getUser = preferences.getString(userObject, "unexpected error"); // get the user object as a string from the storage
     public UserObject user = gson.fromJson(getUser, UserObject.class); // transfer the user object from json to objec
     private double minWater = user.getMinimumAmount();
@@ -58,6 +61,7 @@ public class DailyDrinkingObject {
      * @param dailyAmount This parameter will add new WaterObject to private dailyWater list.
      */
     public void addDailyWater(WaterObject dailyAmount) {
+
         this.dailyWater.add(dailyAmount);
     }
 

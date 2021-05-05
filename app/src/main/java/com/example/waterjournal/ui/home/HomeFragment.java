@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.NumberPicker;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.time.LocalDate;
 import java.time.Month;
@@ -29,6 +30,8 @@ import com.example.waterjournal.MainActivity;
 import com.example.waterjournal.R;
 import com.example.waterjournal.Registration;
 import com.example.waterjournal.UserObject;
+import com.example.waterjournal.WaterList;
+import com.google.gson.Gson;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
@@ -49,6 +52,19 @@ public class HomeFragment extends Fragment {
     private int progressBar = 0;
     private ProgressBar circleBar;
     private String value;
+
+
+    public String watersJson;
+    public String watersGson;
+    public Gson gson = new Gson();
+
+    public WaterList waters;
+
+    private SharedPreferences preferences; // create sharedpreferences variable
+    private final String USER_STORE = "UserStore"; // create preferences for storing information about the user, etc.
+    private final String waterList = "waterList"; // list object for storing the waters of the day
+
+    private String getWaters;
 
     /**
      * Date stuff testing
@@ -95,10 +111,28 @@ public class HomeFragment extends Fragment {
         View main = inflater.inflate(R.layout.fragment_home, container, false);
 
         textAmountGoal = main.findViewById(R.id.textAmountGoal); // get the textivew for the field to use
-        textAmountGoal.setText("0 / " + getTargetAsMl() + " ml"); // set the text as the goal in millilitres using the function defined above
+        double drankValue = DailyDrinkingObject.getInstance().getSpecificWaterObject(DailyDrinkingObject.getInstance().getDailyWaterList().size() - 1).getAmountOfWater();
+        int drankValueInt = (int) drankValue;
+        textAmountGoal.setText(Double.toString(drankValueInt) + " / " + getTargetAsMl() + " ml"); // set the text as the goal in millilitres using the function defined above
         textProgressBar = main.findViewById(R.id.textProgressBar);
         circleBar = main.findViewById(R.id.progress_bar);
         DecimalFormat decimal = new DecimalFormat("#.#");
+
+        /**
+         * Set the percent text in the middle of the progress bar
+         */
+        int target = Integer.valueOf(getTargetAsMl());
+        double percent = (DailyDrinkingObject.getInstance().getSpecificWaterObject(DailyDrinkingObject.getInstance().getDailyWaterList().size() - 1).getAmountOfWater()) / target * 100;
+        int circlePercent = (int) Math.round(percent);
+        textProgressBar.setText(decimal.format(percent) + " %");
+
+        preferences = getActivity().getSharedPreferences(USER_STORE, Context.MODE_PRIVATE);
+
+        getWaters = preferences.getString(waterList, "empty");
+
+        waters = gson.fromJson(getWaters, WaterList.class);
+
+
         /**
          * Button to add amount of drink to store
          */
@@ -115,10 +149,24 @@ public class HomeFragment extends Fragment {
                 double percent = (DailyDrinkingObject.getInstance().getSpecificWaterObject(DailyDrinkingObject.getInstance().getDailyWaterList().size() - 1).getAmountOfWater() + 1.0 * onToGoal) / target * 100;
                 int circlePercent = (int) Math.round(percent);
                 textProgressBar.setText(decimal.format(percent) + " %");
+
+                if(circlePercent >= 100) {
+                    Toast.makeText(getContext(),"Woohoo! You've achieved your daily goal!",Toast.LENGTH_SHORT).show();
+                }
+
                 circleBar.setProgress(circlePercent);
                 DailyDrinkingObject.getInstance().getSpecificWaterObject(DailyDrinkingObject.getInstance().getDailyWaterList().size() - 1).addingWater(onToGoal);
+
+                //waters = gson.fromJson(getWaters, WaterList.class);
+                String valueAsString = amountPicker.getDisplayedValues()[amountPicker.getValue()];
+                waters.addWater(Integer.parseInt(valueAsString));
+                watersGson = gson.toJson(waters);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putString(waterList, watersGson);
+                editor.commit();
             }
         });
+
         /**
          * Numberpicker to take user value and storing that to store
          */
@@ -180,13 +228,21 @@ public class HomeFragment extends Fragment {
 
                 } else {
                     double helpValue = (DailyDrinkingObject.getInstance().getSpecificWaterObject(DailyDrinkingObject.getInstance().getDailyWaterList().size() - 1).getAmountOfWater() - DailyDrinkingObject.getInstance().getSpecificWaterObject(DailyDrinkingObject.getInstance().getDailyWaterList().size() - 1).lastAddedDrink());
+                    int helpValueInt = (int) helpValue;
                     DailyDrinkingObject.getInstance().getSpecificWaterObject(DailyDrinkingObject.getInstance().getDailyWaterList().size() - 1).removingWater();
-                    textAmountGoal.setText(helpValue + " / " + getTargetAsMl() + " ml");
+                    textAmountGoal.setText(helpValueInt + " / " + getTargetAsMl() + " ml");
                     int target = Integer.valueOf(getTargetAsMl());
                     double percent = (DailyDrinkingObject.getInstance().getSpecificWaterObject(DailyDrinkingObject.getInstance().getDailyWaterList().size() - 1).getAmountOfWater()) / target * 100;
                     int circlePercent = (int) Math.round(percent);
                     textProgressBar.setText(decimal.format(percent) + " %");
                     circleBar.setProgress(circlePercent);
+
+                    //waters = gson.fromJson(getWaters, WaterList.class);
+                    waters.removeLatestwater();
+                    watersGson = gson.toJson(waters);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putString(waterList, watersGson);
+                    editor.commit();
                 }
             }
         });

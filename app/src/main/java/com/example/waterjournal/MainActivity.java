@@ -32,9 +32,12 @@ public class MainActivity extends AppCompatActivity {
 
     public String userGson;
     public String userJson;
+    public String watersJson;
+    public String watersGson;
     public Gson gson = new Gson();
 
     public UserObject user;
+    public WaterList waters;
 
     private SharedPreferences preferences; // create sharedpreferences variable
     private final String USER_STORE = "UserStore"; // create preferences for storing information about the user, etc.
@@ -43,12 +46,14 @@ public class MainActivity extends AppCompatActivity {
     private final String userWeight  = "userWeight"; // storage for storing the user weight
     private final String userTarget = "userTarget"; // target water amount per day
     private final String userObject = "userObject"; // location for the JSON formatted version of the user object
+    private final String waterList = "waterList"; // list object for storing the waters of the day
     private boolean getRegistered; // variable for getting the value of registration status key
     private boolean getCreated; // get the value of the person object creation status key
 
     private static int getWeight; //variable for getting the value of the weight key
     private static String getTarget; // variable for getting the value of the water target key
     private String getUser;
+    private String getWaters;
 
     //private TextView showWeight; // textView for weight
     //private TextView showTarget; // textView for target
@@ -79,11 +84,16 @@ public class MainActivity extends AppCompatActivity {
         //showWeight = findViewById(R.id.showWeight);
         //showTarget = findViewById(R.id.showTarget);
 
+
         /**
          * First checking if the user is registered
          */
 
         if (!getRegistered) { // checking if the user has registered already
+            user = new UserObject();
+            userJson = gson.toJson(user);
+            editor.putString(userObject, userJson); // set the value of the newly created user object to the storage
+            editor.commit();
             Log.d(TAG, "User hasn't registered yet, let's go to Registration activity");
             Intent regIntent = new Intent(this, Registration.class); // create intent for going to Registration.java
             startActivity(regIntent); // start the activity Registration.java
@@ -95,7 +105,8 @@ public class MainActivity extends AppCompatActivity {
              */
             if (!getCreated) {
                 Log.d(TAG, "user object hasn't been created, gonna create it");
-                user = new UserObject(getWeight); // create the user object
+                user = new UserObject();
+                user.changeWeight(getWeight); // update the user object with the new info
                 userJson = gson.toJson(user); // user object to json form
                 editor.putString(userObject, userJson); // set the value of the newly created user object to the storage
                 editor.putBoolean(userCreated, true); // set the user object as created in the local storage
@@ -114,6 +125,27 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("paino", String.valueOf(user.getWeight()));
                 //userTarget = String.valueOf(user.getMinimumAmount());
             }
+        }
+
+        getWaters = preferences.getString(waterList, "empty");
+
+        if(getWaters != "empty") {
+            Log.d(TAG, "waterlist object exists, getting the old one from storage");
+            waters = gson.fromJson(getWaters, WaterList.class);
+
+            if(waters.getSize() > 0) {
+                for(int i = 0; i < waters.getSize(); i++) {
+                    double addingAmount = waters.getValue(i);
+                    DailyDrinkingObject.getInstance().getSpecificWaterObject(DailyDrinkingObject.getInstance().getDailyWaterList().size() - 1).addingWater(addingAmount);
+                }
+            }
+        } else {
+            Log.d(TAG, "waterlist object not existing yet, creating new one");
+            waters = new WaterList();
+
+            watersGson = gson.toJson(waters);
+            editor.putString(waterList, watersGson);
+            editor.commit();
         }
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
@@ -138,17 +170,6 @@ public class MainActivity extends AppCompatActivity {
         return contextOfApplication;
     }
 
-    public void reset(View v) {
-        preferences = getSharedPreferences(USER_STORE, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putInt(userWeight, 75);
-        editor.putString(userTarget, "x");
-        editor.putBoolean(userRegistered, false);
-        editor.commit();
-
-        Intent regIntent = new Intent(this, Registration.class); // create intent for going to Registration.java
-        startActivity(regIntent); // start the activity Registration.java
-    }
 
     /**
      *
