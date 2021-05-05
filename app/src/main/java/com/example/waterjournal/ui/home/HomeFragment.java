@@ -45,7 +45,7 @@ public class HomeFragment extends Fragment {
     private Button addDrink, removeResent;
     private NumberPicker amountPicker;
     private TextView textAmount, textAmountGoal, textProgressBar;
-    public String drinks[] = {"-", "100", "200", "250", "300", "333", "400", "450", "500", "600", "700", "800", "900", "1000"};
+    public String drinks[] = {"40", "100", "200", "250", "300", "330", "400", "450", "500", "600", "700", "800", "900", "1000"};
     private int progressBar = 0;
     private ProgressBar circleBar;
     private String value;
@@ -78,7 +78,7 @@ public class HomeFragment extends Fragment {
      * THIS CODE IS TO BE CHANGED WHEN THE PERSON-WATER-OBJECT BRANCH IS MERGED!!! For now it just shows the target which is set in the target field in shared preferences
      */
     public int getTargetAsMl() {
-        float amountGoal = Float.parseFloat(MainActivity.getTarget()) * 1000; // litres to millilitres
+        float amountGoal = Float.parseFloat(MainActivity.getTarget()); // litres to millilitres
         int amountGoalInt = Math.round(amountGoal); // round it so that the decimal point leaves
         return amountGoalInt; // set the text as the goal in millilitres
         //return 1234;
@@ -108,7 +108,8 @@ public class HomeFragment extends Fragment {
             public void onClick(View view) {
                 // Adds drink amount to store
                 double helpValue = (DailyDrinkingObject.getInstance().getSpecificWaterObject(DailyDrinkingObject.getInstance().getDailyWaterList().size() - 1).getAmountOfWater() + Double.parseDouble(value));
-                textAmountGoal.setText(helpValue + " / " + getTargetAsMl() + " ml");
+                int helpValueInt = (int) helpValue;
+                textAmountGoal.setText(helpValueInt + " / " + getTargetAsMl() + " ml");
                 int target = Integer.valueOf(getTargetAsMl());
                 int onToGoal = Integer.valueOf(value);
                 double percent = (DailyDrinkingObject.getInstance().getSpecificWaterObject(DailyDrinkingObject.getInstance().getDailyWaterList().size() - 1).getAmountOfWater() + 1.0 * onToGoal) / target * 100;
@@ -149,6 +150,7 @@ public class HomeFragment extends Fragment {
         amountPicker.setMinValue(0);
         amountPicker.setMaxValue(13);
         amountPicker.setDisplayedValues(drinks);
+        amountPicker.setValue(3);
         /**
          * Numberpicker value picker
          */
@@ -160,6 +162,11 @@ public class HomeFragment extends Fragment {
 
             }
         });
+
+        /**
+         * Set the value of the "value" variable the preselected value on start
+         */
+        value = amountPicker.getDisplayedValues()[amountPicker.getValue()];
 
         /**
          * Button to remove resent drink from store
