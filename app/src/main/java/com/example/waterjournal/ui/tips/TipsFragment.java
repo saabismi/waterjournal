@@ -13,21 +13,31 @@ import androidx.navigation.Navigation;
 
 import com.example.waterjournal.R;
 
+/**
+ * Tips fragment show user some valuable information about water.
+ * Information texts are in boxes and boxes are in scrollView
+ * so user can scroll texts up and down.
+ * Texts are hard coded in string.xml.
+ */
 public class TipsFragment extends Fragment {
-    private TextView tv;
+    /**
+     * Widget: a Button
+     */
     private Button tipsBtn;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         View tips = inflater.inflate(R.layout.fragment_tips, container, false);
-        tv = tips.findViewById(R.id.textView);
-        tv.setText("This is a tips fragment!");
 
+        /**
+         * Button to go back to the home fragment
+         */
         tipsBtn = tips.findViewById(R.id.imageButtonTips);
         tipsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //OnClick to use navigation controller to go to the home fragment
                 Navigation.findNavController(view).navigate(R.id.navigation_home);
             }
         });
