@@ -27,16 +27,19 @@ import com.example.waterjournal.WaterObject;
  */
 public class HistoryFragment extends Fragment {
 
-    private ListView listView;
+    private ListView listViewForDays;
+    private TextView historyText;
     public static final String EXTRA = "ListPosition";
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         View hist = inflater.inflate(R.layout.fragment_history, container, false);
-        this.listView = hist.findViewById(R.id.listViewForDays);
-        this.listView.setAdapter(new ArrayAdapter<WaterObject>(getActivity(), android.R.layout.simple_list_item_1, DailyDrinkingObject.getInstance().getDailyWaterList()));
-        this.listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        this.listViewForDays = hist.findViewById(R.id.listViewForDays);
+        this.historyText = hist.findViewById(R.id.historyText);
+        this.historyText.setText("Your drinking history.");
+        this.listViewForDays.setAdapter(new ArrayAdapter<WaterObject>(getActivity(), android.R.layout.simple_list_item_1, DailyDrinkingObject.getInstance().getDailyWaterList()));
+        this.listViewForDays.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //Intent to open daily view to check stats from a specific day

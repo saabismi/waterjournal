@@ -1,5 +1,7 @@
 package com.example.waterjournal;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -13,7 +15,7 @@ public class WaterObject {
     //Creating variables for class.
     private double amountOfWater;
     private double minimumWater;
-    private Date currentDate;
+    private String currentDate;
     private long dateCheck;
     private ArrayList<String> drinkAddedText;
     private ArrayList<Double> drinksTaken;
@@ -28,7 +30,8 @@ public class WaterObject {
         this.drinkAddedText = new ArrayList<>();
         this.timeAdded = new ArrayList<>();
         this.drinksTaken = new ArrayList<>();
-        this.currentDate = Calendar.getInstance().getTime();
+        this.currentDate = Calendar.getInstance().get(Calendar.DAY_OF_MONTH) + "." + Calendar.getInstance().get(Calendar.MONTH) + "." +
+                Calendar.getInstance().get(Calendar.YEAR);
     }
 
     /**
@@ -43,7 +46,8 @@ public class WaterObject {
         this.drinkAddedText = new ArrayList<>();
         this.timeAdded = new ArrayList<>();
         this.drinksTaken = new ArrayList<>();
-        this.currentDate = Calendar.getInstance().getTime();
+        this.currentDate = Calendar.getInstance().get(Calendar.DAY_OF_MONTH) + "." + (Calendar.getInstance().get(Calendar.MONTH) + 1) + "." +
+                Calendar.getInstance().get(Calendar.YEAR);
     }
 
     /**
@@ -54,10 +58,11 @@ public class WaterObject {
      */
     public void addingWater(double amount) {
         this.amountOfWater += amount;
-        String help = "You drank " + amount + " at " + Calendar.getInstance().getTime();
+        String help = "You drank " + amount + " ml at " + Calendar.getInstance().get(Calendar.HOUR_OF_DAY) + ":" + Calendar.getInstance().get(Calendar.MINUTE);
         this.drinkAddedText.add(help);
         this.timeAdded.add(Calendar.getInstance().getTime());
         this.drinksTaken.add(amount);
+        Log.d("Listan sisältö lisäyksen jälkeen", this.drinksTaken.toString());
     }
 
     /**
@@ -72,7 +77,12 @@ public class WaterObject {
         }
         this.drinkAddedText.remove(this.drinkAddedText.size() - 1);
         this.timeAdded.remove(this.timeAdded.size() - 1);
-        this.drinksTaken.remove(this.drinksTaken.size() -1);
+        this.drinksTaken.remove(this.drinksTaken.size() - 1);
+        Log.d("Listan sisältö poiston jälkeen", this.drinksTaken.toString());
+    }
+
+    public double lastAddedDrink() {
+        return this.drinksTaken.get(this.drinksTaken.size() - 1);
     }
 
     /**
@@ -122,7 +132,8 @@ public class WaterObject {
         this.drinkAddedText.clear();
         this.timeAdded.clear();
         this.drinksTaken.clear();
-        this.currentDate = Calendar.getInstance().getTime();
+        this.currentDate = Calendar.getInstance().get(Calendar.DAY_OF_MONTH) + "." + Calendar.getInstance().get(Calendar.MONTH) + "." +
+                Calendar.getInstance().get(Calendar.YEAR);
         return dailyAmount;
     }
 
@@ -141,11 +152,11 @@ public class WaterObject {
      */
     public String getInformation() {
         return "You have drank " + this.amountOfWater + "ml amount of water.\nIt's " + drinkingProgress() + "% of your daily progress.\n"
-        + "Your minimum amount water you should drink daily is " + this.minimumWater + " litres.\nYou have drank " + this.drinkAddedText.size() + " time(s) today.";
+                + "Your minimum amount water you should drink daily is " + this.minimumWater + " litres.\nYou have drank " + this.drinkAddedText.size() + " time(s) today.";
     }
 
     public String toString() {
-        return this.currentDate.toString();
+        return this.currentDate;
     }
 
     public double getMinimumWater() {

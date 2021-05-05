@@ -57,7 +57,7 @@ public class HomeFragment extends Fragment {
     LocalDate currentDate = LocalDate.now();
 
     // this represents the day that the app gets from the latest water object
-    public Calendar testCal = new Calendar.Builder().setCalendarType("iso8601").setDate(2021,5,2).build();
+    public Calendar testCal = new Calendar.Builder().setCalendarType("iso8601").setDate(2021, 5, 2).build();
 
     // Integer which returns the latest water object's day as a number (1-31)
     public int latestDay() {
@@ -86,6 +86,7 @@ public class HomeFragment extends Fragment {
 
     /**
      * Methods and values
+     *
      * @return
      */
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -110,7 +111,7 @@ public class HomeFragment extends Fragment {
                 textAmountGoal.setText(helpValue + " / " + getTargetAsMl() + " ml");
                 int target = Integer.valueOf(getTargetAsMl());
                 int onToGoal = Integer.valueOf(value);
-                double percent = (DailyDrinkingObject.getInstance().getSpecificWaterObject(DailyDrinkingObject.getInstance().getDailyWaterList().size() - 1).getAmountOfWater() + (1.0 * onToGoal / target)) * 100;
+                double percent = (DailyDrinkingObject.getInstance().getSpecificWaterObject(DailyDrinkingObject.getInstance().getDailyWaterList().size() - 1).getAmountOfWater() + 1.0 * onToGoal) / target * 100;
                 int circlePercent = (int) Math.round(percent);
                 textProgressBar.setText(decimal.format(percent) + " %");
                 circleBar.setProgress(circlePercent);
@@ -130,14 +131,13 @@ public class HomeFragment extends Fragment {
         Log.d(TAG, "viimeisin: " + Integer.toString(latestDay()));
         Log.d(TAG, "nykyinen: " + Integer.toString(currentDay()));
 
-        if(latestDay() < currentDay()) {
+        if (latestDay() < currentDay()) {
             //create new water object
             Log.d(TAG, "create new water object");
         } else {
             //continue with the old water object
             Log.d(TAG, "continue using the existing water object");
         }
-
 
 
         /**
@@ -169,7 +169,18 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 // Removes resent value from store
-                DailyDrinkingObject.getInstance().getSpecificWaterObject(DailyDrinkingObject.getInstance().getDailyWaterList().size() - 1).removingWater();
+                if (DailyDrinkingObject.getInstance().getSpecificWaterObject(DailyDrinkingObject.getInstance().getDailyWaterList().size() - 1).getTimeAdded().isEmpty()) {
+
+                } else {
+                    double helpValue = (DailyDrinkingObject.getInstance().getSpecificWaterObject(DailyDrinkingObject.getInstance().getDailyWaterList().size() - 1).getAmountOfWater() - DailyDrinkingObject.getInstance().getSpecificWaterObject(DailyDrinkingObject.getInstance().getDailyWaterList().size() - 1).lastAddedDrink());
+                    DailyDrinkingObject.getInstance().getSpecificWaterObject(DailyDrinkingObject.getInstance().getDailyWaterList().size() - 1).removingWater();
+                    textAmountGoal.setText(helpValue + " / " + getTargetAsMl() + " ml");
+                    int target = Integer.valueOf(getTargetAsMl());
+                    double percent = (DailyDrinkingObject.getInstance().getSpecificWaterObject(DailyDrinkingObject.getInstance().getDailyWaterList().size() - 1).getAmountOfWater()) / target * 100;
+                    int circlePercent = (int) Math.round(percent);
+                    textProgressBar.setText(decimal.format(percent) + " %");
+                    circleBar.setProgress(circlePercent);
+                }
             }
         });
 
