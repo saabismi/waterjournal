@@ -48,8 +48,8 @@ public class MainActivity extends AppCompatActivity {
     private static String getTarget; // variable for getting the value of the water target key
     private String getUser;
 
-    //private TextView showWeight; // textview for weight
-    //private TextView showTarget; // textview for target
+    //private TextView showWeight; // textView for weight
+    //private TextView showTarget; // textView for target
 
     private String TAG = "WaterLog"; // easy to use tag for logging
 

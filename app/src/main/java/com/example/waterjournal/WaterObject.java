@@ -15,7 +15,8 @@ public class WaterObject {
     private double minimumWater;
     private Date currentDate;
     private long dateCheck;
-    private ArrayList<String> drinkAdded;
+    private ArrayList<String> drinkAddedText;
+    private ArrayList<Double> drinksTaken;
     private ArrayList<Date> timeAdded;
 
     /**
@@ -24,8 +25,9 @@ public class WaterObject {
     public WaterObject() {
         this.minimumWater = 2500;
         this.amountOfWater = 0;
-        this.drinkAdded = new ArrayList<>();
+        this.drinkAddedText = new ArrayList<>();
         this.timeAdded = new ArrayList<>();
+        this.drinksTaken = new ArrayList<>();
         this.currentDate = Calendar.getInstance().getTime();
     }
 
@@ -38,8 +40,9 @@ public class WaterObject {
     public WaterObject(double minimumWater) {
         this.amountOfWater = 0.0;
         this.minimumWater = minimumWater;
-        this.drinkAdded = new ArrayList<>();
+        this.drinkAddedText = new ArrayList<>();
         this.timeAdded = new ArrayList<>();
+        this.drinksTaken = new ArrayList<>();
         this.currentDate = Calendar.getInstance().getTime();
     }
 
@@ -52,25 +55,24 @@ public class WaterObject {
     public void addingWater(double amount) {
         this.amountOfWater += amount;
         String help = "You drank " + amount + " at " + Calendar.getInstance().getTime();
-        this.drinkAdded.add(help);
+        this.drinkAddedText.add(help);
         this.timeAdded.add(Calendar.getInstance().getTime());
+        this.drinksTaken.add(amount);
     }
 
     /**
-     * This function will remove specific amount of water from amountOfWater variable.
+     * This function will remove last added amount of water from amountOfWater variable.
      * For example user has miss clicked add water button and wants to remove the extra water.
-     *
-     * @param amount This parameter will remove a specific amount of water from amountOfWater variable.
-     *               It will also delete last added value from drinkAdded list.
      */
-    public void removingWater(double amount) {
-        if (this.amountOfWater - amount < 0) {
+    public void removingWater() {
+        if (this.amountOfWater - this.drinksTaken.get(this.drinksTaken.size() - 1) <= 0) {
             this.amountOfWater = 0;
         } else {
-            this.amountOfWater -= amount;
+            this.amountOfWater -= this.drinksTaken.get(this.drinksTaken.size() - 1);
         }
-        this.drinkAdded.remove(this.drinkAdded.size() - 1);
+        this.drinkAddedText.remove(this.drinkAddedText.size() - 1);
         this.timeAdded.remove(this.timeAdded.size() - 1);
+        this.drinksTaken.remove(this.drinksTaken.size() -1);
     }
 
     /**
@@ -97,7 +99,7 @@ public class WaterObject {
      * @return Will return amountOfWater variable.
      */
     public double getAmountOfWater() {
-        return this.amountOfWater * 1000;
+        return this.amountOfWater;
     }
 
     /**
@@ -117,8 +119,9 @@ public class WaterObject {
     public double dailyReset() {
         double dailyAmount = this.amountOfWater;
         this.amountOfWater = 0;
-        this.drinkAdded.clear();
+        this.drinkAddedText.clear();
         this.timeAdded.clear();
+        this.drinksTaken.clear();
         this.currentDate = Calendar.getInstance().getTime();
         return dailyAmount;
     }
@@ -128,7 +131,7 @@ public class WaterObject {
     }
 
     public ArrayList<String> getDrinkAdded() {
-        return this.drinkAdded;
+        return this.drinkAddedText;
     }
 
     /**
@@ -137,11 +140,8 @@ public class WaterObject {
      * @return Will return a string variable to user.
      */
     public String getInformation() {
-        return "You have drank " + this.amountOfWater + "ml amount of water.\nIt's " + drinkingProgress() + "% of your daily progress.";
-    }
-
-    public String getWaterInformation() {
-        return "Your minimum amount water you should drink daily is " + this.amountOfWater + " litres.\nYou have drank " + this.drinkAdded.size() + " time(s) today.";
+        return "You have drank " + this.amountOfWater + "ml amount of water.\nIt's " + drinkingProgress() + "% of your daily progress.\n"
+        + "Your minimum amount water you should drink daily is " + this.minimumWater + " litres.\nYou have drank " + this.drinkAddedText.size() + " time(s) today.";
     }
 
     public String toString() {

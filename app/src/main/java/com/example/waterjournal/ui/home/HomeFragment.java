@@ -43,7 +43,7 @@ import java.util.List;
 public class HomeFragment extends Fragment {
 
     private Button addDrink, removeResent;
-    private NumberPicker amounPicker;
+    private NumberPicker amountPicker;
     private TextView textAmount, textAmountGoal, textProgressBar;
     public String drinks[] = {"-", "100", "200", "250", "300", "333", "400", "450", "500", "600", "700", "800", "900", "1000"};
     private int progressBar = 0;
@@ -64,7 +64,7 @@ public class HomeFragment extends Fragment {
         return testCal.get(Calendar.DAY_OF_MONTH); // this is to be changed to a value retrieved from the water object
     }
 
-    // this is the current date refreshed every time the app is laoded
+    // this is the current date refreshed every time the app is loaded
     public Calendar currentCal = new Calendar.Builder().setCalendarType("iso8601").setDate(currentDate.getYear(), currentDate.getMonthValue(), currentDate.getDayOfMonth()).build();
 
     // Integer which returns the current day number (1-31)
@@ -78,10 +78,10 @@ public class HomeFragment extends Fragment {
      * THIS CODE IS TO BE CHANGED WHEN THE PERSON-WATER-OBJECT BRANCH IS MERGED!!! For now it just shows the target which is set in the target field in shared preferences
      */
     public int getTargetAsMl() {
-        //float amountGoal = Float.parseFloat(MainActivity.getTarget()) * 1000; // litres to millilitres
-        //int amountGoalInt = Math.round(amountGoal); // round it so that the decimal point leaves
-        //return amountGoalInt; // set the text as the goal in millilitres
-        return 1234;
+        float amountGoal = Float.parseFloat(MainActivity.getTarget()) * 1000; // litres to millilitres
+        int amountGoalInt = Math.round(amountGoal); // round it so that the decimal point leaves
+        return amountGoalInt; // set the text as the goal in millilitres
+        //return 1234;
     }
 
     /**
@@ -106,21 +106,21 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 // Adds drink amount to store
-                //double helpValue = (DailyDrinkingObject.getInstance().getSpecificWaterObject(DailyDrinkingObject.getInstance().getDailyWaterList().size() - 1).getAmountOfWater() + Double.parseDouble(value));
-                textAmountGoal.setText(value + " / " + getTargetAsMl() + " ml");
+                double helpValue = (DailyDrinkingObject.getInstance().getSpecificWaterObject(DailyDrinkingObject.getInstance().getDailyWaterList().size() - 1).getAmountOfWater() + Double.parseDouble(value));
+                textAmountGoal.setText(helpValue + " / " + getTargetAsMl() + " ml");
                 int target = Integer.valueOf(getTargetAsMl());
                 int onToGoal = Integer.valueOf(value);
-                double prosent = (1.0 * onToGoal / target) * 100;
-                int circleProsent = (int) Math.round(prosent);
-                textProgressBar.setText(decimal.format(prosent) + " %");
-                circleBar.setProgress(circleProsent);
-                //DailyDrinkingObject.getInstance().getSpecificWaterObject(DailyDrinkingObject.getInstance().getDailyWaterList().size() - 1).addingWater(onToGoal);
+                double percent = (DailyDrinkingObject.getInstance().getSpecificWaterObject(DailyDrinkingObject.getInstance().getDailyWaterList().size() - 1).getAmountOfWater() + (1.0 * onToGoal / target)) * 100;
+                int circlePercent = (int) Math.round(percent);
+                textProgressBar.setText(decimal.format(percent) + " %");
+                circleBar.setProgress(circlePercent);
+                DailyDrinkingObject.getInstance().getSpecificWaterObject(DailyDrinkingObject.getInstance().getDailyWaterList().size() - 1).addingWater(onToGoal);
             }
         });
         /**
          * Numberpicker to take user value and storing that to store
          */
-        amounPicker = main.findViewById(R.id.amountPicker);
+        amountPicker = main.findViewById(R.id.amountPicker);
         textAmount = main.findViewById(R.id.textAmount);
 
         /* Testing!! */
@@ -146,13 +146,13 @@ public class HomeFragment extends Fragment {
          * @param setMaxValue highest indes on drinks-array
          * @param setDisplayedValues shows drinks-array values on picker
          */
-        amounPicker.setMinValue(0);
-        amounPicker.setMaxValue(13);
-        amounPicker.setDisplayedValues(drinks);
+        amountPicker.setMinValue(0);
+        amountPicker.setMaxValue(13);
+        amountPicker.setDisplayedValues(drinks);
         /**
          * Numberpicker value picker
          */
-        amounPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+        amountPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker numberPicker, int oldVal, int newVal) {
                 //Amount of drink to store
@@ -169,6 +169,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 // Removes resent value from store
+                DailyDrinkingObject.getInstance().getSpecificWaterObject(DailyDrinkingObject.getInstance().getDailyWaterList().size() - 1).removingWater();
             }
         });
 

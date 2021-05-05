@@ -17,6 +17,7 @@ public class DailyDrinkingObject {
      */
     private DailyDrinkingObject() {
         this.dailyWater = new ArrayList<>();
+        this.dailyWater.add(new WaterObject(2.5));
     }
 
     public static DailyDrinkingObject getInstance() {
