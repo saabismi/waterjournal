@@ -29,15 +29,19 @@ import com.google.gson.Gson;
 import java.text.DecimalFormat;
 
 public class PreferencesFragment extends Fragment {
-
+    /**
+     * Variales and widgets
+     */
     public String userGson; // user converted to json
     public String userJson; // user object in json form
     public Gson gson = new Gson(); // Gson object
 
-    private NumberPicker weightPicker, dailyPicker;
-    private TextView textWeight, textAmount;
-    private Button save, tips;
-
+    private NumberPicker weightPicker;
+    private NumberPicker dailyPicker;
+    private TextView textWeight;
+    private TextView textAmount;
+    private Button tips;
+    private Button save;
     private String TAG = "WaterLog";
 
     //public Gson gson = new Gson();
