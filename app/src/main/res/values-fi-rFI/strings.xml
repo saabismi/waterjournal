@@ -3,7 +3,7 @@
     <string name="text_app_name">Vesikirja</string>
     <string name="button_store_user_data">Tallenna</string>
     <string name="button_add_drink">Lisää</string>
-    <string name="text_preferences">Asetukset</string>
+    <string name="text_preferences">Asetukset:</string>
     <string name="button_drinking_history">Historia</string>
     <string name="button_home">Koti</string>
     <string name="button_save_preferences">Tallenna</string>

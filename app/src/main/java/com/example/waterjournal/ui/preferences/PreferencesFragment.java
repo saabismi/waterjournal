@@ -72,10 +72,11 @@ public class PreferencesFragment extends Fragment {
 
     /**
      * Main view of the preferences fragment
-     * @param inflater
-     * @param container
-     * @param savedInstanceState
-     * @return
+     * Called to have the fragment instantiate its user interface view.
+     * @param inflater the LayoutInflater object that can be used to inflate any views in the fragment.
+     * @param container used to generate the LayoutParams of the view.
+     * @param savedInstanceState this fragment is being re-constructed from a previous saved state as given here.
+     * @return return the View for the fragment's UI, or null.
      */
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -208,11 +209,14 @@ public class PreferencesFragment extends Fragment {
                 Toast.makeText(getContext(),"Preferences saved",Toast.LENGTH_SHORT).show();
             }
         });
-
+        /**
+         * Button to go to the tips fragment.
+         */
         tips = pref.findViewById(R.id.imageButtonTips);
         tips.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //OnClick to use navigation controller to go to the tips fragment.
                 Navigation.findNavController(view).navigate(R.id.navigation_tips);
             }
         });

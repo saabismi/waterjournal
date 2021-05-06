@@ -96,9 +96,11 @@ public class HomeFragment extends Fragment {
     }
 
     /**
-     * Methods and values
-     *
-     * @return
+     * Called to have the fragment instantiate its user interface view.
+     * @param inflater the LayoutInflater object that can be used to inflate any views in the fragment.
+     * @param container used to generate the LayoutParams of the view.
+     * @param savedInstanceState this fragment is being re-constructed from a previous saved state as given here.
+     * @return return the View for the fragment's UI, or null.
      */
     @RequiresApi(api = Build.VERSION_CODES.O)
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -266,11 +268,14 @@ public class HomeFragment extends Fragment {
                 }
             }
         });
-
+        /**
+         * Button to go to the tips fragment.
+         */
         tips = main.findViewById(R.id.imageButtonTips);
         tips.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //OnClick to use navigation controller to go to the tips fragment.
                 Navigation.findNavController(view).navigate(R.id.navigation_tips);
             }
         });

@@ -42,10 +42,11 @@ public class HistoryFragment extends Fragment {
     /**
      * This View is used for creating HistoryFragment activity. It will show activity's view which is app's logo, textView with information,
      * listView with a list of user's days which user has been drinking water and tips button which will show useful information about water.
-     * @param inflater
-     * @param container
-     * @param savedInstanceState
-     * @return Will return history fragment.
+     * Called to have the fragment instantiate its user interface view.
+     * @param inflater the LayoutInflater object that can be used to inflate any views in the fragment.
+     * @param container used to generate the LayoutParams of the view.
+     * @param savedInstanceState this fragment is being re-constructed from a previous saved state as given here.
+     * @return return the View for the fragment's UI, or null.
      */
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -74,6 +75,9 @@ public class HistoryFragment extends Fragment {
                 startActivity(specificDayView);
             }
         });
+        /**
+         * Button to go to the tips fragment.
+         */
         tips = hist.findViewById(R.id.imageButtonTips);
         tips.setOnClickListener(new View.OnClickListener() {
             /**
@@ -82,6 +86,7 @@ public class HistoryFragment extends Fragment {
              */
             @Override
             public void onClick(View view) {
+                //OnClick to use navigation controller to go to the tips fragment.
                 Navigation.findNavController(view).navigate(R.id.navigation_tips);
             }
         });
