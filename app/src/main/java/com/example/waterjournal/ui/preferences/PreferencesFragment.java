@@ -50,7 +50,7 @@ public class PreferencesFragment extends Fragment {
     private final String userObject = "userObject"; // location for the JSON formatted version of the user object
     private SharedPreferences preferences; // create sharedPreferences variable
 
-    /* List of displayed values in the daily water number picker */
+    /** List of displayed values in the daily water number picker */
     public String targets[] = {"1.0", "1.1", "1.2","1.3","1.4","1.5","1.6","1.7","1.8","1.9","2.0","2.1","2.2","2.3", "2.4", "2.5", "2.6", "2.7", "2.8", "2.9", "3.0", "3.1", "3.2", "3.3", "3.4", "3.5", "3.6", "3.7", "3.8", "3.9", "4.0", "4.1", "4.2", "4.3", "4.4", "4.5", "4.6", "4.7", "4.8", "4.9", "5.0", "5.1", "5.2", "5.3", "5.4", "5.5"};
 
     private int getWeight; // get values from the preferences
@@ -59,8 +59,8 @@ public class PreferencesFragment extends Fragment {
 
     /**
      * Calculate needed water amount, used when the user changes their weight but doesn't touch the target water amount
-     * @param weight
-     * @return
+     * @param weight takes user's weight and multiply it 0.033 to get daily goal
+     * @return value of daily goal
      */
 
     public String calcMinValuePref(int weight) {
@@ -104,9 +104,14 @@ public class PreferencesFragment extends Fragment {
         String userJson = preferences.getString(userObject, "");
         user = gson.fromJson(userJson, UserObject.class);
 
+        /**
+         * Numberpicker for user's weight
+         * @param setMinValue setting numberpicker min value to 20
+         * @param setMaxValue setting numberpicker max value to 200
+         * @param setValue setting user's input value
+         */
         textWeight = pref.findViewById(R.id.textWeight);
         weightPicker = pref.findViewById(R.id.weightPicker);
-
         weightPicker.setMinValue(20);
         weightPicker.setMaxValue(200);
         weightPicker.setValue(user.getWeight());
@@ -121,6 +126,12 @@ public class PreferencesFragment extends Fragment {
             }
         });
 
+        /**
+         * Numberpicker for change daily drinking goal
+         * @param setMinValue setting numberpicker min range value to 0
+         * @param setMaxValue setting numberpicker max range value to 45
+         * @param setValue setting user's input value
+         */
         dailyPicker = pref.findViewById(R.id.drinkPicker);
         dailyPicker.setMinValue(0);
         dailyPicker.setMaxValue(45);
@@ -175,7 +186,9 @@ public class PreferencesFragment extends Fragment {
                 user.changeMinimumAmount(Double.parseDouble(value));
             }
         });
-
+        /**
+         * Button to save preferences
+         */
         save = pref.findViewById(R.id.buttonSave);
         save.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -200,7 +213,9 @@ public class PreferencesFragment extends Fragment {
                 user.changeMinimumAmount(targetAmountDouble);
 
                 userGson = gson.toJson(user);
-
+                /**
+                 * Saving preferences to SharedPreferences
+                 */
                 editor.putInt(userWeight, weightPicker.getValue());
                 editor.putString(userTarget, targetAmount);
                 editor.putString(userObject, userGson);
