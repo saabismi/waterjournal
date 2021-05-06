@@ -42,7 +42,7 @@ public class WaterObject {
      */
     public WaterObject(double minimumWater) {
         this.amountOfWater = 0.0;
-        this.minimumWater = minimumWater;
+        this.minimumWater = minimumWater * 1000;
         this.drinkAddedText = new ArrayList<>();
         this.timeAdded = new ArrayList<>();
         this.drinksTaken = new ArrayList<>();
@@ -58,7 +58,13 @@ public class WaterObject {
      */
     public void addingWater(double amount) {
         this.amountOfWater += amount;
-        String help = "You drank " + amount + " ml at " + Calendar.getInstance().get(Calendar.HOUR_OF_DAY) + ":" + Calendar.getInstance().get(Calendar.MINUTE);
+        int amountInt = (int) amount;
+        String help;
+        if(Calendar.getInstance().get(Calendar.MINUTE) > 9) {
+            help = "You drank " + amountInt + " ml at " + Calendar.getInstance().get(Calendar.HOUR_OF_DAY) + ":" + Calendar.getInstance().get(Calendar.MINUTE);
+        } else {
+            help = "You drank " + amountInt + " ml at " + Calendar.getInstance().get(Calendar.HOUR_OF_DAY) + ":0" + Calendar.getInstance().get(Calendar.MINUTE);
+        }
         this.drinkAddedText.add(help);
         this.timeAdded.add(Calendar.getInstance().getTime());
         this.drinksTaken.add(amount);
@@ -151,12 +157,22 @@ public class WaterObject {
      * @return Will return a string variable to user.
      */
     public String getInformation() {
-        return "You have drank " + this.amountOfWater + "ml amount of water.\nIt's " + drinkingProgress() + "% of your daily progress.\n"
-                + "Your minimum amount water you should drink daily is " + this.minimumWater + " litres.\nYou have drank " + this.drinkAddedText.size() + " time(s) today.";
+        int amountOfWaterInt = (int) this.amountOfWater;
+        int drinkingProgressInt = (int) drinkingProgress();
+        int minimumWaterInt = (int) minimumWater;
+        return "You (have) drank " + amountOfWaterInt + " ml.\nIt is " + drinkingProgressInt + "% of your daily target which is " + minimumWaterInt + " ml.\nYou (have) drank " + this.drinkAddedText.size() + " time(s) on this day.";
     }
 
     public String toString() {
         return this.currentDate;
+    }
+
+    public Calendar getDate() {
+        return Calendar.getInstance();
+    }
+
+    public ArrayList<Double> getDrinksTaken() {
+        return this.drinksTaken;
     }
 
     public double getMinimumWater() {
