@@ -20,9 +20,9 @@ import com.example.waterjournal.R;
  * Texts are hard coded in string.xml.
  */
 public class TipsFragment extends Fragment {
-    /** Variales and widgets
-     *  a Button
-     *  */
+    /** Variales
+     *  tipsBtn button to move user to the hamo fragment
+     */
     private Button tipsBtn;
     /**
      * Called to have the fragment instantiate its user interface view.

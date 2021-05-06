@@ -64,9 +64,13 @@ public class HomeFragment extends Fragment {
      * and then saving them to preferences.
      * getWater will fetch information from WaterObject objects from preferences.
      */
-    private Button addDrink, removeResent, tips;
+    private Button addDrink;
+    private Button removeResent;
+    private Button tips;
     private NumberPicker amountPicker;
-    private TextView textAmount, textAmountGoal, textProgressBar;
+    private TextView textAmount;
+    private TextView textAmountGoal;
+    private TextView textProgressBar;
     public String drinks[] = {"40", "100", "200", "250", "300", "330", "400", "450", "500", "600", "700", "800", "900", "1000"};
     private int progressBar = 0;
     private ProgressBar circleBar;

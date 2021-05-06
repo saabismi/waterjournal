@@ -31,20 +31,20 @@ import java.text.DecimalFormat;
 public class PreferencesFragment extends Fragment {
     /**
      * Variales
-     * userGson
-     * userJson
-     * gson
-     * weightPicker
-     * dailyPicker
-     * textWeight
-     * textAmount
-     * tips
-     * save
+     * userGson user converted to json
+     * userJson user object in json form
+     * gson Gson object
+     * weightPicker to set new weight
+     * dailyPicker to set new daily drinking goal
+     * textWeight to show text weight kg
+     * textAmount to show text amount ml
+     * tips button to go to the tips fragment
+     * save button to save preferences
      * TAG
      */
-    public String userGson; // user converted to json
-    public String userJson; // user object in json form
-    public Gson gson = new Gson(); // Gson object
+    public String userGson;
+    public String userJson;
+    public Gson gson = new Gson();
     private NumberPicker weightPicker;
     private NumberPicker dailyPicker;
     private TextView textWeight;
