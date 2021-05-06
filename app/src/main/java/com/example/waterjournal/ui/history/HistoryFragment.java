@@ -25,7 +25,8 @@ import com.example.waterjournal.SpecificDayView;
 import com.example.waterjournal.WaterObject;
 
 /**
- * History fragment show user's drinking history on listView by daily. User can check specific days and get information about them.
+ * History fragment show user's drinking history on listView by daily.
+ * User can open a specific day and get information about that day.
  */
 public class HistoryFragment extends Fragment {
 
@@ -38,23 +39,28 @@ public class HistoryFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
 
         View hist = inflater.inflate(R.layout.fragment_history, container, false);
+        /**
+         * ListView to show days when user have store a drink with onItemClick adapter.
+         */
         this.listViewForDays = hist.findViewById(R.id.listViewForDays);
-        this.historyText = hist.findViewById(R.id.historyText);
-        this.historyText.setText("Your drinking history.");
         this.listViewForDays.setAdapter(new ArrayAdapter<WaterObject>(getActivity(), android.R.layout.simple_list_item_1, DailyDrinkingObject.getInstance().getDailyWaterList()));
         this.listViewForDays.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //Intent to open daily view to check stats from a specific day
+                //Intent to open daily view activity to check stats from a specific day
                 Intent specificDayView = new Intent(getActivity(), SpecificDayView.class);
                 specificDayView.putExtra(EXTRA, position);
                 startActivity(specificDayView);
             }
         });
+        /**
+         * Button to go to the tips fragment.
+         */
         tips = hist.findViewById(R.id.imageButtonTips);
         tips.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //OnClick to use navigation controller to go to the tips fragment.
                 Navigation.findNavController(view).navigate(R.id.navigation_tips);
             }
         });

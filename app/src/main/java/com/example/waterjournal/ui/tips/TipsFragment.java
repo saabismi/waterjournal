@@ -31,13 +31,13 @@ public class TipsFragment extends Fragment {
         View tips = inflater.inflate(R.layout.fragment_tips, container, false);
 
         /**
-         * Button to go back to the home fragment
+         * Button to go back to the home fragment.
          */
         tipsBtn = tips.findViewById(R.id.imageButtonTips);
         tipsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //OnClick to use navigation controller to go to the home fragment
+                //OnClick to use navigation controller to go to the home fragment.
                 Navigation.findNavController(view).navigate(R.id.navigation_home);
             }
         });
