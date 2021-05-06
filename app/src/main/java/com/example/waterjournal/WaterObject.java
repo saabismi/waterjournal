@@ -1,10 +1,15 @@
 package com.example.waterjournal;
 
+import android.app.Application;
 import android.util.Log;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import com.example.waterjournal.R;
 
 /**
  * This class is for water drinking. It will tell user how much user have been drinking on specific day
@@ -24,6 +29,7 @@ public class WaterObject {
     private ArrayList<String> drinkAddedText;
     private ArrayList<Double> drinksTaken;
     private ArrayList<Date> timeAdded;
+    String drank;
 
     /**
      * This default constructor will define default values to private variables.
@@ -66,7 +72,7 @@ public class WaterObject {
 
         //This if-sentence will put correct timestamp when user adds new drink.
         if (Calendar.getInstance().get(Calendar.MINUTE) > 9) {
-            this.drinkAddedText.add("You drank " + amountInt + " ml at " + Calendar.getInstance().get(Calendar.HOUR_OF_DAY) + ":" + Calendar.getInstance().get(Calendar.MINUTE));
+            this.drinkAddedText.add("You drank" + amountInt + " ml at " + Calendar.getInstance().get(Calendar.HOUR_OF_DAY) + ":" + Calendar.getInstance().get(Calendar.MINUTE));
         } else {
             this.drinkAddedText.add("You drank " + amountInt + " ml at " + Calendar.getInstance().get(Calendar.HOUR_OF_DAY) + ":0" + Calendar.getInstance().get(Calendar.MINUTE));
         }

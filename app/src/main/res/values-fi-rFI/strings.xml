@@ -43,4 +43,6 @@
     <string name="announce_info">Voit asettaa oma juomatavoiteesi asetuksissa.</string>
     <string name="whenReady">Kun valmis:</string>
     <string name="toMainButton">Jatka</string>
+    <string name="text_you_drank">"Joit "</string>
+    <string name="text_ml_at">" ml klo "</string>
 </resources>
