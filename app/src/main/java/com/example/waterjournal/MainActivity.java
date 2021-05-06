@@ -28,6 +28,11 @@ import androidx.navigation.ui.NavigationUI;
  */
 public class MainActivity extends AppCompatActivity {
 
+    //Creating public and private variables for MainActivity class.
+    //userJson variable is for getting user's object information from gson files or add user's objetc information to gson files.
+    //gson variable is for being able to use gson in MainActivity for saving and fetching information for code.
+    //user variable is for user object which will be created using UserObject class. It can be also defined by fetching information from gson UserObject files.
+
     public static Context contextOfApplication;
 
     public String userGson;
@@ -55,11 +60,14 @@ public class MainActivity extends AppCompatActivity {
     private String getUser;
     private String getWaters;
 
-    //private TextView showWeight; // textView for weight
-    //private TextView showTarget; // textView for target
-
     private String TAG = "WaterLog"; // easy to use tag for logging
 
+    /**
+     * This onCreate function will create MainActivity class view. It will also open in different ways depending if user has already defined settings.
+     * If user hasn't defined setting it will Start Registration class which will guide user to make first account. But if user has already created an account
+     * it will start MainActivity and HomeFragment activities.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,13 +89,9 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = preferences.edit(); // editor
 
         getUser = preferences.getString(userObject, "unexpected error"); // get the user object as a string from the storage
-        //showWeight = findViewById(R.id.showWeight);
-        //showTarget = findViewById(R.id.showTarget);
 
-
-        /**
-         * First checking if the user is registered
-         */
+        //This if-sentence will check if user has registered to the app. If user hasn't registered it will automatically open Registration class activity
+        //for user. If user has already registered it will use already created UserObject.
 
         if (!getRegistered) { // checking if the user has registered already
             user = new UserObject();
@@ -100,9 +104,8 @@ public class MainActivity extends AppCompatActivity {
         } else {
             Log.d(TAG, "User has already registered, continuing in MainActivity");
 
-            /**
-             * Checking if the user object has been created
-             */
+            //This if-sentence will check if WaterObject class object has been created. If it hasn't been created it will create one using WaterObject class.
+            //If there has been created one it will use last used WaterObject object.
             if (!getCreated) {
                 Log.d(TAG, "user object hasn't been created, gonna create it");
                 user = new UserObject();
@@ -111,7 +114,8 @@ public class MainActivity extends AppCompatActivity {
                 editor.putString(userObject, userJson); // set the value of the newly created user object to the storage
                 editor.putBoolean(userCreated, true); // set the user object as created in the local storage
 
-                // reset these values so that they won't be used again because they are now unnecessary
+                //New WaterObject object will be created by using UserObject classes minimum amount of water.
+                //After that it will be saved to mobile phones preferences.
                 DailyDrinkingObject.getInstance().createWaterObject(user.getMinimumAmount());
                 editor.putInt(userWeight, user.getWeight());
                 editor.putString(userTarget, String.valueOf(DailyDrinkingObject.getInstance().getSpecificWaterObject(0).getMinimumWater()));
@@ -166,8 +170,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     /**
-     *
-     * @return user's weight
+     * This function will return user's minimum amount of water user should drink daily.
+     * @return Will return minimum amount of water.
      */
     public static String getTarget() {
         if (DailyDrinkingObject.getInstance().getDailyWaterList().size() == 0) {

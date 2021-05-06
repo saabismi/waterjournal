@@ -25,15 +25,28 @@ import com.example.waterjournal.SpecificDayView;
 import com.example.waterjournal.WaterObject;
 
 /**
- * History fragment show user's drinking history on listView by daily. User can check specific days and get information about them.
+ * History fragment will show user's daily drinking history on a listView. User can check specific days by clicking dates and get specific information about them.
  */
 public class HistoryFragment extends Fragment {
 
+    //Creating private and public variables for HistoryFragment class.
+    //listViewForDays variable is for ListView UI element with id listViewForDays.
+    //historyText variable is for TextView UI element with id historyText.
+    //tips variable is for tips button element.
+    //EXTRA variable is a key for adding information using intent for SpecificDayView class.
     private ListView listViewForDays;
     private TextView historyText;
     private Button tips;
     public static final String EXTRA = "ListPosition";
 
+    /**
+     * This View is used for creating HistoryFragment activity. It will show activity's view which is app's logo, textView with information,
+     * listView with a list of user's days which user has been drinking water and tips button which will show useful information about water.
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return Will return history fragment.
+     */
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -41,11 +54,21 @@ public class HistoryFragment extends Fragment {
         this.listViewForDays = hist.findViewById(R.id.listViewForDays);
         this.historyText = hist.findViewById(R.id.historyText);
         this.historyText.setText("Your drinking history.");
+
+        //Creating listView for HistoryFragment.
         this.listViewForDays.setAdapter(new ArrayAdapter<WaterObject>(getActivity(), android.R.layout.simple_list_item_1, DailyDrinkingObject.getInstance().getDailyWaterList()));
         this.listViewForDays.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            /**
+             * This onItemClick function will be used to create new activity on SpecificDayView class. It will also add information to the class and keep
+             * track which day is selected and show correct day.
+             * @param parent This parameter will tell where specific click happened.
+             * @param view This parameter will tell in which view the click happened.
+             * @param position This parameter will tell which position the view is on the adapter.
+             * @param id This parameter will tell which is the row position of the clicked view.
+             */
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //Intent to open daily view to check stats from a specific day
+                //Intent to open daily view to check information from a specific day
                 Intent specificDayView = new Intent(getActivity(), SpecificDayView.class);
                 specificDayView.putExtra(EXTRA, position);
                 startActivity(specificDayView);
@@ -53,6 +76,10 @@ public class HistoryFragment extends Fragment {
         });
         tips = hist.findViewById(R.id.imageButtonTips);
         tips.setOnClickListener(new View.OnClickListener() {
+            /**
+             * This function is for water tips fragment view. It will go to water information fragment when clicked.
+             * @param view This parameter will tell from which view are we going to water information view.
+             */
             @Override
             public void onClick(View view) {
                 Navigation.findNavController(view).navigate(R.id.navigation_tips);

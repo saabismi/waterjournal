@@ -13,10 +13,14 @@ import java.util.Date;
 public class WaterObject {
 
     //Creating variables for class.
+    //amountOfWater variable will keep track how much user has been drinking on specific day.
+    //minimumWater variable will remember how much user should drink at least per day.
+    //currentDate variable will keep track which date it is.
+    //drinkAddedText list will add a string sentence about water and what time it was taken.
+    //drinksTaken list will keep track how much user has taken on specific day and what size drinks.
     private double amountOfWater;
     private double minimumWater;
     private String currentDate;
-    private long dateCheck;
     private ArrayList<String> drinkAddedText;
     private ArrayList<Double> drinksTaken;
     private ArrayList<Date> timeAdded;
@@ -59,13 +63,13 @@ public class WaterObject {
     public void addingWater(double amount) {
         this.amountOfWater += amount;
         int amountInt = (int) amount;
-        String help;
-        if(Calendar.getInstance().get(Calendar.MINUTE) > 9) {
-            help = "You drank " + amountInt + " ml at " + Calendar.getInstance().get(Calendar.HOUR_OF_DAY) + ":" + Calendar.getInstance().get(Calendar.MINUTE);
+
+        //This if-sentence will put correct timestamp when user adds new drink.
+        if (Calendar.getInstance().get(Calendar.MINUTE) > 9) {
+            this.drinkAddedText.add("You drank " + amountInt + " ml at " + Calendar.getInstance().get(Calendar.HOUR_OF_DAY) + ":" + Calendar.getInstance().get(Calendar.MINUTE));
         } else {
-            help = "You drank " + amountInt + " ml at " + Calendar.getInstance().get(Calendar.HOUR_OF_DAY) + ":0" + Calendar.getInstance().get(Calendar.MINUTE);
+            this.drinkAddedText.add("You drank " + amountInt + " ml at " + Calendar.getInstance().get(Calendar.HOUR_OF_DAY) + ":0" + Calendar.getInstance().get(Calendar.MINUTE));
         }
-        this.drinkAddedText.add(help);
         this.timeAdded.add(Calendar.getInstance().getTime());
         this.drinksTaken.add(amount);
         Log.d("Listan sisältö lisäyksen jälkeen", this.drinksTaken.toString());
@@ -74,6 +78,7 @@ public class WaterObject {
     /**
      * This function will remove last added amount of water from amountOfWater variable.
      * For example user has miss clicked add water button and wants to remove the extra water.
+     * Function will also check that the water amount won't go less than 0 using if-sentence.
      */
     public void removingWater() {
         if (this.amountOfWater - this.drinksTaken.get(this.drinksTaken.size() - 1) <= 0) {
@@ -87,6 +92,11 @@ public class WaterObject {
         Log.d("Listan sisältö poiston jälkeen", this.drinksTaken.toString());
     }
 
+    /**
+     * This function will return user's last added drink.
+     *
+     * @return Will return last added drink.
+     */
     public double lastAddedDrink() {
         return this.drinksTaken.get(this.drinksTaken.size() - 1);
     }
@@ -143,18 +153,28 @@ public class WaterObject {
         return dailyAmount;
     }
 
+    /**
+     * This function will return timeAdded list which variables inside the list are date times
+     * when user drank.
+     * @return Will return timeAdded list.
+     */
     public ArrayList<Date> getTimeAdded() {
         return this.timeAdded;
     }
 
+    /**
+     * This function will return drinkAddedText list for singleton class to use it in SpecificDayView class for listView.
+     * @return Will return drinkAddedText list.
+     */
     public ArrayList<String> getDrinkAdded() {
         return this.drinkAddedText;
     }
 
     /**
-     * This function will tell user how much the user has drank during the day and how much is the daily progress.
+     * This function will give user information about user. It will tell how user has drank water and daily progress regarding to it.
+     * It will also tell the minimum amount which should be drank during the day and how many times user has been drinking during the specific day.
      *
-     * @return Will return a string variable to user.
+     * @return Will return information using string class.
      */
     public String getInformation() {
         int amountOfWaterInt = (int) this.amountOfWater;
@@ -163,18 +183,35 @@ public class WaterObject {
         return "You (have) drank " + amountOfWaterInt + " ml.\nIt is " + drinkingProgressInt + "% of your daily target which is " + minimumWaterInt + " ml.\nYou (have) drank " + this.drinkAddedText.size() + " time(s) on this day.";
     }
 
+    /**
+     * This toString function will return current date for HistoryActivity to use in listView.
+     * @return Will return current date.
+     */
     public String toString() {
         return this.currentDate;
     }
 
+    /**
+     * This function will return current date for user.
+     * @return Will return current date.
+     */
     public Calendar getDate() {
         return Calendar.getInstance();
     }
 
+    /**
+     * This function will return list of water types user took during day. For example user drank 5 times and this function
+     * will return those five times in drinksTaken ArrayList.
+     * @return Will return user's specific day drinks.
+     */
     public ArrayList<Double> getDrinksTaken() {
         return this.drinksTaken;
     }
 
+    /**
+     * This function will return minimum amount water user should drink daily.
+     * @return Will return minimum amount of water.
+     */
     public double getMinimumWater() {
         return this.minimumWater;
     }

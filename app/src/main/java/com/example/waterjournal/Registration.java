@@ -18,9 +18,13 @@ import org.w3c.dom.Text;
 
 import java.text.DecimalFormat;
 
+/**
+ * This class will create activity which will guide user to make his first PersonObject object for the app.
+ * This object will be later used to create WaterObject object which will track user's drinking on specific days.
+ */
 public class Registration extends AppCompatActivity {
 
-    /* variables for intent extras */
+    // variables for intent extras
     public static final String WEIGHT = "666";
     public static final String TARGET = "undefined";
 
