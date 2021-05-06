@@ -28,12 +28,13 @@ import com.example.waterjournal.WaterObject;
  * History fragment will show user's daily drinking history on a listView. User can check specific days by clicking dates and get specific information about them.
  */
 public class HistoryFragment extends Fragment {
-
-    //Creating private and public variables for HistoryFragment class.
-    //listViewForDays variable is for ListView UI element with id listViewForDays.
-    //historyText variable is for TextView UI element with id historyText.
-    //tips variable is for tips button element.
-    //EXTRA variable is a key for adding information using intent for SpecificDayView class.
+    /**
+     * Creating private and public variables for HistoryFragment class.
+     * listViewForDays variable is for ListView UI element with id listViewForDays.
+     * historyText variable is for TextView UI element with id historyText.
+     * tips variable is for tips button element.
+     * EXTRA variable is a key for adding information using intent for SpecificDayView class.
+     */
     private ListView listViewForDays;
     private TextView historyText;
     private Button tips;
