@@ -71,13 +71,12 @@ public class PreferencesFragment extends Fragment {
     }
 
     /**
-     * Main view of the preferences fragment
-     * @param inflater
-     * @param container
-     * @param savedInstanceState
-     * @return
+     * Called to have the fragment instantiate its user interface view.
+     * @param inflater the LayoutInflater object that can be used to inflate any views in the fragment.
+     * @param container used to generate the LayoutParams of the view.
+     * @param savedInstanceState this fragment is being re-constructed from a previous saved state as given here.
+     * @return return the View for the fragment's UI, or null.
      */
-
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
