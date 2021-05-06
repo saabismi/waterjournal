@@ -29,7 +29,7 @@ import com.example.waterjournal.WaterObject;
  */
 public class HistoryFragment extends Fragment {
     /**
-     * Variales and widgets
+     * Variales
      * Creating private and public variables for HistoryFragment class.
      * listViewForDays variable is for ListView UI element with id listViewForDays.
      * historyText variable is for TextView UI element with id historyText.
