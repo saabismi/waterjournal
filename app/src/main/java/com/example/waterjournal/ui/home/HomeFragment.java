@@ -108,7 +108,7 @@ public class HomeFragment extends Fragment {
         textAmountGoal = main.findViewById(R.id.textAmountGoal); // get the textivew for the field to use
         double drankValue = DailyDrinkingObject.getInstance().getSpecificWaterObject(DailyDrinkingObject.getInstance().getDailyWaterList().size() - 1).getAmountOfWater();
         int drankValueInt = (int) drankValue;
-        textAmountGoal.setText(Double.toString(drankValueInt) + " / " + getTargetAsMl() + " ml"); // set the text as the goal in millilitres using the function defined above
+        textAmountGoal.setText(Integer.toString(drankValueInt) + " / " + getTargetAsMl() + " ml"); // set the text as the goal in millilitres using the function defined above
         textProgressBar = main.findViewById(R.id.textProgressBar);
         circleBar = main.findViewById(R.id.progress_bar);
         DecimalFormat decimal = new DecimalFormat("#.#");
