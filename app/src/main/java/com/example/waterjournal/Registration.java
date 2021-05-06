@@ -43,6 +43,12 @@ public class Registration extends AppCompatActivity {
     private TextView previewTarget; // textview for showing the preview for the water target
     private Button toMain; // button for going to the main activity
 
+    /**
+     * This onCreate function will create view and add UI elements for Registration class.
+     * This function will also create user's first UserObject object.
+     * @param savedInstanceState This parameter will allow activity to download earlier data from same activity if it has been used earlier
+     *                           and earlier information was saved during onPause or onStop functions.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,10 +77,16 @@ public class Registration extends AppCompatActivity {
         editor.commit();
 
         pickWeight.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+            /**
+             * This function will define user's weight and water amount user should drink at least per day.
+             * Once the NumberPicker value has been decided and continue button has been clicked.
+             * @param pickWeight This parameter will be used to determine user's weight.
+             * @param oldVal This parameter is the old weight user had selected using the NumberPicker.
+             * @param newVal This parameter is the new weight value user has selected using the NumberPicker.
+             */
             @Override
             public void onValueChange(NumberPicker pickWeight, int oldVal, int newVal) {
                 double target = newVal * 0.033;
-                //String targetStr = Double.toString(target);
                 String targetStr = Double.toString(Double.valueOf(dec.format(target)));
                 previewTarget.setText(targetStr + " litres");
                 editor.putString(userTarget, targetStr);
@@ -83,6 +95,10 @@ public class Registration extends AppCompatActivity {
         });
     }
 
+    /**
+     * This function will save and store information about user to mobile phones preferences
+     * if the app is on pause mode.
+     */
     @Override
     protected void onPause() {
         super.onPause();
@@ -97,6 +113,10 @@ public class Registration extends AppCompatActivity {
     }
 
 
+    /**
+     * This function will fetch user's information from mobile phones preferences. It will give specific information
+     * about user depending if user has made profile earlier or not.
+     */
     @Override
     protected void onRestart() {
         super.onRestart();
@@ -117,6 +137,10 @@ public class Registration extends AppCompatActivity {
         previewTarget.setText(getTarget + " litres");
     }
 
+    /**
+     * This function will go to MainActivity and HomeFragement activity once user has clicked the continue button.
+     * @param v This parameter will tell which element was clicked and show it view.
+     */
     public void goToMain(View v) {
         /* Create intent for returning to the main activity */
         Intent regedIntent = new Intent(this, MainActivity.class);

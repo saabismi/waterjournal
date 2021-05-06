@@ -36,12 +36,14 @@ public class TipsFragment extends Fragment {
 
         View tips = inflater.inflate(R.layout.fragment_tips, container, false);
 
-        /**
-         * Button to go back to the home fragment
-         */
+        //Button to go back to the home fragment.
         tipsBtn = tips.findViewById(R.id.imageButtonTips);
         tipsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
+            /**
+             * This function will go back to HomeFragment activity when clicked.
+             * @param view This will tell navigation control from which activity are we going to next activity.
+             */
             public void onClick(View view) {
                 //OnClick to use navigation controller to go to the home fragment
                 Navigation.findNavController(view).navigate(R.id.navigation_home);

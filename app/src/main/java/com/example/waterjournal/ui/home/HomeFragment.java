@@ -45,16 +45,28 @@ import java.util.List;
  */
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class HomeFragment extends Fragment {
+
     /**
-     * Variales and widgets
+     * Creating private and public variables for HomeFragment class.
+     * addDrink variable UI element will add water to WaterObject.
+     * removeResent variable UI element will remove latest added water from WaterObject.
+     * amountPicker variable UI element will show drinks[] variable's list on a NumberPicker element.
+     * textAmount variable UI element will show user current drinking amount.
+     * textAmountGoal variable UI element will show user's minimum drinking amount per day.
+     * textProgressBar variable UI element will tell user's drinking progress.
+     * drinks variable will be used with NumberPicker element.
+     * circleBar variable UI element will show user's drinking progress in a circle with filling the circle with specific amount percent.
+     * value variable is used for determine which number has been picked from NumberPicker.
+     * waterGson variable will save WaterObject objects to mobile phones preferences.
+     * gson variable will make it possible to save information and data to mobile phones preferences.
+     * waters variables is a list of WaterObject objects which user has created by using the app. It will
+     * be used to fetch them from preferences and then add to singleton class or fetching them from singleton class
+     * and then saving them to preferences.
+     * getWater will fetch information from WaterObject objects from preferences.
      */
-    private Button addDrink;
-    private Button removeResent;
-    private Button tips;
+    private Button addDrink, removeResent, tips;
     private NumberPicker amountPicker;
-    private TextView textAmount;
-    private TextView textAmountGoal;
-    private TextView textProgressBar;
+    private TextView textAmount, textAmountGoal, textProgressBar;
     public String drinks[] = {"40", "100", "200", "250", "300", "330", "400", "450", "500", "600", "700", "800", "900", "1000"};
     private int progressBar = 0;
     private ProgressBar circleBar;
@@ -121,24 +133,17 @@ public class HomeFragment extends Fragment {
         circleBar = main.findViewById(R.id.progress_bar);
         DecimalFormat decimal = new DecimalFormat("#.#");
 
-
-        /**
-         * Get the date from the singleton
-         */
+        //Get the date from the singleton
         SingletonDay = DailyDrinkingObject.getInstance().getSpecificWaterObject(DailyDrinkingObject.getInstance().getDailyWaterList().size() - 1).toString();
         SingletonDayInt = SingletonDay.charAt(0);
 
-        /**
-         * Get the current date
-         */
+        //Get the current date
         // this is the current date refreshed every time the app is loaded
         currentCal = new Calendar.Builder().setCalendarType("iso8601").setDate(currentDate.getYear(), currentDate.getMonthValue(), currentDate.getDayOfMonth()).build();
         // Integer which returns the current day number (1-31)
         currentDay = currentCal.get(Calendar.DAY_OF_MONTH);
 
-        /**
-         * Set the percent text in the middle of the progress bar
-         */
+        //Set the percent text in the middle of the progress bar
         int target = Integer.valueOf(getTargetAsMl());
         double percent = (DailyDrinkingObject.getInstance().getSpecificWaterObject(DailyDrinkingObject.getInstance().getDailyWaterList().size() - 1).getAmountOfWater()) / target * 100;
         int circlePercent = (int) Math.round(percent);
@@ -152,16 +157,25 @@ public class HomeFragment extends Fragment {
         waters = gson.fromJson(getWaters, WaterList.class);
 
 
-        /**
-         * Button to add amount of drink to store
-         */
+        //Button to add amount of drink to store
         addDrink = main.findViewById(R.id.buttonAddDrink);
         addDrink.setOnClickListener(new View.OnClickListener() {
+            /**
+             * This function will add water to WaterObject object once user has selected the amount which user wants to add and after
+             * that clicked add button. After adding water this function will then update UI and show the amount which was added and sum it to
+             * current amount. It will also update progress circle with current percent of daily intake.
+             * @param view This parameter will tell which UI element was clicked and use this information to make this function work.
+             */
             @Override
             public void onClick(View view) {
                 // Adds drink amount to store
                 double helpValue = (DailyDrinkingObject.getInstance().getSpecificWaterObject(DailyDrinkingObject.getInstance().getDailyWaterList().size() - 1).getAmountOfWater() + Double.parseDouble(value));
                 int helpValueInt = (int) helpValue;
+
+                //Will show on screen how much user has been drinking during current day.
+                //target is the amount user should drink at least per day.
+                //onToGoal is the amount which will be added to current water amount.
+                //percent will be used to show right amount of percent on circlePercent variable.
                 textAmountGoal.setText(helpValueInt + " / " + getTargetAsMl() + " ml");
                 int target = Integer.valueOf(getTargetAsMl());
                 int onToGoal = Integer.valueOf(value);
@@ -169,6 +183,7 @@ public class HomeFragment extends Fragment {
                 int circlePercent = (int) Math.round(percent);
                 textProgressBar.setText(decimal.format(percent) + " %");
 
+                //This if-sentence will inform user if daily goal is reached.
                 if(circlePercent >= 100) {
                     Toast.makeText(getContext(),"Woohoo! You've achieved your daily goal!",Toast.LENGTH_SHORT).show();
                 }
@@ -177,6 +192,7 @@ public class HomeFragment extends Fragment {
                 DailyDrinkingObject.getInstance().getSpecificWaterObject(DailyDrinkingObject.getInstance().getDailyWaterList().size() - 1).addingWater(onToGoal);
 
                 //waters = gson.fromJson(getWaters, WaterList.class);
+                //These variables will save added water information to preferences.
                 String valueAsString = amountPicker.getDisplayedValues()[amountPicker.getValue()];
                 waters.addWater(Integer.parseInt(valueAsString));
                 watersGson = gson.toJson(waters);
@@ -186,9 +202,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        /**
-         * Numberpicker to take user value and storing that to store
-         */
+        //NumberPicker to take user value and storing that to store
         amountPicker = main.findViewById(R.id.amountPicker);
         textAmount = main.findViewById(R.id.textAmount);
 
@@ -200,11 +214,13 @@ public class HomeFragment extends Fragment {
         //Log.d(TAG, "nykyinen: " + Integer.toString(currentDay()));
 
 
+        //This if-sentence will check if day has changed. If it has it will create new WaterObject object otherwise
+        //it will use current WaterObject.
         if (SingletonDayInt < currentDay) {
             //create new water object
             waters = gson.fromJson(getWaters, WaterList.class);
             waters.reset();
-            DailyDrinkingObject.getInstance().getSpecificWaterObject(DailyDrinkingObject.getInstance().getDailyWaterList().size() - 1).dailyReset();
+            DailyDrinkingObject.getInstance().createWaterObject(getTargetAsMl());
 
             watersGson = gson.toJson(waters);
             SharedPreferences.Editor editor = preferences.edit(); // editor
@@ -216,20 +232,18 @@ public class HomeFragment extends Fragment {
             Log.d(TAG, "continue using the existing water object");
         }
 
-
-        /**
-         * Numberpicker min, max and default values
-         * @param setMinValue lowest index on drink-array
-         * @param setMaxValue highest indes on drinks-array
-         * @param setDisplayedValues shows drinks-array values on picker
+        /*
+        Numberpicker min, max and default values
+        setMinValue lowest index on drink-array
+        setMaxValue highest indes on drinks-array
+        setDisplayedValues shows drinks-array values on picker
          */
         amountPicker.setMinValue(0);
         amountPicker.setMaxValue(13);
         amountPicker.setDisplayedValues(drinks);
         amountPicker.setValue(3);
-        /**
-         * Numberpicker value picker
-         */
+
+        //NumberPicker value picker
         amountPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker numberPicker, int oldVal, int newVal) {
@@ -239,19 +253,16 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        /**
-         * Set the value of the "value" variable the preselected value on start
-         */
+        //Set the value of the "value" variable the preselected value on start
         value = amountPicker.getDisplayedValues()[amountPicker.getValue()];
 
-        /**
-         * Button to remove resent drink from store
-         */
+        //Button to remove resent drink from store
         removeResent = main.findViewById(R.id.buttonRemoveResent);
         removeResent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Removes resent value from store
+                //This if-sentence will make app not crash if user tries to remove value before adding anything.
                 if (DailyDrinkingObject.getInstance().getSpecificWaterObject(DailyDrinkingObject.getInstance().getDailyWaterList().size() - 1).getTimeAdded().isEmpty()) {
 
                 } else {
@@ -274,9 +285,7 @@ public class HomeFragment extends Fragment {
                 }
             }
         });
-        /**
-         * Button to go to the tips fragment.
-         */
+        //Button to go to the tips fragment.
         tips = main.findViewById(R.id.imageButtonTips);
         tips.setOnClickListener(new View.OnClickListener() {
             @Override
