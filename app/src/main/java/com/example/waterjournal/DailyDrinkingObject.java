@@ -2,16 +2,24 @@ package com.example.waterjournal;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.preference.PreferenceManager;
+import android.provider.CalendarContract;
+import android.util.Log;
+
+import androidx.annotation.RequiresApi;
 
 import com.google.gson.Gson;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  * This singleton class will add each day water object to an ArrayList which will keep them in memory.
  * This will give user a chance to check his daily or monthly water usage and compare them.
  */
+@RequiresApi(api = Build.VERSION_CODES.O)
 public class DailyDrinkingObject {
 
     /**
@@ -31,6 +39,10 @@ public class DailyDrinkingObject {
     private final String userObject = "userObject"; // location for the JSON formatted version of the user object
     private SharedPreferences preferences = applicationContext.getSharedPreferences(USER_STORE, Context.MODE_PRIVATE);
 
+
+    private String TAG = "WaterLog"; // easy to use tag for logging in Logcat
+
+
     /**
      * Get the minimum amount from the user object
      */
@@ -42,6 +54,7 @@ public class DailyDrinkingObject {
     //Creating variables for class.
     private ArrayList<WaterObject> dailyWater;
     private static final DailyDrinkingObject ourInstance = new DailyDrinkingObject();
+
 
     /**
      * This constructor will define new ArrayList for singleton class to use.
@@ -60,7 +73,6 @@ public class DailyDrinkingObject {
      * @param dailyAmount This parameter will add new WaterObject to private dailyWater list.
      */
     public void addDailyWater(WaterObject dailyAmount) {
-
         this.dailyWater.add(dailyAmount);
     }
 

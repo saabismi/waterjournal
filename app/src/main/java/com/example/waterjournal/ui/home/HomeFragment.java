@@ -80,7 +80,7 @@ public class HomeFragment extends Fragment {
     /**
      * Variables  for checking whether to create a new water object or use the old one = if the day has changed
      */
-    private String SingletonDay; // get the value of the date of the latest water object
+    private Calendar SingletonDay; // get the value of the date of the latest water object
     private int SingletonDayInt; // int for the day extracted from the date
     private Calendar currentCal; // initialise variable for getting the current date as a calendar object
     private int currentDay;
@@ -117,8 +117,9 @@ public class HomeFragment extends Fragment {
         /**
          * Get the date from the singleton
          */
+        /*
         SingletonDay = DailyDrinkingObject.getInstance().getSpecificWaterObject(DailyDrinkingObject.getInstance().getDailyWaterList().size() - 1).toString();
-        SingletonDayInt = SingletonDay.charAt(0);
+        SingletonDayInt = SingletonDay.charAt(0);*/
 
         /**
          * Get the current date
@@ -141,8 +142,15 @@ public class HomeFragment extends Fragment {
 
         getWaters = preferences.getString(waterList, "empty");
 
-        waters = gson.fromJson(getWaters, WaterList.class);
-
+        if(getWaters == "empty") {
+            waters = new WaterList();
+            watersGson = gson.toJson(waters);
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putString(waterList, watersGson);
+            editor.commit();
+        } else {
+            waters = gson.fromJson(getWaters, WaterList.class);
+        }
 
         /**
          * Button to add amount of drink to store
@@ -161,6 +169,8 @@ public class HomeFragment extends Fragment {
                 int circlePercent = (int) Math.round(percent);
                 textProgressBar.setText(decimal.format(percent) + " %");
 
+
+
                 if(circlePercent >= 100) {
                     Toast.makeText(getContext(),"Woohoo! You've achieved your daily goal!",Toast.LENGTH_SHORT).show();
                 }
@@ -168,7 +178,8 @@ public class HomeFragment extends Fragment {
                 circleBar.setProgress(circlePercent);
                 DailyDrinkingObject.getInstance().getSpecificWaterObject(DailyDrinkingObject.getInstance().getDailyWaterList().size() - 1).addingWater(onToGoal);
 
-                //waters = gson.fromJson(getWaters, WaterList.class);
+
+                waters = gson.fromJson(getWaters, WaterList.class);
                 String valueAsString = amountPicker.getDisplayedValues()[amountPicker.getValue()];
                 waters.addWater(Integer.parseInt(valueAsString));
                 watersGson = gson.toJson(waters);
@@ -184,14 +195,7 @@ public class HomeFragment extends Fragment {
         amountPicker = main.findViewById(R.id.amountPicker);
         textAmount = main.findViewById(R.id.textAmount);
 
-        /* Testing!! */
-
-        Log.d(TAG, "onko ennen nykyhetkeä: " + Boolean.toString(currentCal.after(testCal)));
-
-       // Log.d(TAG, "viimeisin: " + Integer.toString(latestDay()));
-        //Log.d(TAG, "nykyinen: " + Integer.toString(currentDay()));
-
-
+/*
         if (SingletonDayInt < currentDay) {
             //create new water object
             waters = gson.fromJson(getWaters, WaterList.class);
@@ -207,7 +211,28 @@ public class HomeFragment extends Fragment {
             //continue with the old water object
             Log.d(TAG, "continue using the existing water object");
         }
+*/
 
+        //Get the date from the singleton
+        SingletonDay = DailyDrinkingObject.getInstance().getSpecificWaterObject(DailyDrinkingObject.getInstance().getDailyWaterList().size() - 1).getDate();
+
+        //This if-sentence will check if day has changed. If it has it will create new WaterObject object otherwise
+        //it will use current WaterObject.
+        /*if (SingletonDay.before(currentCal)) {
+            //create new water object
+            waters = gson.fromJson(getWaters, WaterList.class);
+            waters.reset();
+            DailyDrinkingObject.getInstance().createWaterObject(getTargetAsMl());
+
+            watersGson = gson.toJson(waters);
+            SharedPreferences.Editor editor = preferences.edit(); // editor
+            editor.putString(waterList, watersGson);
+            editor.commit();
+            Log.d(TAG, "create new water object");
+        } else {
+            //continue with the old water object
+            Log.d(TAG, "continue using the existing water object");
+        }*/
 
         /**
          * Numberpicker min, max and default values
@@ -257,7 +282,8 @@ public class HomeFragment extends Fragment {
                     textProgressBar.setText(decimal.format(percent) + " %");
                     circleBar.setProgress(circlePercent);
 
-                    //waters = gson.fromJson(getWaters, WaterList.class);
+
+                    waters = gson.fromJson(getWaters, WaterList.class);
                     waters.removeLatestwater();
                     watersGson = gson.toJson(waters);
                     SharedPreferences.Editor editor = preferences.edit();
