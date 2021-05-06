@@ -115,8 +115,9 @@ public class HomeFragment extends Fragment {
 
     /**
      * Called to have the fragment instantiate its user interface view.
-     * @param inflater the LayoutInflater object that can be used to inflate any views in the fragment.
-     * @param container used to generate the LayoutParams of the view.
+     *
+     * @param inflater           the LayoutInflater object that can be used to inflate any views in the fragment.
+     * @param container          used to generate the LayoutParams of the view.
      * @param savedInstanceState this fragment is being re-constructed from a previous saved state as given here.
      * @return return the View for the fragment's UI, or null.
      */
@@ -184,8 +185,8 @@ public class HomeFragment extends Fragment {
                 textProgressBar.setText(decimal.format(percent) + " %");
 
                 //This if-sentence will inform user if daily goal is reached.
-                if(circlePercent >= 100) {
-                    Toast.makeText(getContext(),"Woohoo! You've achieved your daily goal!",Toast.LENGTH_SHORT).show();
+                if (circlePercent >= 100) {
+                    Toast.makeText(getContext(), "Woohoo! You've achieved your daily goal!", Toast.LENGTH_SHORT).show();
                 }
 
                 circleBar.setProgress(circlePercent);
@@ -210,7 +211,7 @@ public class HomeFragment extends Fragment {
 
         Log.d(TAG, "onko ennen nykyhetkeä: " + Boolean.toString(currentCal.after(testCal)));
 
-       // Log.d(TAG, "viimeisin: " + Integer.toString(latestDay()));
+        // Log.d(TAG, "viimeisin: " + Integer.toString(latestDay()));
         //Log.d(TAG, "nykyinen: " + Integer.toString(currentDay()));
 
 
@@ -245,6 +246,12 @@ public class HomeFragment extends Fragment {
 
         //NumberPicker value picker
         amountPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+            /**
+             * This function will be used to pick amount of water user wants to add to user's daily intake.
+             * @param numberPicker This parameter will be used to search values in drinks list.
+             * @param oldVal This parameter is numberPickers earlier value.
+             * @param newVal This parameter is numberPickers new value.
+             */
             @Override
             public void onValueChange(NumberPicker numberPicker, int oldVal, int newVal) {
                 //Amount of drink to store
@@ -259,6 +266,12 @@ public class HomeFragment extends Fragment {
         //Button to remove resent drink from store
         removeResent = main.findViewById(R.id.buttonRemoveResent);
         removeResent.setOnClickListener(new View.OnClickListener() {
+            /**
+             * This function is used to remove last added amount of water from user's daily intake. Function has if-sentence for not crashing if user decided
+             * to click remove button before adding anything. Function will use singleton class and WaterObject object inside it to determine how to subtract two values.
+             * After it has done subtraction it will update percent circle bar and text values.
+             * @param view This parameter will tell which UI element was clicked.
+             */
             @Override
             public void onClick(View view) {
                 // Removes resent value from store
@@ -285,9 +298,14 @@ public class HomeFragment extends Fragment {
                 }
             }
         });
+
         //Button to go to the tips fragment.
         tips = main.findViewById(R.id.imageButtonTips);
         tips.setOnClickListener(new View.OnClickListener() {
+            /**
+             * This function will go to tips activity once it is clicked.
+             * @param view This parameter will tell from which activity are we going to next one.
+             */
             @Override
             public void onClick(View view) {
                 //OnClick to use navigation controller to go to the tips fragment.
