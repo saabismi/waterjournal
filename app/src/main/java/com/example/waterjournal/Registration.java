@@ -54,16 +54,21 @@ public class Registration extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
-        /* Set the values for the previously initialised variables */
+        /** Set the values for the previously initialised variables */
         pickWeight = findViewById(R.id.numPickWeight);
         previewTarget = findViewById(R.id.previewTarget);
         toMain = findViewById(R.id.toMainButton);
 
-        /* Set up sharedpreferences */
+        /** Set up sharedpreferences */
         preferences = getSharedPreferences(USER_STORE, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
 
-        /* Set up the numberpicker for the weight */
+        /**
+         * Set up the numberpicker for the weight
+         * @param setMinValue setting numberpicker min value to 20
+         * @param setMaxValue setting numberpicker max value to 200
+         * @param setValue setting default value to 75
+         */
         pickWeight.setMaxValue(200);
         pickWeight.setMinValue(20);
         pickWeight.setValue(75);
