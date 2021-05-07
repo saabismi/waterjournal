@@ -29,67 +29,131 @@ import androidx.navigation.ui.NavigationUI;
  */
 public class MainActivity extends AppCompatActivity {
     /**
-    * Creating public and private variables for MainActivity class.
-    * userJson variable is for getting user's object information from gson files or add user's objetc information to gson files.
-    * gson variable is for being able to use gson in MainActivity for saving and fetching information for code.
-    * user variable is for user object which will be created using UserObject class. It can be also defined by fetching information from gson UserObject files.
+    * contextOfApplication is a variable for app context.
     */
     public static Context contextOfApplication;
 
+    /**
+     * userGson variable is for saving user's object information to gson files.
+     */
     public String userGson;
+    /**
+     * userJson variable is for getting user's object information from gson files or add user's objetc information to gson files.
+     */
     public String userJson;
+    /**
+     * waterJson variable is for getting water object's information from gson files or add water object's information to gson files.
+     */
     public String watersJson;
+    /**
+     * waterGson variable is for saving water object's information to gson files.
+     */
     public String watersGson;
+    /**
+     * gson variable is for being able to use gson in MainActivity for saving and fetching information for code.
+     */
     public Gson gson = new Gson();
 
+    /**
+     * user variable is for user object which will be created using UserObject class. It can be also defined by fetching information from gson UserObject files.
+     */
     public UserObject user;
+    /**
+     * water is list which will contain WaterObject class objects. It will get objects from either preferences or singleton class depending
+     * on if user wants to load or save information.
+     */
     public WaterList waters;
     /**
-     * preferences create sharedpreferences variable
-     * UserStore create preferences for storing information about the user, etc.
-     * userRegistered storage for sharing the information about whether the user is registered already or not
-     * userCreated key for checking if the user object has already been created or not
-     * userWeight storage for storing the user weight
-     * userTarget target water amount per day
-     * userObject location for the JSON formatted version of the user object
-     * waterList list object for storing the waters of the day
-     * getRegistered variable for getting the value of registration status key
-     * getCreated get the value of the person object creation status key
-     * getWeight variable for getting the value of the weight key
-     * getTarget variable for getting the value of the water target key
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
      * getUser
      * getWaters
-     * TAG easy to use tag for logging
+     *
+     */
+    /**
+     * preferences create sharedPreferences variable.
      */
     private SharedPreferences preferences;
+    /**
+     * UserStore create preferences for storing information about the user, etc.
+     */
     private final String USER_STORE = "UserStore";
+    /**
+     * userRegistered storage for sharing the information about whether the user is registered already or not.
+     */
     private final String userRegistered = "userRegistered";
+    /**
+     * userCreated key for checking if the user object has already been created or not.
+     */
     private final String userCreated = "userCreated";
+    /**
+     * userWeight storage for storing the user weight.
+     */
     private final String userWeight  = "userWeight";
+    /**
+     * userTarget target water amount per day.
+     */
     private final String userTarget = "userTarget";
+    /**
+     * userObject location for the JSON formatted version of the user object.
+     */
     private final String userObject = "userObject";
+    /**
+     * waterList list object for storing the waters of the day.
+     */
     private final String waterList = "waterList";
+    /**
+     * getRegistered variable for getting the value of registration status key.
+     */
     private boolean getRegistered;
+    /**
+     * getCreated get the value of the person object creation status key.
+     */
     private boolean getCreated;
+    /**
+     * getWeight variable for getting the value of the weight key.
+     */
     private static int getWeight;
+    /**
+     * getTarget variable for getting the value of the water target key.
+     */
     private static String getTarget;
+    /**
+     * getUser variable is for getting the user object as a string from the storage.
+     */
     private String getUser;
+    /**
+     * getWaters variable is for getting the water object as a string from the storage.
+     */
     private String getWaters;
+    /**
+     * TAG easy to use tag for logging.
+     */
     private String TAG = "WaterLog";
 
     /**
      * This onCreate function will create MainActivity class view. It will also open in different ways depending if user has already defined settings.
      * If user hasn't defined setting it will Start Registration class which will guide user to make first account. But if user has already created an account
      * it will start MainActivity and HomeFragment activities.
-     * @param savedInstanceState
+     * @param savedInstanceState this Activity is being re-constructed from a previous saved state as given here.
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        /**
-         * Variable for context of application
+        /*
+          Variable for context of application
          */
         contextOfApplication = getApplicationContext();
 
@@ -148,7 +212,7 @@ public class MainActivity extends AppCompatActivity {
 
         getWaters = preferences.getString(waterList, "empty");
 
-        if(getWaters != "empty") {
+        if(!getWaters.equals("empty")) {
             Log.d(TAG, "waterlist object exists, getting the old one from storage");
             waters = gson.fromJson(getWaters, WaterList.class);
 
@@ -166,13 +230,13 @@ public class MainActivity extends AppCompatActivity {
             editor.putString(waterList, watersGson);
             editor.commit();
         }
-        /**
-         * Bottom bar navigation to home, history and preferences fragments
+        /*
+          Bottom bar navigation to home, history and preferences fragments
          */
         BottomNavigationView navView = findViewById(R.id.nav_view);
-        /**
-         * Passing each menu ID as a set of Ids because each
-         * menu should be considered as top level destinations.
+        /*
+          Passing each menu ID as a set of Ids because each
+          menu should be considered as top level destinations.
          */
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_home, R.id.navigation_history, R.id.navigation_settings)

@@ -48,74 +48,125 @@ import java.util.List;
 public class HomeFragment extends Fragment {
 
     /**
-     * Creating private and public variables for HomeFragment class.
      * addDrink variable UI element will add water to WaterObject.
+     */
+    private Button addDrink;
+    /**
      * removeResent variable UI element will remove latest added water from WaterObject.
+     */
+    private Button removeResent;
+    /**
+     * tips button is used for getting to tips fragment.
+     */
+    private Button tips;
+    /**
      * amountPicker variable UI element will show drinks[] variable's list on a NumberPicker element.
+     */
+    private NumberPicker amountPicker;
+    /**
      * textAmount variable UI element will show user current drinking amount.
+     */
+    private TextView textAmount;
+    /**
      * textAmountGoal variable UI element will show user's minimum drinking amount per day.
+     */
+    private TextView textAmountGoal;
+    /**
      * textProgressBar variable UI element will tell user's drinking progress.
+     */
+    private TextView textProgressBar;
+    /**
      * drinks variable will be used with NumberPicker element.
+     */
+    public String drinks[] = {"40", "100", "200", "250", "300", "330", "400", "450", "500", "600", "700", "800", "900", "1000"};
+    /**
      * circleBar variable UI element will show user's drinking progress in a circle with filling the circle with specific amount percent.
+     */
+    private ProgressBar circleBar;
+    /**
      * value variable is used for determine which number has been picked from NumberPicker.
+     */
+    private String value;
+
+    /**
+     * waterJson variable will load water object information as a string from preferences.
+     */
+    public String watersJson;
+    /**
      * waterGson variable will save WaterObject objects to mobile phones preferences.
+     */
+    public String watersGson;
+    /**
      * gson variable will make it possible to save information and data to mobile phones preferences.
+     */
+    public Gson gson = new Gson();
+
+    /**
      * waters variables is a list of WaterObject objects which user has created by using the app. It will
      * be used to fetch them from preferences and then add to singleton class or fetching them from singleton class
      * and then saving them to preferences.
-     * getWater will fetch information from WaterObject objects from preferences.
      */
-    private Button addDrink;
-    private Button removeResent;
-    private Button tips;
-    private NumberPicker amountPicker;
-    private TextView textAmount;
-    private TextView textAmountGoal;
-    private TextView textProgressBar;
-    public String drinks[] = {"40", "100", "200", "250", "300", "330", "400", "450", "500", "600", "700", "800", "900", "1000"};
-    private int progressBar = 0;
-    private ProgressBar circleBar;
-    private String value;
-
-
-    public String watersJson;
-    public String watersGson;
-    public Gson gson = new Gson();
-
     public WaterList waters;
 
-    private SharedPreferences preferences; // create sharedpreferences variable
-    private final String USER_STORE = "UserStore"; // create preferences for storing information about the user, etc.
-    private final String waterList = "waterList"; // list object for storing the waters of the day
+    /**
+     * preferences variable is for being able to use mobile phone's preferences.
+     */
+    private SharedPreferences preferences;
+    /**
+     * USER_STORE variable will create preferences for storing information about the user, etc.
+     */
+    private final String USER_STORE = "UserStore";
+    /**
+     * waterList variable will create list object for storing the waters of the day.
+     */
+    private final String waterList = "waterList"; //
 
+    /**
+     * getWater will fetch information from WaterObject objects from preferences.
+     */
     private String getWaters;
 
     /**
-     * Date stuff testing
+     * currentDate variable is for current date.
      */
-    // Localdate object for retrieving the current date
     LocalDate currentDate = LocalDate.now();
 
-    // this represents the day that the app gets from the latest water object
+    /**
+     * this represents the day that the app gets from the latest water object.
+     */
     public Calendar testCal = new Calendar.Builder().setCalendarType("iso8601").setDate(2021, 5, 2).build();
+
+    /**
+     * gets the value of the date of the latest water object.
+     */
+    private String SingletonDay;
+    /**
+     * int for the day extracted from the date.
+     */
+    private int SingletonDayInt;
+    /**
+     * initialise variable for getting the current date as a calendar object.
+     */
+    private Calendar currentCal;
+    /**
+     * currentDay variable is the current day in int form.
+     */
+    private int currentDay;
+
+    /**
+     * easy to use tag for logging in Logcat.
+     */
+    private String TAG = "WaterLog";
 
 
     /**
-     * Variables  for checking whether to create a new water object or use the old one = if the day has changed
+     * This function will return user's minimum amount of water user should drink at least per day from MainActivity class.
+     * @return Will return user's minimum amount of water.
      */
-    private String SingletonDay; // get the value of the date of the latest water object
-    private int SingletonDayInt; // int for the day extracted from the date
-    private Calendar currentCal; // initialise variable for getting the current date as a calendar object
-    private int currentDay;
-
-    private String TAG = "WaterLog"; // easy to use tag for logging in Logcat
-
-
     public int getTargetAsMl() {
         float amountGoal = Float.parseFloat(MainActivity.getTarget()); // litres to millilitres
         int amountGoalInt = Math.round(amountGoal); // round it so that the decimal point leaves
         return amountGoalInt; // set the text as the goal in millilitres
-        //return 1234;
     }
 
     /**
@@ -239,7 +290,7 @@ public class HomeFragment extends Fragment {
         }
 
         /*
-        Numberpicker min, max and default values
+        NumberPicker min, max and default values
         setMinValue lowest index on drink-array
         setMaxValue highest indes on drinks-array
         setDisplayedValues shows drinks-array values on picker
@@ -281,9 +332,7 @@ public class HomeFragment extends Fragment {
             public void onClick(View view) {
                 // Removes resent value from store
                 //This if-sentence will make app not crash if user tries to remove value before adding anything.
-                if (DailyDrinkingObject.getInstance().getSpecificWaterObject(DailyDrinkingObject.getInstance().getDailyWaterList().size() - 1).getTimeAdded().isEmpty()) {
-
-                } else {
+                if (!DailyDrinkingObject.getInstance().getSpecificWaterObject(DailyDrinkingObject.getInstance().getDailyWaterList().size() - 1).getTimeAdded().isEmpty()) {
                     double helpValue = (DailyDrinkingObject.getInstance().getSpecificWaterObject(DailyDrinkingObject.getInstance().getDailyWaterList().size() - 1).getAmountOfWater() - DailyDrinkingObject.getInstance().getSpecificWaterObject(DailyDrinkingObject.getInstance().getDailyWaterList().size() - 1).lastAddedDrink());
                     int helpValueInt = (int) helpValue;
                     DailyDrinkingObject.getInstance().getSpecificWaterObject(DailyDrinkingObject.getInstance().getDailyWaterList().size() - 1).removingWater();
@@ -306,7 +355,7 @@ public class HomeFragment extends Fragment {
 
         //Button to go to the tips fragment.
         tips = main.findViewById(R.id.imageButtonTips);
-        /** tipsBtn setOnClickListener. */
+        /* tipsBtn setOnClickListener. */
         tips.setOnClickListener(new View.OnClickListener() {
             /**
              * This function will go to the tips fragment once it is clicked.

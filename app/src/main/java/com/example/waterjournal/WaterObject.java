@@ -19,16 +19,34 @@ import com.example.waterjournal.R;
 public class WaterObject {
 
     //Creating variables for class.
-    //amountOfWater variable will keep track how much user has been drinking on specific day.
-    //minimumWater variable will remember how much user should drink at least per day.
-    //currentDate variable will keep track which date it is.
-    //drinkAddedText list will add a string sentence about water and what time it was taken.
-    //drinksTaken list will keep track how much user has taken on specific day and what size drinks.
+    //
+    //
+    //
+    //
+    //
+    /**
+     * amountOfWater variable will keep track how much user has been drinking on specific day.
+     */
     private double amountOfWater;
+    /**
+     * minimumWater variable will remember how much user should drink at least per day.
+     */
     private double minimumWater;
+    /**
+     * currentDate variable will keep track which date it is.
+     */
     private String currentDate;
+    /**
+     * drinkAddedText list will add a string sentence about water and what time it was taken.
+     */
     private ArrayList<String> drinkAddedText;
+    /**
+     * drinksTaken list will keep track how much user has taken on specific day and what size drinks.
+     */
     private ArrayList<Double> drinksTaken;
+    /**
+     * timeAdded list will keep track at which time user has taken drinks.
+     */
     private ArrayList<Date> timeAdded;
     String drank;
 

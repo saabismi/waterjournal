@@ -20,9 +20,13 @@ import com.example.waterjournal.ui.history.HistoryFragment;
 public class SpecificDayView extends AppCompatActivity {
 
     //Creating private variables for the class.
-    //informationAboutUser variable will get information about user using WaterObject object.
-    //listOfDrinkingTimes list has list of user's drinks user took on the specific day.
+    /**
+     * informationAboutUser variable will get information about user using WaterObject object.
+     */
     private TextView informationAboutUser;
+    /**
+     * listOfDrinkingTimes list has list of user's drinks user took on the specific day.
+     */
     private ListView listOfDrinkingTimes;
 
     /**

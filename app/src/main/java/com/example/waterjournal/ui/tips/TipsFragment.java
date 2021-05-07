@@ -21,8 +21,8 @@ import com.example.waterjournal.R;
  * @author Mikael Gustafsson.
  */
 public class TipsFragment extends Fragment {
-    /** Variales
-     *  tipsBtn button to move user to the hamo fragment
+    /**
+     *  tipsBtn button to move user to the home fragment
      */
     private Button tipsBtn;
     /**
@@ -37,15 +37,15 @@ public class TipsFragment extends Fragment {
 
         View tips = inflater.inflate(R.layout.fragment_tips, container, false);
 
-        /** Button to go back to the home fragment. */
+        /* Button to go back to the home fragment. */
         tipsBtn = tips.findViewById(R.id.imageButtonTips);
-        /** tipsBtn setOnClickListener. */
+        /* tipsBtn setOnClickListener. */
         tipsBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
             /**
              * This function will go back to home fragment when clicked.
              * @param view This will tell navigation control from which activity are we going to next activity.
              */
+            @Override
             public void onClick(View view) {
                 //OnClick to use navigation controller to go to the home fragment
                 Navigation.findNavController(view).navigate(R.id.navigation_home);

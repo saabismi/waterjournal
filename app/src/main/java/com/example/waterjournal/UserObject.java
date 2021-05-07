@@ -10,9 +10,13 @@ import java.text.DecimalFormat;
 public class UserObject {
 
     //Creating private variables for class.
-    //weight variable is used for keeping track on user's current weight.
-    //minimumAmount variable is used for keeping track on user's current weight.
+    /**
+     * weight variable is used for keeping track on user's current weight.
+     */
     private int weight;
+    /**
+     * minimumAmount variable is used for keeping track on user's current weight.
+     */
     private double minimumAmount;
 
     /**

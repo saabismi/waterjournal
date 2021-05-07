@@ -15,6 +15,7 @@ import java.util.ArrayList;
  */
 public class DailyDrinkingObject {
 
+    //Creating variables for class.
     /**
      * Gson variable
      */
@@ -26,25 +27,38 @@ public class DailyDrinkingObject {
     Context applicationContext = MainActivity.getContextOfApplication();
 
     /**
-     * Set variables for the sharedpreferences
+     * USER_STORE will create a preference for user information.
      */
     private final String USER_STORE = "UserStore"; // create preferences for storing information about the user, etc.
+    /**
+     * userObject is a variable for making a location for JSON formatted version of user object.
+     */
     private final String userObject = "userObject"; // location for the JSON formatted version of the user object
+    /**
+     * preference variable is a variable which let us use mobile phones preferences.
+     */
     private SharedPreferences preferences = applicationContext.getSharedPreferences(USER_STORE, Context.MODE_PRIVATE);
 
     /**
-     * Get the minimum amount from the user object
+     * getUser variable will get the user object from preferences as a string from memory storage
      */
     private String getUser = preferences.getString(userObject, "unexpected error"); // get the user object as a string from the storage
-    public UserObject user = gson.fromJson(getUser, UserObject.class); // transfer the user object from json to objec
+    /**
+     * user variable is used to make convert user object from string to object.
+     */
+    public UserObject user = gson.fromJson(getUser, UserObject.class); // transfer the user object from json to object
+    /**
+     * minWater variable will get minimum amount of water.
+     */
     private double minWater = user.getMinimumAmount();
 
-
-    //Creating variables for class.
-    //dailyWater variable will save each WaterObject object to it's memory. Users will be able to use them.
-    //ourInstance will able user to use DailyDrinkingObject in different activities without needing to create new
-    //DailyDrinkingObject each time.
+    /**
+     * dailyWater variable will save each WaterObject object to it's memory. Users will be able to use them.
+     */
     private ArrayList<WaterObject> dailyWater;
+    /**
+     * ourInstance will able user to use DailyDrinkingObject in different activities without needing to create new DailyDrinkingObject each time.
+     */
     private static final DailyDrinkingObject ourInstance = new DailyDrinkingObject();
 
     /**

@@ -26,23 +26,49 @@ import java.text.DecimalFormat;
 public class Registration extends AppCompatActivity {
 
     // variables for intent extras
-    public static final String WEIGHT = "666";
-    public static final String TARGET = "undefined";
+    /**
+     * preferences variable is used for being able to use mobile phone's preferences.
+     */
+    private SharedPreferences preferences;
+    /**
+     * Create preferences for storing information about the user, etc.
+     */
+    private final String USER_STORE = "UserStore";
+    /**
+     * Storage for sharing the information about whether the user is registered already or not.
+     */
+    private final String userRegistered = "userRegistered";
+    /**
+     * Storage for storing the user weight.
+     */
+    private final String userWeight  = "userWeight";
+    /**
+     * Storage for storing target water amount per day.
+     */
+    private final String userTarget = "userTarget";
 
-    private SharedPreferences preferences; // create sharedpreferences variable
-    private final String USER_STORE = "UserStore"; // create preferences for storing information about the user, etc.
-    private final String userRegistered = "userRegistered"; // storage for sharing the information about whether the user is registered already or not
-    private final String userWeight  = "userWeight"; // storage for storing the user weight
-    private final String userTarget = "userTarget"; // target water amount per day
-
-    private int getWeight; // get values from the preferences
+    /**
+     * getWeight variable is for getting user's weight from preferences.
+     */
+    private int getWeight;
+    /**
+     * getTarget variable is for getting user's target water amount per day.
+     */
     private String getTarget;
 
-    private String TAG = "WaterLog"; // easy to use tag for logging
+    /**
+     * Easy to use tag for logging.
+     */
+    private String TAG = "WaterLog";
 
-    private NumberPicker pickWeight; // number picker for choosing weight
-    private TextView previewTarget; // textview for showing the preview for the water target
-    private Button toMain; // button for going to the main activity
+    /**
+     * number picker for choosing weight.
+     */
+    private NumberPicker pickWeight;
+    /**
+     * textView for showing the preview for the water target.
+     */
+    private TextView previewTarget;
 
     /**
      * This onCreate function will create view and add UI elements for Registration class.
@@ -55,19 +81,18 @@ public class Registration extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
-        /** Set the values for the previously initialised variables */
+        //Set the values for the previously initialised variables
         pickWeight = findViewById(R.id.numPickWeight);
         previewTarget = findViewById(R.id.previewTarget);
-        toMain = findViewById(R.id.toMainButton);
 
-        /** Set up sharedpreferences */
+        //Set up sharedPreferences
         preferences = getSharedPreferences(USER_STORE, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
 
-        /**
-         * Set up the numberpicker for the weight
-         * @param setMinValue setting numberpicker min value to 20
-         * @param setMaxValue setting numberpicker max value to 200
+        /*
+          Set up the numberPicker for the weight
+          @param setMinValue setting numberPicker min value to 20
+         * @param setMaxValue setting numberPicker max value to 200
          * @param setValue setting default value to 75
          */
         pickWeight.setMaxValue(200);

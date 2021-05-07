@@ -30,17 +30,22 @@ import com.example.waterjournal.WaterObject;
  * @author Mikael Gustafsson, Andreas Mattson, Vilho Syvähuoko.
  */
 public class HistoryFragment extends Fragment {
+
     /**
-     * Variales
-     * Creating private and public variables for HistoryFragment class.
      * listViewForDays variable is for ListView UI element with id listViewForDays.
-     * historyText variable is for TextView UI element with id historyText.
-     * tips variable is for tips button element.
-     * EXTRA variable is a key for adding information using intent for SpecificDayView class.
      */
     private ListView listViewForDays;
+    /**
+     * historyText variable is for TextView UI element with id historyText.
+     */
     private TextView historyText;
+    /**
+     * tips variable is for tips button element.
+     */
     private Button tips;
+    /**
+     * EXTRA variable is a key for adding information using intent for SpecificDayView class.
+     */
     public static final String EXTRA = "ListPosition";
 
     /**
@@ -60,7 +65,8 @@ public class HistoryFragment extends Fragment {
         this.historyText = hist.findViewById(R.id.historyText);
         this.historyText.setText("Your drinking history.");
 
-        //Creating listView for HistoryFragment.
+        //Creating listView for HistoryFragment. It will show each day by using singleton class, which uses WaterObject objects to determine which object is for
+        //which day.
         this.listViewForDays.setAdapter(new ArrayAdapter<WaterObject>(getActivity(), android.R.layout.simple_list_item_1, DailyDrinkingObject.getInstance().getDailyWaterList()));
         this.listViewForDays.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             /**
@@ -79,9 +85,9 @@ public class HistoryFragment extends Fragment {
                 startActivity(specificDayView);
             }
         });
-        /** Button to go to the tips fragment */
+        /* Button to go to the tips fragment */
         tips = hist.findViewById(R.id.imageButtonTips);
-        /** tipsBtn setOnClickListener. */
+        /* tipsBtn setOnClickListener. */
         tips.setOnClickListener(new View.OnClickListener() {
             /**
              * This function will go to the tips fragment once it is clicked.
