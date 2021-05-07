@@ -29,6 +29,9 @@ import com.google.gson.Gson;
 import java.text.DecimalFormat;
 
 /**
+ * In preferences fragment user can change weight and amount of drinking goal.
+ * There are two number pickers. One for the weight and other for the drink.
+ * After user have pushed save button new vaeus are stored in sharedPreferences.
  * @author Mikael Gustafsson, Andeass Mattson, Vilho Syvähuoko.
  */
 public class PreferencesFragment extends Fragment {
@@ -59,12 +62,18 @@ public class PreferencesFragment extends Fragment {
     //public Gson gson = new Gson();
 
     public UserObject user;
-
-    private final String USER_STORE = "UserStore"; // create preferences for storing information about the user, etc.
-    private final String userWeight  = "userWeight"; // storage for storing the user weight
-    private final String userTarget = "userTarget"; // target water amount per day
-    private final String userObject = "userObject"; // location for the JSON formatted version of the user object
-    private SharedPreferences preferences; // create sharedPreferences variable
+    /**
+     * USER_STORE create preferences for storing information about the user, etc.
+     * userWeight storage for storing the user weight.
+     * userTarget target water amount per day.
+     * userObject location for the JSON formatted version of the user object.
+     * preferences create sharedPreferences variable.
+     */
+    private final String USER_STORE = "UserStore";
+    private final String userWeight  = "userWeight";
+    private final String userTarget = "userTarget";
+    private final String userObject = "userObject";
+    private SharedPreferences preferences;
 
     /** List of displayed values in the daily water number picker */
     public String targets[] = {"1.0", "1.1", "1.2","1.3","1.4","1.5","1.6","1.7","1.8","1.9","2.0","2.1","2.2","2.3", "2.4", "2.5", "2.6", "2.7", "2.8", "2.9", "3.0", "3.1", "3.2", "3.3", "3.4", "3.5", "3.6", "3.7", "3.8", "3.9", "4.0", "4.1", "4.2", "4.3", "4.4", "4.5", "4.6", "4.7", "4.8", "4.9", "5.0", "5.1", "5.2", "5.3", "5.4", "5.5"};
@@ -110,9 +119,9 @@ public class PreferencesFragment extends Fragment {
         userJson = gson.toJson(user);
 
 
-        /* new_object_branch
-        getWeight = preferences.getInt(userWeight, 75); // get the value of the weight from the storage
-        Log.d("paino", String.valueOf(getWeight));
+        /** new_object_branch
+        *getWeight = preferences.getInt(userWeight, 75); // get the value of the weight from the storage
+        *Log.d("paino", String.valueOf(getWeight));
         */
   
         getTarget = preferences.getString(userTarget, "undefined"); // get the value of the target from the storage
@@ -174,7 +183,7 @@ public class PreferencesFragment extends Fragment {
 
         Log.d(TAG, Integer.toString(targets.length));
 
-
+        /** weightPicker setOnValueChangedListener */
         weightPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker numberPicker, int i, int i1) {
@@ -192,7 +201,7 @@ public class PreferencesFragment extends Fragment {
                 }
             }
         });
-
+        /** dailyPicker setOnValueChangedListener */
         dailyPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker numberPicker, int i, int i1) {
@@ -202,10 +211,9 @@ public class PreferencesFragment extends Fragment {
                 user.changeMinimumAmount(Double.parseDouble(value));
             }
         });
-        /**
-         * Button to save preferences
-         */
+        /** Button to save preferences */
         save = pref.findViewById(R.id.buttonSave);
+        /** save setOnClickListener*/
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
