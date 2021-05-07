@@ -25,15 +25,15 @@ import androidx.navigation.ui.NavigationUI;
  * Here user adds amount of drink to the store
  * User can remove resent amount if it was a mistake or amount was wrong
  * User can move in to the history activity or preference activity
- * @author Mikael Gustafsson, Andeass Mattson, Vilho Syvähuoko.
+ * @author Mikael Gustafsson, Andreas Mattson, Vilho Syvähuoko.
  */
 public class MainActivity extends AppCompatActivity {
-
-    //Creating public and private variables for MainActivity class.
-    //userJson variable is for getting user's object information from gson files or add user's objetc information to gson files.
-    //gson variable is for being able to use gson in MainActivity for saving and fetching information for code.
-    //user variable is for user object which will be created using UserObject class. It can be also defined by fetching information from gson UserObject files.
-
+    /**
+    * Creating public and private variables for MainActivity class.
+    * userJson variable is for getting user's object information from gson files or add user's objetc information to gson files.
+    * gson variable is for being able to use gson in MainActivity for saving and fetching information for code.
+    * user variable is for user object which will be created using UserObject class. It can be also defined by fetching information from gson UserObject files.
+    */
     public static Context contextOfApplication;
 
     public String userGson;
@@ -44,24 +44,38 @@ public class MainActivity extends AppCompatActivity {
 
     public UserObject user;
     public WaterList waters;
-
-    private SharedPreferences preferences; // create sharedpreferences variable
-    private final String USER_STORE = "UserStore"; // create preferences for storing information about the user, etc.
-    private final String userRegistered = "userRegistered"; // storage for sharing the information about whether the user is registered already or not
-    private final String userCreated = "userCreated"; // key for checking if the user object has already been created or not
-    private final String userWeight  = "userWeight"; // storage for storing the user weight
-    private final String userTarget = "userTarget"; // target water amount per day
-    private final String userObject = "userObject"; // location for the JSON formatted version of the user object
-    private final String waterList = "waterList"; // list object for storing the waters of the day
-    private boolean getRegistered; // variable for getting the value of registration status key
-    private boolean getCreated; // get the value of the person object creation status key
-
-    private static int getWeight; //variable for getting the value of the weight key
-    private static String getTarget; // variable for getting the value of the water target key
+    /**
+     * preferences create sharedpreferences variable
+     * UserStore create preferences for storing information about the user, etc.
+     * userRegistered storage for sharing the information about whether the user is registered already or not
+     * userCreated key for checking if the user object has already been created or not
+     * userWeight storage for storing the user weight
+     * userTarget target water amount per day
+     * userObject location for the JSON formatted version of the user object
+     * waterList list object for storing the waters of the day
+     * getRegistered variable for getting the value of registration status key
+     * getCreated get the value of the person object creation status key
+     * getWeight variable for getting the value of the weight key
+     * getTarget variable for getting the value of the water target key
+     * getUser
+     * getWaters
+     * TAG easy to use tag for logging
+     */
+    private SharedPreferences preferences;
+    private final String USER_STORE = "UserStore";
+    private final String userRegistered = "userRegistered";
+    private final String userCreated = "userCreated";
+    private final String userWeight  = "userWeight";
+    private final String userTarget = "userTarget";
+    private final String userObject = "userObject";
+    private final String waterList = "waterList";
+    private boolean getRegistered;
+    private boolean getCreated;
+    private static int getWeight;
+    private static String getTarget;
     private String getUser;
     private String getWaters;
-
-    private String TAG = "WaterLog"; // easy to use tag for logging
+    private String TAG = "WaterLog";
 
     /**
      * This onCreate function will create MainActivity class view. It will also open in different ways depending if user has already defined settings.
@@ -152,10 +166,14 @@ public class MainActivity extends AppCompatActivity {
             editor.putString(waterList, watersGson);
             editor.commit();
         }
-
+        /**
+         * Bottom bar navigation to home, history and preferences fragments
+         */
         BottomNavigationView navView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
+        /**
+         * Passing each menu ID as a set of Ids because each
+         * menu should be considered as top level destinations.
+         */
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_home, R.id.navigation_history, R.id.navigation_settings)
                 .build();

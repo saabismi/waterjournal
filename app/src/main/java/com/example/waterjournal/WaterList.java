@@ -3,7 +3,7 @@ package com.example.waterjournal;
 import java.util.ArrayList;
 
 /**
- * @author Andeass Mattson, Vilho Syvähuoko.
+ * @author Andreas Mattson, Vilho Syvähuoko.
  */
 public class WaterList {
 

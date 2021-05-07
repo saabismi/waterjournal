@@ -15,7 +15,7 @@ import com.example.waterjournal.ui.history.HistoryFragment;
 /**
  * This SpecificDayView function is for user to view user information regarding to drinking. It will show specific information about user
  * and how many times and how much user drank on specific day.
- * @author Andeass Mattson, Vilho Syvähuoko.
+ * @author Andreas Mattson, Vilho Syvähuoko.
  */
 public class SpecificDayView extends AppCompatActivity {
 

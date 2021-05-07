@@ -11,6 +11,7 @@ import java.util.ArrayList;
 /**
  * This singleton class will add each day water object to an ArrayList which will keep them in memory.
  * This will give user a chance to check his daily or monthly water usage and compare them.
+ * @author Andreas Mattson, Vilho Syvähuoko.
  */
 public class DailyDrinkingObject {
 

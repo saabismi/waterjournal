@@ -42,7 +42,7 @@ import java.util.List;
 
 /**
  * Main fragment opens on default after user have set weight in registration activity.
- * @author Mikael Gustafsson, Andeass Mattson, Vilho Syvähuoko.
+ * @author Mikael Gustafsson, Andreas Mattson, Vilho Syvähuoko.
  */
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class HomeFragment extends Fragment {

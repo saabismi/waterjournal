@@ -32,7 +32,7 @@ import java.text.DecimalFormat;
  * In preferences fragment user can change weight and amount of drinking goal.
  * There are two number pickers. One for the weight and other for the drink.
  * After user have pushed save button new vaeus are stored in sharedPreferences.
- * @author Mikael Gustafsson, Andeass Mattson, Vilho Syvähuoko.
+ * @author Mikael Gustafsson, Andreas Mattson, Vilho Syvähuoko.
  */
 public class PreferencesFragment extends Fragment {
     /**
