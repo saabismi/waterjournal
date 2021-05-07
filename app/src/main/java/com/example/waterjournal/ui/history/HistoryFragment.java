@@ -26,7 +26,7 @@ import com.example.waterjournal.WaterObject;
 
 /**
  * History fragment will show user's daily drinking history on a listView. User can check specific days by clicking dates and get specific information about them.
- * Circle brogress bar was taken from Code with the flow video tutorial <a href="https://www.youtube.com/watch?v=YsHHXg1vbcc">Circular Determinate ProgressBar with Background and Text - Android Studio Tutorial</a>.
+ * Circle brogress bar was taken from Code with the flow video tutorial <a href="https://www.youtube.com/watch?v=YsHHXg1vbcc"> Circular Determinate ProgressBar with Background and Text - Android Studio Tutorial</a>.
  * @author Mikael Gustafsson, Andeass Mattson, Vilho Syvähuoko.
  */
 public class HistoryFragment extends Fragment {
