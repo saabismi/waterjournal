@@ -62,8 +62,8 @@ public class HistoryFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
 
         View hist = inflater.inflate(R.layout.fragment_history, container, false);
-        /**
-         * ListView to show days when user have store a drink with onItemClick adapter.
+        /*
+          ListView to show days when user have store a drink with onItemClick adapter.
          */
         this.listViewForDays = hist.findViewById(R.id.listViewForDays);
         this.historyText = hist.findViewById(R.id.historyText);

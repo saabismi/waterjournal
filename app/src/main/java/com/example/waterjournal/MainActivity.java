@@ -63,23 +63,7 @@ public class MainActivity extends AppCompatActivity {
      * on if user wants to load or save information.
      */
     public WaterList waters;
-    /**
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     * getUser
-     * getWaters
-     *
-     */
+
     /**
      * preferences create sharedPreferences variable.
      */
