@@ -79,14 +79,13 @@ public class HistoryFragment extends Fragment {
                 startActivity(specificDayView);
             }
         });
-        /**
-         * Button to go to the tips fragment.
-         */
+        /** Button to go to the tips fragment */
         tips = hist.findViewById(R.id.imageButtonTips);
+        /** tipsBtn setOnClickListener. */
         tips.setOnClickListener(new View.OnClickListener() {
             /**
-             * This function is for water tips fragment view. It will go to water information fragment when clicked.
-             * @param view This parameter will tell from which view are we going to water information view.
+             * This function will go to the tips fragment once it is clicked.
+             * @param view This parameter will tell from which activity are we going to next one.
              */
             @Override
             public void onClick(View view) {

@@ -21,6 +21,7 @@ import java.text.DecimalFormat;
 /**
  * This class will create activity which will guide user to make his first PersonObject object for the app.
  * This object will be later used to create WaterObject object which will track user's drinking on specific days.
+ * @author Vilho Syvähuoko.
  */
 public class Registration extends AppCompatActivity {
 

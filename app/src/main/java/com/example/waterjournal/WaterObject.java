@@ -14,6 +14,7 @@ import com.example.waterjournal.R;
 /**
  * This class is for water drinking. It will tell user how much user have been drinking on specific day
  * and will also tell user % daily amount.
+ * @author Andeass Mattson, Vilho Syvähuoko.
  */
 public class WaterObject {
 

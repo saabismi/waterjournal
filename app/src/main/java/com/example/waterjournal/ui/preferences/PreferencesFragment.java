@@ -213,7 +213,7 @@ public class PreferencesFragment extends Fragment {
         });
         /** Button to save preferences */
         save = pref.findViewById(R.id.buttonSave);
-        /** save setOnClickListener*/
+        /** save setOnClickListener */
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -248,11 +248,14 @@ public class PreferencesFragment extends Fragment {
                 Toast.makeText(getContext(),"Preferences saved",Toast.LENGTH_SHORT).show();
             }
         });
-        /**
-         * Button to go to the tips fragment.
-         */
+        /** Button to go to the tips fragment */
         tips = pref.findViewById(R.id.imageButtonTips);
+        /** tipsBtn setOnClickListener. */
         tips.setOnClickListener(new View.OnClickListener() {
+            /**
+             * This function will go to the tips fragment once it is clicked.
+             * @param view This parameter will tell from which activity are we going to next one.
+             */
             @Override
             public void onClick(View view) {
                 //OnClick to use navigation controller to go to the tips fragment.

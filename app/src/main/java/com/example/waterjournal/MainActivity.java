@@ -25,6 +25,7 @@ import androidx.navigation.ui.NavigationUI;
  * Here user adds amount of drink to the store
  * User can remove resent amount if it was a mistake or amount was wrong
  * User can move in to the history activity or preference activity
+ * @author Mikael Gustafsson, Andeass Mattson, Vilho Syvähuoko.
  */
 public class MainActivity extends AppCompatActivity {
 

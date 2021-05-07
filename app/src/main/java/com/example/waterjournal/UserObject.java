@@ -5,6 +5,7 @@ import java.text.DecimalFormat;
 /**
  * This class is for app user. It will define user's weight and it will use this information to calculate
  * approximately the water amount user has to drink using WaterObject class.
+ * @author Andeass Mattson, Vilho Syvähuoko.
  */
 public class UserObject {
 

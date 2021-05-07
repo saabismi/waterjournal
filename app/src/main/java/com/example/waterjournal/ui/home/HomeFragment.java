@@ -306,9 +306,10 @@ public class HomeFragment extends Fragment {
 
         //Button to go to the tips fragment.
         tips = main.findViewById(R.id.imageButtonTips);
+        /** tipsBtn setOnClickListener. */
         tips.setOnClickListener(new View.OnClickListener() {
             /**
-             * This function will go to tips activity once it is clicked.
+             * This function will go to the tips fragment once it is clicked.
              * @param view This parameter will tell from which activity are we going to next one.
              */
             @Override
