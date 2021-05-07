@@ -28,6 +28,9 @@ import com.google.gson.Gson;
 
 import java.text.DecimalFormat;
 
+/**
+ * @author Mikael Gustafsson, Andeass Mattson, Vilho Syvähuoko.
+ */
 public class PreferencesFragment extends Fragment {
     /**
      * Variales

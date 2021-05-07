@@ -18,6 +18,7 @@ import com.example.waterjournal.R;
  * Information texts are in boxes and boxes are in scrollView
  * so user can scroll texts up and down.
  * Texts are hard coded in string.xml.
+ * @author Mikael Gustafsson, Andeass Mattson, Vilho Syvähuoko.
  */
 public class TipsFragment extends Fragment {
     /** Variales
