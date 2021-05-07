@@ -18,13 +18,15 @@ import com.example.waterjournal.R;
  * Information texts are in boxes and boxes are in scrollView
  * so user can scroll texts up and down.
  * Texts are hard coded in string.xml.
+ * @author Mikael Gustafsson.
  */
 public class TipsFragment extends Fragment {
     /**
-     * Widget: a Button
+     *  tipsBtn button to move user to the home fragment
      */
     private Button tipsBtn;
 
+  
     /**
      * Called to have the fragment instantiate its user interface view.
      * @param inflater the LayoutInflater object that can be used to inflate any views in the fragment.
@@ -37,11 +39,14 @@ public class TipsFragment extends Fragment {
 
         View tips = inflater.inflate(R.layout.fragment_tips, container, false);
 
-        /**
-         * Button to go back to the home fragment.
-         */
+        /* Button to go back to the home fragment. */
         tipsBtn = tips.findViewById(R.id.imageButtonTips);
+        /* tipsBtn setOnClickListener. */
         tipsBtn.setOnClickListener(new View.OnClickListener() {
+            /**
+             * This function will go back to home fragment when clicked.
+             * @param view This will tell navigation control from which activity are we going to next activity.
+             */
             @Override
             public void onClick(View view) {
                 //OnClick to use navigation controller to go to the home fragment.

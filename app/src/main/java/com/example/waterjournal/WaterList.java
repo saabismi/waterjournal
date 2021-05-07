@@ -2,6 +2,9 @@ package com.example.waterjournal;
 
 import java.util.ArrayList;
 
+/**
+ * @author Andreas Mattson, Vilho Syvähuoko.
+ */
 public class WaterList {
 
     public ArrayList<Integer> waters = new ArrayList<>();

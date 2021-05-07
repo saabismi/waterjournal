@@ -3,30 +3,26 @@ package com.example.waterjournal;
 import java.text.DecimalFormat;
 
 /**
- * This class is for app user. It will define user's gender and weight and it will use this information to calculate
+ * This class is for app user. It will define user's weight and it will use this information to calculate
  * approximately the water amount user has to drink using WaterObject class.
+ * @author Andreas Mattson, Vilho Syvähuoko.
  */
 public class UserObject {
 
     //Creating private variables for class.
+    /**
+     * weight variable is used for keeping track on user's current weight.
+     */
     private int weight;
+    /**
+     * minimumAmount variable is used for keeping track on user's current weight.
+     */
     private double minimumAmount;
 
     /**
-     * This constructor will define values for user either using default values
-     * or user's values which are his gender and weight.
+     * This in default constructor for UserObject if there happens something with the app.
+     * It will give default values for two private variables.
      */
-
-    /**
-     * This function will calculate the minimum water amount and convert it to a one decimal double
-     */
-    public double calcMinimumAmount(int weight) {
-        DecimalFormat dec = new DecimalFormat("#.0"); // use this to format to one decimal number
-
-        double minimumAmount = weight * 0.033; // calculate default target ( = 75kg)
-        return Double.valueOf(dec.format(minimumAmount));
-    }
-
     public UserObject() {
         this.weight = 75;
         this.minimumAmount = calcMinimumAmount(this.weight);
@@ -43,6 +39,20 @@ public class UserObject {
     }
 
     /**
+     * This function will calculate the minimum water amount and convert it to a one decimal double.
+     * After that it will return it.
+     */
+    public double calcMinimumAmount(int weight) {
+        // use this to format to one decimal number
+        DecimalFormat dec = new DecimalFormat("#.0");
+
+        // calculate default target ( = 75kg)
+        double minimumAmount = weight * 0.033;
+        return Double.valueOf(dec.format(minimumAmount));
+    }
+
+
+    /**
      * This function will change user's weight and at the same time change the minimum amount of water user should drink per day.
      * @param newWeight Will change current weight in private weight variable to a new one.
      */
@@ -51,9 +61,15 @@ public class UserObject {
         this.minimumAmount = calcMinimumAmount(weight);
     }
 
+    /**
+     * This function will change user's minimum amount user should be drinking daily without changing user's weight.
+     * @param newMinimumAmount This parameter will define new minimum amount of water user should drink at least per day.
+     */
     public void changeMinimumAmount(double newMinimumAmount) {
-        DecimalFormat dec = new DecimalFormat("#.0"); // use this to format to one decimal number
-        this.minimumAmount = Double.valueOf(dec.format(newMinimumAmount)); // convert the new minimum amount to one decimal
+        // use this to format to one decimal number
+        DecimalFormat dec = new DecimalFormat("#.0");
+        // convert the new minimum amount to one decimal
+        this.minimumAmount = Double.valueOf(dec.format(newMinimumAmount));
     }
 
     /**

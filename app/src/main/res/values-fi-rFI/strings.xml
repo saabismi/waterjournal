@@ -3,7 +3,7 @@
     <string name="text_app_name">Vesikirja</string>
     <string name="button_store_user_data">Tallenna</string>
     <string name="button_add_drink">Lisää</string>
-    <string name="text_preferences">Asetukset</string>
+    <string name="text_preferences">Asetukset:</string>
     <string name="button_drinking_history">Historia</string>
     <string name="button_home">Koti</string>
     <string name="button_save_preferences">Tallenna</string>
@@ -12,7 +12,7 @@
     <string name="text_drink_ml">ml</string>
     <string name="button_remove_resent">Poista uusin</string>
     <string name="text_sex">Sukupuoli</string>
-    <string name="text_weight">Paino</string>
+    <string name="text_weight">Paino:</string>
     <string name="button_preferences">Asetukset</string>
     <string name="text_add_drink">Lisää juoma:</string>
     <string name="text_daily_goal">Päivätavoite:</string>
@@ -39,8 +39,10 @@
     <string name="announce_target">Veden juonnin päivätavoitteesi:</string>
     <string name="placeholder_x">x</string>
     <string name="text_tips_elderly">Ikääntyneille \\n\\nJuo 1–1,5 litraa päivässä. \\nJuo, vaikka sinulla ei olisikaan jano. \\nHyviä juomia ovat veden ja maitotuotteiden lisäksi muun muassa täysmehut, mehujuomat ja virvoitusjuomat. \\nSyö nestepitoista ruokaa, esimerkiksi salaatteja ja kylmiä keittoja. \\nVaraa joka päivä jääkaappiin juotavaa litran kannuun. \\nNäin voit myös tarkkailla, paljonko juot. \\nJuo nestettä runsaammin aamulla ja päivällä. \\nRunsas iltajuominen lisää virtsaneritystä yöllä. \\nNestevajaus on ikääntyneille erityisen vakavaa, sillä kehossa on vähemmän vettä kuin nuoremmilla.  \\nNestevajaus voi syntyä hyvin nopeasti. \\nSe voi johtaa muun muassa verenpaineen laskuun ja kaatumisiin. \\nMyös jotkut lääkkeet lisäävät nesteen tarvetta.  \\n(thl)</string>
-    <string name="toMainButton">Jatka</string>
-    <string name="whenReady">Kun valmis:</string>
-    <string name="announce_info">Voit asettaa haluamasi juomatavoitemäärän asetuksista.</string>
     <string name="announce_water_target">Laskettu päivittäinen juomatavoite:</string>
+    <string name="announce_info">Voit asettaa oma juomatavoiteesi asetuksissa.</string>
+    <string name="whenReady">Kun valmis:</string>
+    <string name="toMainButton">Jatka</string>
+    <string name="text_you_drank">"Joit "</string>
+    <string name="text_ml_at">" ml klo "</string>
 </resources>

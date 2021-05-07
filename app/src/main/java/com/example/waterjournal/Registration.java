@@ -18,42 +18,83 @@ import org.w3c.dom.Text;
 
 import java.text.DecimalFormat;
 
+/**
+ * This class will create activity which will guide user to make his first PersonObject object for the app.
+ * This object will be later used to create WaterObject object which will track user's drinking on specific days.
+ * @author Vilho Syvähuoko.
+ */
 public class Registration extends AppCompatActivity {
 
-    /* variables for intent extras */
-    public static final String WEIGHT = "666";
-    public static final String TARGET = "undefined";
+    // variables for intent extras
+    /**
+     * preferences variable is used for being able to use mobile phone's preferences.
+     */
+    private SharedPreferences preferences;
+    /**
+     * Create preferences for storing information about the user, etc.
+     */
+    private final String USER_STORE = "UserStore";
+    /**
+     * Storage for sharing the information about whether the user is registered already or not.
+     */
+    private final String userRegistered = "userRegistered";
+    /**
+     * Storage for storing the user weight.
+     */
+    private final String userWeight  = "userWeight";
+    /**
+     * Storage for storing target water amount per day.
+     */
+    private final String userTarget = "userTarget";
 
-    private SharedPreferences preferences; // create sharedpreferences variable
-    private final String USER_STORE = "UserStore"; // create preferences for storing information about the user, etc.
-    private final String userRegistered = "userRegistered"; // storage for sharing the information about whether the user is registered already or not
-    private final String userWeight  = "userWeight"; // storage for storing the user weight
-    private final String userTarget = "userTarget"; // target water amount per day
-
-    private int getWeight; // get values from the preferences
+    /**
+     * getWeight variable is for getting user's weight from preferences.
+     */
+    private int getWeight;
+    /**
+     * getTarget variable is for getting user's target water amount per day.
+     */
     private String getTarget;
 
-    private String TAG = "WaterLog"; // easy to use tag for logging
+    /**
+     * Easy to use tag for logging.
+     */
+    private String TAG = "WaterLog";
 
-    private NumberPicker pickWeight; // number picker for choosing weight
-    private TextView previewTarget; // textview for showing the preview for the water target
-    private Button toMain; // button for going to the main activity
+    /**
+     * number picker for choosing weight.
+     */
+    private NumberPicker pickWeight;
+    /**
+     * textView for showing the preview for the water target.
+     */
+    private TextView previewTarget;
 
+    /**
+     * This onCreate function will create view and add UI elements for Registration class.
+     * This function will also create user's first UserObject object.
+     * @param savedInstanceState This parameter will allow activity to download earlier data from same activity if it has been used earlier
+     *                           and earlier information was saved during onPause or onStop functions.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
-        /* Set the values for the previously initialised variables */
+        //Set the values for the previously initialised variables
         pickWeight = findViewById(R.id.numPickWeight);
         previewTarget = findViewById(R.id.previewTarget);
-        toMain = findViewById(R.id.toMainButton);
 
-        /* Set up sharedpreferences */
+        //Set up sharedPreferences
         preferences = getSharedPreferences(USER_STORE, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
 
-        /* Set up the numberpicker for the weight */
+        /*
+          Set up the numberPicker for the weight
+          @param setMinValue setting numberPicker min value to 20
+         * @param setMaxValue setting numberPicker max value to 200
+         * @param setValue setting default value to 75
+         */
         pickWeight.setMaxValue(200);
         pickWeight.setMinValue(20);
         pickWeight.setValue(75);
@@ -67,10 +108,16 @@ public class Registration extends AppCompatActivity {
         editor.commit();
 
         pickWeight.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+            /**
+             * This function will define user's weight and water amount user should drink at least per day.
+             * Once the NumberPicker value has been decided and continue button has been clicked.
+             * @param pickWeight This parameter will be used to determine user's weight.
+             * @param oldVal This parameter is the old weight user had selected using the NumberPicker.
+             * @param newVal This parameter is the new weight value user has selected using the NumberPicker.
+             */
             @Override
             public void onValueChange(NumberPicker pickWeight, int oldVal, int newVal) {
                 double target = newVal * 0.033;
-                //String targetStr = Double.toString(target);
                 String targetStr = Double.toString(Double.valueOf(dec.format(target)));
                 previewTarget.setText(targetStr + " litres");
                 editor.putString(userTarget, targetStr);
@@ -79,6 +126,10 @@ public class Registration extends AppCompatActivity {
         });
     }
 
+    /**
+     * This function will save and store information about user to mobile phones preferences
+     * if the app is on pause mode.
+     */
     @Override
     protected void onPause() {
         super.onPause();
@@ -93,6 +144,10 @@ public class Registration extends AppCompatActivity {
     }
 
 
+    /**
+     * This function will fetch user's information from mobile phones preferences. It will give specific information
+     * about user depending if user has made profile earlier or not.
+     */
     @Override
     protected void onRestart() {
         super.onRestart();
@@ -113,6 +168,10 @@ public class Registration extends AppCompatActivity {
         previewTarget.setText(getTarget + " litres");
     }
 
+    /**
+     * This function will go to MainActivity and HomeFragement activity once user has clicked the continue button.
+     * @param v This parameter will tell which element was clicked and show it view.
+     */
     public void goToMain(View v) {
         /* Create intent for returning to the main activity */
         Intent regedIntent = new Intent(this, MainActivity.class);

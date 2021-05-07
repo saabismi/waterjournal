@@ -25,48 +25,135 @@ import androidx.navigation.ui.NavigationUI;
  * Here user adds amount of drink to the store
  * User can remove resent amount if it was a mistake or amount was wrong
  * User can move in to the history activity or preference activity
+ * @author Mikael Gustafsson, Andreas Mattson, Vilho Syvähuoko.
  */
 public class MainActivity extends AppCompatActivity {
-
+    /**
+    * contextOfApplication is a variable for app context.
+    */
     public static Context contextOfApplication;
 
+    /**
+     * userGson variable is for saving user's object information to gson files.
+     */
     public String userGson;
+    /**
+     * userJson variable is for getting user's object information from gson files or add user's objetc information to gson files.
+     */
     public String userJson;
+    /**
+     * waterJson variable is for getting water object's information from gson files or add water object's information to gson files.
+     */
     public String watersJson;
+    /**
+     * waterGson variable is for saving water object's information to gson files.
+     */
     public String watersGson;
+    /**
+     * gson variable is for being able to use gson in MainActivity for saving and fetching information for code.
+     */
     public Gson gson = new Gson();
 
+    /**
+     * user variable is for user object which will be created using UserObject class. It can be also defined by fetching information from gson UserObject files.
+     */
     public UserObject user;
+    /**
+     * water is list which will contain WaterObject class objects. It will get objects from either preferences or singleton class depending
+     * on if user wants to load or save information.
+     */
     public WaterList waters;
-
-    private SharedPreferences preferences; // create sharedpreferences variable
-    private final String USER_STORE = "UserStore"; // create preferences for storing information about the user, etc.
-    private final String userRegistered = "userRegistered"; // storage for sharing the information about whether the user is registered already or not
-    private final String userCreated = "userCreated"; // key for checking if the user object has already been created or not
-    private final String userWeight  = "userWeight"; // storage for storing the user weight
-    private final String userTarget = "userTarget"; // target water amount per day
-    private final String userObject = "userObject"; // location for the JSON formatted version of the user object
-    private final String waterList = "waterList"; // list object for storing the waters of the day
-    private boolean getRegistered; // variable for getting the value of registration status key
-    private boolean getCreated; // get the value of the person object creation status key
-
-    private static int getWeight; //variable for getting the value of the weight key
-    private static String getTarget; // variable for getting the value of the water target key
+    /**
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     * getUser
+     * getWaters
+     *
+     */
+    /**
+     * preferences create sharedPreferences variable.
+     */
+    private SharedPreferences preferences;
+    /**
+     * UserStore create preferences for storing information about the user, etc.
+     */
+    private final String USER_STORE = "UserStore";
+    /**
+     * userRegistered storage for sharing the information about whether the user is registered already or not.
+     */
+    private final String userRegistered = "userRegistered";
+    /**
+     * userCreated key for checking if the user object has already been created or not.
+     */
+    private final String userCreated = "userCreated";
+    /**
+     * userWeight storage for storing the user weight.
+     */
+    private final String userWeight  = "userWeight";
+    /**
+     * userTarget target water amount per day.
+     */
+    private final String userTarget = "userTarget";
+    /**
+     * userObject location for the JSON formatted version of the user object.
+     */
+    private final String userObject = "userObject";
+    /**
+     * waterList list object for storing the waters of the day.
+     */
+    private final String waterList = "waterList";
+    /**
+     * getRegistered variable for getting the value of registration status key.
+     */
+    private boolean getRegistered;
+    /**
+     * getCreated get the value of the person object creation status key.
+     */
+    private boolean getCreated;
+    /**
+     * getWeight variable for getting the value of the weight key.
+     */
+    private static int getWeight;
+    /**
+     * getTarget variable for getting the value of the water target key.
+     */
+    private static String getTarget;
+    /**
+     * getUser variable is for getting the user object as a string from the storage.
+     */
     private String getUser;
+    /**
+     * getWaters variable is for getting the water object as a string from the storage.
+     */
     private String getWaters;
+    /**
+     * TAG easy to use tag for logging.
+     */
+    private String TAG = "WaterLog";
 
-    //private TextView showWeight; // textView for weight
-    //private TextView showTarget; // textView for target
-
-    private String TAG = "WaterLog"; // easy to use tag for logging
-
+    /**
+     * This onCreate function will create MainActivity class view. It will also open in different ways depending if user has already defined settings.
+     * If user hasn't defined setting it will Start Registration class which will guide user to make first account. But if user has already created an account
+     * it will start MainActivity and HomeFragment activities.
+     * @param savedInstanceState this Activity is being re-constructed from a previous saved state as given here.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        /**
-         * Variable for context of application
+        /*
+          Variable for context of application
          */
         contextOfApplication = getApplicationContext();
 
@@ -81,13 +168,9 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = preferences.edit(); // editor
 
         getUser = preferences.getString(userObject, "unexpected error"); // get the user object as a string from the storage
-        //showWeight = findViewById(R.id.showWeight);
-        //showTarget = findViewById(R.id.showTarget);
 
-
-        /**
-         * First checking if the user is registered
-         */
+        //This if-sentence will check if user has registered to the app. If user hasn't registered it will automatically open Registration class activity
+        //for user. If user has already registered it will use already created UserObject.
 
         if (!getRegistered) { // checking if the user has registered already
             user = new UserObject();
@@ -100,9 +183,8 @@ public class MainActivity extends AppCompatActivity {
         } else {
             Log.d(TAG, "User has already registered, continuing in MainActivity");
 
-            /**
-             * Checking if the user object has been created
-             */
+            //This if-sentence will check if WaterObject class object has been created. If it hasn't been created it will create one using WaterObject class.
+            //If there has been created one it will use last used WaterObject object.
             if (!getCreated) {
                 Log.d(TAG, "user object hasn't been created, gonna create it");
                 user = new UserObject();
@@ -111,7 +193,8 @@ public class MainActivity extends AppCompatActivity {
                 editor.putString(userObject, userJson); // set the value of the newly created user object to the storage
                 editor.putBoolean(userCreated, true); // set the user object as created in the local storage
 
-                // reset these values so that they won't be used again because they are now unnecessary
+                //New WaterObject object will be created by using UserObject classes minimum amount of water.
+                //After that it will be saved to mobile phones preferences.
                 DailyDrinkingObject.getInstance().createWaterObject(user.getMinimumAmount());
                 editor.putInt(userWeight, user.getWeight());
                 editor.putString(userTarget, String.valueOf(DailyDrinkingObject.getInstance().getSpecificWaterObject(0).getMinimumWater()));
@@ -129,7 +212,7 @@ public class MainActivity extends AppCompatActivity {
 
         getWaters = preferences.getString(waterList, "empty");
 
-        if(getWaters != "empty") {
+        if(!getWaters.equals("empty")) {
             Log.d(TAG, "waterlist object exists, getting the old one from storage");
             waters = gson.fromJson(getWaters, WaterList.class);
 
@@ -147,10 +230,14 @@ public class MainActivity extends AppCompatActivity {
             editor.putString(waterList, watersGson);
             editor.commit();
         }
-
+        /*
+          Bottom bar navigation to home, history and preferences fragments
+         */
         BottomNavigationView navView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
+        /*
+          Passing each menu ID as a set of Ids because each
+          menu should be considered as top level destinations.
+         */
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_home, R.id.navigation_history, R.id.navigation_settings)
                 .build();
@@ -166,8 +253,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     /**
-     *
-     * @return user's weight
+     * This function will return user's minimum amount of water user should drink daily.
+     * @return Will return minimum amount of water.
      */
     public static String getTarget() {
         if (DailyDrinkingObject.getInstance().getDailyWaterList().size() == 0) {

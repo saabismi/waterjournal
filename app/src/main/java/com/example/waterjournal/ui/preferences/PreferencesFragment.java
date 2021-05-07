@@ -28,41 +28,102 @@ import com.google.gson.Gson;
 
 import java.text.DecimalFormat;
 
+/**
+ * In preferences fragment user can change weight and amount of drinking goal.
+ * There are two number pickers. One for the weight and other for the drink.
+ * After user have pushed save button new vaeus are stored in sharedPreferences.
+ * @author Mikael Gustafsson, Andreas Mattson, Vilho Syvähuoko.
+ */
 public class PreferencesFragment extends Fragment {
 
-    public String userGson; // user converted to json
-    public String userJson; // user object in json form
-    public Gson gson = new Gson(); // Gson object
-
-    private NumberPicker weightPicker, dailyPicker;
-    private TextView textWeight, textAmount;
-    private Button save, tips;
-
+    /**
+     * userGson user converted to json.
+     */
+    public String userGson;
+    /**
+     * userJson user object in json form.
+     */
+    public String userJson;
+    /**
+     * gson Gson object.
+     */
+    public Gson gson = new Gson();
+    /**
+     * weightPicker to set new weight.
+     */
+    private NumberPicker weightPicker;
+    /**
+     * dailyPicker to set new daily drinking goal.
+     */
+    private NumberPicker dailyPicker;
+    /**
+     * textWeight to show text weight kg.
+     */
+    private TextView textWeight;
+    /**
+     * textAmount to show text amount ml.
+     */
+    private TextView textAmount;
+    /**
+     * tips button to go to the tips fragment.
+     */
+    private Button tips;
+    /**
+     * save button to save preferences.
+     */
+    private Button save;
+    /**
+     * easy to use tag for logging in Logcat.
+     */
     private String TAG = "WaterLog";
 
-    //public Gson gson = new Gson();
-
+    /**
+     * user variable is for user object which will be created using UserObject class. It can be also defined by fetching information from gson UserObject files.
+     */
     public UserObject user;
 
-    private final String USER_STORE = "UserStore"; // create preferences for storing information about the user, etc.
-    private final String userWeight  = "userWeight"; // storage for storing the user weight
-    private final String userTarget = "userTarget"; // target water amount per day
-    private final String userObject = "userObject"; // location for the JSON formatted version of the user object
-    private SharedPreferences preferences; // create sharedPreferences variable
+    /**
+     * USER_STORE create preferences for storing information about the user, etc.
+     */
+    private final String USER_STORE = "UserStore";
+    /**
+     * userWeight storage for storing the user weight.
+     */
+    private final String userWeight  = "userWeight";
+    /**
+     * userTarget target water amount per day..
+     */
+    private final String userTarget = "userTarget";
+    /**
+     * userObject location for the JSON formatted version of the user object.
+     */
+    private final String userObject = "userObject";
+    /**
+     * preferences create sharedPreferences variable.
+     */
+    private SharedPreferences preferences;
 
-    /* List of displayed values in the daily water number picker */
+    /** List of displayed values in the daily water number picker */
     public String targets[] = {"1.0", "1.1", "1.2","1.3","1.4","1.5","1.6","1.7","1.8","1.9","2.0","2.1","2.2","2.3", "2.4", "2.5", "2.6", "2.7", "2.8", "2.9", "3.0", "3.1", "3.2", "3.3", "3.4", "3.5", "3.6", "3.7", "3.8", "3.9", "4.0", "4.1", "4.2", "4.3", "4.4", "4.5", "4.6", "4.7", "4.8", "4.9", "5.0", "5.1", "5.2", "5.3", "5.4", "5.5"};
 
-    private int getWeight; // get values from the preferences
+    /**
+     * getWeight variable will get user's weight values from the preferences
+     */
+    private int getWeight;
+    /**
+     * getTarget variable for getting the value of the water target key.
+     */
     private String getTarget;
+    /**
+     * getUser variable is for getting the user object as a string from the storage.
+     */
     private String getUser;
 
     /**
      * Calculate needed water amount, used when the user changes their weight but doesn't touch the target water amount
-     * @param weight
-     * @return
+     * @param weight takes user's weight and multiply it 0.033 to get daily goal
+     * @return value of daily goal
      */
-
     public String calcMinValuePref(int weight) {
         DecimalFormat dec = new DecimalFormat("#.0"); // use this to format to one decimal number
 
@@ -71,6 +132,7 @@ public class PreferencesFragment extends Fragment {
     }
 
     /**
+     * Main view of the preferences fragment
      * Called to have the fragment instantiate its user interface view.
      * @param inflater the LayoutInflater object that can be used to inflate any views in the fragment.
      * @param container used to generate the LayoutParams of the view.
@@ -102,9 +164,14 @@ public class PreferencesFragment extends Fragment {
         String userJson = preferences.getString(userObject, "");
         user = gson.fromJson(userJson, UserObject.class);
 
+        /*
+          NumberPicker for user's weight
+          @param setMinValue setting numberPicker min value to 20
+         * @param setMaxValue setting numberPicker max value to 200
+         * @param setValue setting user's input value
+         */
         textWeight = pref.findViewById(R.id.textWeight);
         weightPicker = pref.findViewById(R.id.weightPicker);
-
         weightPicker.setMinValue(20);
         weightPicker.setMaxValue(200);
         weightPicker.setValue(user.getWeight());
@@ -119,13 +186,19 @@ public class PreferencesFragment extends Fragment {
             }
         });
 
+        /*
+          NumberPicker for change daily drinking goal
+          @param setMinValue setting numberPicker min range value to 0
+         * @param setMaxValue setting numberPicker max range value to 45
+         * @param setValue setting user's input value
+         */
         dailyPicker = pref.findViewById(R.id.drinkPicker);
         dailyPicker.setMinValue(0);
         dailyPicker.setMaxValue(45);
         dailyPicker.setDisplayedValues(targets);
 
-        /**
-         * Set values for the daily water amount picker
+        /*
+          Set values for the daily water amount picker
          */
         /* This should be a function but I didn't manage to do it, but at least it works... */
         String minimumAsString = Double.toString(user.getMinimumAmount());
@@ -145,7 +218,7 @@ public class PreferencesFragment extends Fragment {
 
         Log.d(TAG, Integer.toString(targets.length));
 
-
+        /* weightPicker setOnValueChangedListener */
         weightPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker numberPicker, int i, int i1) {
@@ -163,7 +236,7 @@ public class PreferencesFragment extends Fragment {
                 }
             }
         });
-
+        /* dailyPicker setOnValueChangedListener */
         dailyPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker numberPicker, int i, int i1) {
@@ -173,8 +246,9 @@ public class PreferencesFragment extends Fragment {
                 user.changeMinimumAmount(Double.parseDouble(value));
             }
         });
-
+        /* Button to save preferences */
         save = pref.findViewById(R.id.buttonSave);
+        /* save setOnClickListener */
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -198,7 +272,9 @@ public class PreferencesFragment extends Fragment {
                 user.changeMinimumAmount(targetAmountDouble);
 
                 userGson = gson.toJson(user);
-
+                /*
+                  Saving preferences to SharedPreferences
+                 */
                 editor.putInt(userWeight, weightPicker.getValue());
                 editor.putString(userTarget, targetAmount);
                 editor.putString(userObject, userGson);
@@ -207,11 +283,17 @@ public class PreferencesFragment extends Fragment {
                 Toast.makeText(getContext(),"Preferences saved",Toast.LENGTH_SHORT).show();
             }
         });
-
+        /* Button to go to the tips fragment */
         tips = pref.findViewById(R.id.imageButtonTips);
+        /* tipsBtn setOnClickListener. */
         tips.setOnClickListener(new View.OnClickListener() {
+            /**
+             * This function will go to the tips fragment once it is clicked.
+             * @param view This parameter will tell from which activity are we going to next one.
+             */
             @Override
             public void onClick(View view) {
+                //OnClick to use navigation controller to go to the tips fragment.
                 Navigation.findNavController(view).navigate(R.id.navigation_tips);
             }
         });
