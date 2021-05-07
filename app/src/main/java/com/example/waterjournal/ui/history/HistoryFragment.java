@@ -51,6 +51,7 @@ public class HistoryFragment extends Fragment {
     /**
      * This View is used for creating HistoryFragment activity. It will show activity's view which is app's logo, textView with information,
      * listView with a list of user's days which user has been drinking water and tips button which will show useful information about water.
+     
      * Called to have the fragment instantiate its user interface view.
      * @param inflater the LayoutInflater object that can be used to inflate any views in the fragment.
      * @param container used to generate the LayoutParams of the view.
@@ -61,12 +62,16 @@ public class HistoryFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
 
         View hist = inflater.inflate(R.layout.fragment_history, container, false);
+        /**
+         * ListView to show days when user have store a drink with onItemClick adapter.
+         */
         this.listViewForDays = hist.findViewById(R.id.listViewForDays);
         this.historyText = hist.findViewById(R.id.historyText);
         this.historyText.setText("Your drinking history.");
 
         //Creating listView for HistoryFragment. It will show each day by using singleton class, which uses WaterObject objects to determine which object is for
         //which day.
+
         this.listViewForDays.setAdapter(new ArrayAdapter<WaterObject>(getActivity(), android.R.layout.simple_list_item_1, DailyDrinkingObject.getInstance().getDailyWaterList()));
         this.listViewForDays.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             /**
@@ -79,12 +84,14 @@ public class HistoryFragment extends Fragment {
              */
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //Intent to open daily view to check information from a specific day
+
+                //Intent to open daily view activity to check stats from a specific day
                 Intent specificDayView = new Intent(getActivity(), SpecificDayView.class);
                 specificDayView.putExtra(EXTRA, position);
                 startActivity(specificDayView);
             }
         });
+
         /* Button to go to the tips fragment */
         tips = hist.findViewById(R.id.imageButtonTips);
         /* tipsBtn setOnClickListener. */

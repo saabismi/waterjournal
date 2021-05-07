@@ -25,6 +25,8 @@ public class TipsFragment extends Fragment {
      *  tipsBtn button to move user to the home fragment
      */
     private Button tipsBtn;
+
+  
     /**
      * Called to have the fragment instantiate its user interface view.
      * @param inflater the LayoutInflater object that can be used to inflate any views in the fragment.
@@ -47,7 +49,7 @@ public class TipsFragment extends Fragment {
              */
             @Override
             public void onClick(View view) {
-                //OnClick to use navigation controller to go to the home fragment
+                //OnClick to use navigation controller to go to the home fragment.
                 Navigation.findNavController(view).navigate(R.id.navigation_home);
             }
         });
